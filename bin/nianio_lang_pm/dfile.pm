@@ -325,625 +325,625 @@ $_[0] = $memory_0;}
 
 sub dfile_priv::get_char($) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);
-#line 55
+#line 56
 $memory_2 = ptd::sim();
-#line 55
+#line 56
 $memory_4 = $memory_0->{'str'};
-#line 55
+#line 56
 $memory_5 = $memory_0->{'pos'};
-#line 55
+#line 56
 $memory_6 = 1;
-#line 55
+#line 56
 $memory_3 = c_std_lib::fast_substr($memory_4, $memory_5, $memory_6);
-#line 55
+#line 56
 undef($memory_6);
-#line 55
+#line 56
 undef($memory_5);
-#line 55
+#line 56
 undef($memory_4);
-#line 55
+#line 56
 $memory_1 = ptd::ensure($memory_2, $memory_3);
-#line 55
+#line 56
 undef($memory_3);
-#line 55
+#line 56
 undef($memory_2);
-#line 55
+#line 56
 $_[0] = $memory_0;return $memory_1;
-#line 55
+#line 56
 undef($memory_1);
-#line 55
+#line 56
 $_[0] = $memory_0;return;
 $_[0] = $memory_0;}
 
 sub dfile_priv::is_ov($) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);
-#line 58
+#line 60
 $memory_2 = $memory_0->{'str'};
-#line 58
+#line 60
 $memory_3 = $memory_0->{'pos'};
-#line 58
+#line 60
 $memory_4 = 7;
-#line 58
+#line 60
 $memory_1 = c_std_lib::fast_substr($memory_2, $memory_3, $memory_4);
-#line 58
+#line 60
 undef($memory_4);
-#line 58
+#line 60
 undef($memory_3);
-#line 58
+#line 60
 undef($memory_2);
-#line 58
+#line 60
 $memory_2 = "ov::mk(";
-#line 58
+#line 60
 $memory_1 = c_rt_lib::to_nl($memory_1 eq $memory_2);
-#line 58
+#line 60
 undef($memory_2);
-#line 58
+#line 60
 $_[0] = $memory_0;return $memory_1;
-#line 58
+#line 60
 undef($memory_1);
-#line 58
+#line 60
 $_[0] = $memory_0;return;
 $_[0] = $memory_0;}
 
 sub dfile_priv::eat_non_ws($$) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);$memory_1 = $_[1];Scalar::Util::weaken($_[1]) if ref($_[1]);
-#line 62
+#line 64
 $memory_2 = "";
-#line 63
+#line 65
 $memory_3 = $memory_0->{'len'};
-#line 64
+#line 66
 $memory_4 = $memory_0->{'pos'};
-#line 64
+#line 66
 $memory_4 = c_rt_lib::to_nl($memory_4 >= $memory_3);
-#line 64
+#line 66
 $memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_4));
-#line 64
+#line 66
 if (c_rt_lib::check_true($memory_4)) {goto label_2;}
-#line 65
+#line 67
 $memory_5 = c_rt_lib::to_nl(1);
-#line 65
+#line 67
 $memory_1 = $memory_5;
-#line 65
+#line 67
 undef($memory_5);
-#line 66
+#line 68
 $memory_5 = "pos ";
-#line 66
+#line 68
 $memory_6 = $memory_0->{'pos'};
-#line 66
+#line 68
 $memory_5 = $memory_5 . $memory_6;
-#line 66
+#line 68
 undef($memory_6);
-#line 66
+#line 68
 $memory_6 = ": expected scalar";
-#line 66
+#line 68
 $memory_5 = $memory_5 . $memory_6;
-#line 66
+#line 68
 undef($memory_6);
-#line 66
+#line 68
 undef($memory_2);
-#line 66
+#line 68
 undef($memory_3);
-#line 66
-undef($memory_4);
-#line 66
-$_[0] = $memory_0;$_[1] = $memory_1;return $memory_5;
-#line 66
-undef($memory_5);
-#line 67
-goto label_2;
-#line 67
-label_2:
-#line 67
+#line 68
 undef($memory_4);
 #line 68
-label_4:
+$_[0] = $memory_0;$_[1] = $memory_1;return $memory_5;
+#line 68
+undef($memory_5);
 #line 69
+goto label_2;
+#line 69
+label_2:
+#line 69
+undef($memory_4);
+#line 70
+label_4:
+#line 71
 $memory_4 = dfile_priv::get_char($memory_0);
-#line 70
-$memory_5 = string::is_letter($memory_4);
-#line 70
-if (c_rt_lib::check_true($memory_5)) {goto label_8;}
-#line 70
-$memory_5 = string::is_digit($memory_4);
-#line 70
-label_8:
-#line 70
-if (c_rt_lib::check_true($memory_5)) {goto label_7;}
-#line 70
-$memory_5 = "_";
-#line 70
-$memory_5 = c_rt_lib::to_nl($memory_4 eq $memory_5);
-#line 70
-label_7:
-#line 70
-$memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 70
-$memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 70
-if (c_rt_lib::check_true($memory_5)) {goto label_6;}
-#line 70
-undef($memory_4);
-#line 70
-undef($memory_5);
-#line 70
-goto label_3;
-#line 70
-goto label_6;
-#line 70
-label_6:
-#line 70
-undef($memory_5);
-#line 71
-$memory_5 = "pos";
-#line 71
-$memory_5 = c_rt_lib::get_ref_hash($memory_0, $memory_5);
-#line 71
-$memory_6 = 1;
-#line 71
-$memory_5 = $memory_5 + $memory_6;
-#line 71
-$memory_7 = "pos";
-#line 71
-c_rt_lib::set_ref_hash($memory_0, $memory_7, $memory_5);
-#line 71
-undef($memory_7);
-#line 71
-undef($memory_5);
-#line 71
-undef($memory_6);
 #line 72
-$memory_2 = $memory_2 . $memory_4;
-#line 73
-$memory_5 = $memory_0->{'pos'};
-#line 73
-$memory_5 = c_rt_lib::to_nl($memory_5 >= $memory_3);
-#line 73
+$memory_5 = string::is_letter($memory_4);
+#line 72
+if (c_rt_lib::check_true($memory_5)) {goto label_8;}
+#line 72
+$memory_5 = string::is_digit($memory_4);
+#line 72
+label_8:
+#line 72
+if (c_rt_lib::check_true($memory_5)) {goto label_7;}
+#line 72
+$memory_5 = "_";
+#line 72
+$memory_5 = c_rt_lib::to_nl($memory_4 eq $memory_5);
+#line 72
+label_7:
+#line 72
 $memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 73
-if (c_rt_lib::check_true($memory_5)) {goto label_10;}
-#line 73
+#line 72
+$memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
+#line 72
+if (c_rt_lib::check_true($memory_5)) {goto label_6;}
+#line 72
 undef($memory_4);
-#line 73
+#line 72
 undef($memory_5);
-#line 73
+#line 72
 goto label_3;
+#line 72
+goto label_6;
+#line 72
+label_6:
+#line 72
+undef($memory_5);
 #line 73
+$memory_5 = "pos";
+#line 73
+$memory_5 = c_rt_lib::get_ref_hash($memory_0, $memory_5);
+#line 73
+$memory_6 = 1;
+#line 73
+$memory_5 = $memory_5 + $memory_6;
+#line 73
+$memory_7 = "pos";
+#line 73
+c_rt_lib::set_ref_hash($memory_0, $memory_7, $memory_5);
+#line 73
+undef($memory_7);
+#line 73
+undef($memory_5);
+#line 73
+undef($memory_6);
+#line 74
+$memory_2 = $memory_2 . $memory_4;
+#line 75
+$memory_5 = $memory_0->{'pos'};
+#line 75
+$memory_5 = c_rt_lib::to_nl($memory_5 >= $memory_3);
+#line 75
+$memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
+#line 75
+if (c_rt_lib::check_true($memory_5)) {goto label_10;}
+#line 75
+undef($memory_4);
+#line 75
+undef($memory_5);
+#line 75
+goto label_3;
+#line 75
 goto label_10;
-#line 73
+#line 75
 label_10:
-#line 73
+#line 75
 undef($memory_5);
-#line 73
+#line 75
 undef($memory_4);
-#line 68
+#line 70
 goto label_4;
-#line 68
+#line 70
 label_3:
-#line 75
+#line 77
 $memory_4 = "";
-#line 75
+#line 77
 $memory_4 = c_rt_lib::to_nl($memory_2 eq $memory_4);
-#line 75
+#line 77
 $memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_4));
-#line 75
+#line 77
 if (c_rt_lib::check_true($memory_4)) {goto label_12;}
-#line 76
+#line 78
 $memory_5 = c_rt_lib::to_nl(1);
-#line 76
+#line 78
 $memory_1 = $memory_5;
-#line 76
+#line 78
 undef($memory_5);
-#line 77
+#line 79
 $memory_5 = "pos ";
-#line 77
+#line 79
 $memory_6 = $memory_0->{'pos'};
-#line 77
+#line 79
 $memory_5 = $memory_5 . $memory_6;
-#line 77
+#line 79
 undef($memory_6);
-#line 77
+#line 79
 $memory_6 = ": expected scalar";
-#line 77
+#line 79
 $memory_5 = $memory_5 . $memory_6;
-#line 77
+#line 79
 undef($memory_6);
-#line 77
+#line 79
 undef($memory_2);
-#line 77
+#line 79
 undef($memory_3);
-#line 77
+#line 79
 undef($memory_4);
-#line 77
+#line 79
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_5;
-#line 77
+#line 79
 undef($memory_5);
-#line 78
+#line 80
 goto label_12;
-#line 78
+#line 80
 label_12:
-#line 78
+#line 80
 undef($memory_4);
-#line 79
+#line 81
 undef($memory_3);
-#line 79
+#line 81
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_2;
-#line 79
+#line 81
 undef($memory_2);
-#line 79
+#line 81
 undef($memory_3);
-#line 79
+#line 81
 $_[0] = $memory_0;$_[1] = $memory_1;return;
 $_[0] = $memory_0;$_[1] = $memory_1;}
 
 sub dfile_priv::parse_scalar($$) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;my $memory_9;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);$memory_1 = $_[1];Scalar::Util::weaken($_[1]) if ref($_[1]);
-#line 83
+#line 85
 dfile_priv::eat_ws($memory_0);
-#line 84
-$memory_2 = dfile_priv::get_char($memory_0);
-#line 84
-$memory_3 = "\"";
-#line 84
-$memory_2 = c_rt_lib::to_nl($memory_2 eq $memory_3);
-#line 84
-undef($memory_3);
-#line 84
-$memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
-#line 84
-if (c_rt_lib::check_true($memory_2)) {goto label_2;}
-#line 85
-$memory_3 = "pos";
-#line 85
-$memory_3 = c_rt_lib::get_ref_hash($memory_0, $memory_3);
-#line 85
-$memory_4 = 1;
-#line 85
-$memory_3 = $memory_3 + $memory_4;
-#line 85
-$memory_5 = "pos";
-#line 85
-c_rt_lib::set_ref_hash($memory_0, $memory_5, $memory_3);
-#line 85
-undef($memory_5);
-#line 85
-undef($memory_3);
-#line 85
-undef($memory_4);
 #line 86
-$memory_3 = "";
-#line 87
-label_4:
-#line 88
-$memory_4 = $memory_0->{'pos'};
-#line 88
-$memory_5 = $memory_0->{'len'};
-#line 88
-$memory_4 = c_rt_lib::to_nl($memory_4 >= $memory_5);
-#line 88
-undef($memory_5);
-#line 88
-$memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_4));
-#line 88
-if (c_rt_lib::check_true($memory_4)) {goto label_6;}
-#line 89
-$memory_5 = c_rt_lib::to_nl(1);
-#line 89
-$memory_1 = $memory_5;
-#line 89
-undef($memory_5);
-#line 90
-$memory_5 = "pos ";
-#line 90
-$memory_6 = $memory_0->{'pos'};
-#line 90
-$memory_5 = $memory_5 . $memory_6;
-#line 90
-undef($memory_6);
-#line 90
-$memory_6 = ": expected \"";
-#line 90
-$memory_5 = $memory_5 . $memory_6;
-#line 90
-undef($memory_6);
-#line 90
-undef($memory_2);
-#line 90
+$memory_2 = dfile_priv::get_char($memory_0);
+#line 86
+$memory_3 = "\"";
+#line 86
+$memory_2 = c_rt_lib::to_nl($memory_2 eq $memory_3);
+#line 86
 undef($memory_3);
-#line 90
+#line 86
+$memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
+#line 86
+if (c_rt_lib::check_true($memory_2)) {goto label_2;}
+#line 87
+$memory_3 = "pos";
+#line 87
+$memory_3 = c_rt_lib::get_ref_hash($memory_0, $memory_3);
+#line 87
+$memory_4 = 1;
+#line 87
+$memory_3 = $memory_3 + $memory_4;
+#line 87
+$memory_5 = "pos";
+#line 87
+c_rt_lib::set_ref_hash($memory_0, $memory_5, $memory_3);
+#line 87
+undef($memory_5);
+#line 87
+undef($memory_3);
+#line 87
 undef($memory_4);
+#line 88
+$memory_3 = "";
+#line 89
+label_4:
 #line 90
-$_[0] = $memory_0;$_[1] = $memory_1;return $memory_5;
+$memory_4 = $memory_0->{'pos'};
+#line 90
+$memory_5 = $memory_0->{'len'};
+#line 90
+$memory_4 = c_rt_lib::to_nl($memory_4 >= $memory_5);
 #line 90
 undef($memory_5);
+#line 90
+$memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_4));
+#line 90
+if (c_rt_lib::check_true($memory_4)) {goto label_6;}
 #line 91
-goto label_6;
+$memory_5 = c_rt_lib::to_nl(1);
 #line 91
-label_6:
+$memory_1 = $memory_5;
 #line 91
+undef($memory_5);
+#line 92
+$memory_5 = "pos ";
+#line 92
+$memory_6 = $memory_0->{'pos'};
+#line 92
+$memory_5 = $memory_5 . $memory_6;
+#line 92
+undef($memory_6);
+#line 92
+$memory_6 = ": expected \"";
+#line 92
+$memory_5 = $memory_5 . $memory_6;
+#line 92
+undef($memory_6);
+#line 92
+undef($memory_2);
+#line 92
+undef($memory_3);
+#line 92
 undef($memory_4);
 #line 92
+$_[0] = $memory_0;$_[1] = $memory_1;return $memory_5;
+#line 92
+undef($memory_5);
+#line 93
+goto label_6;
+#line 93
+label_6:
+#line 93
+undef($memory_4);
+#line 94
 $memory_4 = dfile_priv::get_char($memory_0);
-#line 93
+#line 95
 $memory_5 = "pos";
-#line 93
+#line 95
 $memory_5 = c_rt_lib::get_ref_hash($memory_0, $memory_5);
-#line 93
+#line 95
 $memory_6 = 1;
-#line 93
+#line 95
 $memory_5 = $memory_5 + $memory_6;
-#line 93
+#line 95
 $memory_7 = "pos";
-#line 93
+#line 95
 c_rt_lib::set_ref_hash($memory_0, $memory_7, $memory_5);
-#line 93
+#line 95
 undef($memory_7);
-#line 93
+#line 95
 undef($memory_5);
-#line 93
+#line 95
 undef($memory_6);
-#line 94
-$memory_5 = "\"";
-#line 94
-$memory_5 = c_rt_lib::to_nl($memory_4 eq $memory_5);
-#line 94
-$memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 94
-if (c_rt_lib::check_true($memory_5)) {goto label_8;}
-#line 94
-undef($memory_4);
-#line 94
-undef($memory_5);
-#line 94
-goto label_3;
-#line 94
-goto label_8;
-#line 94
-label_8:
-#line 94
-undef($memory_5);
-#line 95
-$memory_5 = "\\";
-#line 95
-$memory_5 = c_rt_lib::to_nl($memory_4 eq $memory_5);
-#line 95
-$memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 95
-if (c_rt_lib::check_true($memory_5)) {goto label_10;}
 #line 96
-$memory_6 = dfile_priv::get_char($memory_0);
-#line 97
-$memory_7 = "n";
-#line 97
-$memory_7 = c_rt_lib::to_nl($memory_6 eq $memory_7);
-#line 97
-$memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
-#line 97
-if (c_rt_lib::check_true($memory_7)) {goto label_12;}
-#line 98
-$memory_8 = string::lf();
-#line 98
-$memory_3 = $memory_3 . $memory_8;
-#line 98
-undef($memory_8);
-#line 99
-goto label_11;
-#line 99
-label_12:
-#line 99
-$memory_7 = "r";
-#line 99
-$memory_7 = c_rt_lib::to_nl($memory_6 eq $memory_7);
-#line 99
-$memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
-#line 99
-if (c_rt_lib::check_true($memory_7)) {goto label_13;}
-#line 100
-$memory_8 = string::r();
-#line 100
-$memory_3 = $memory_3 . $memory_8;
-#line 100
-undef($memory_8);
-#line 101
-goto label_11;
-#line 101
-label_13:
-#line 101
-$memory_7 = "t";
-#line 101
-$memory_7 = c_rt_lib::to_nl($memory_6 eq $memory_7);
-#line 101
-$memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
-#line 101
-if (c_rt_lib::check_true($memory_7)) {goto label_14;}
-#line 102
-$memory_8 = string::tab();
-#line 102
-$memory_3 = $memory_3 . $memory_8;
-#line 102
-undef($memory_8);
-#line 103
-goto label_11;
-#line 103
-label_14:
-#line 104
-$memory_3 = $memory_3 . $memory_6;
-#line 105
-goto label_11;
-#line 105
-label_11:
-#line 105
-undef($memory_7);
-#line 106
-$memory_7 = "pos";
-#line 106
-$memory_7 = c_rt_lib::get_ref_hash($memory_0, $memory_7);
-#line 106
-$memory_8 = 1;
-#line 106
-$memory_7 = $memory_7 + $memory_8;
-#line 106
-$memory_9 = "pos";
-#line 106
-c_rt_lib::set_ref_hash($memory_0, $memory_9, $memory_7);
-#line 106
-undef($memory_9);
-#line 106
-undef($memory_7);
-#line 106
-undef($memory_8);
-#line 106
-undef($memory_6);
-#line 107
-goto label_9;
-#line 107
-label_10:
-#line 108
-$memory_3 = $memory_3 . $memory_4;
-#line 109
-goto label_9;
-#line 109
-label_9:
-#line 109
-undef($memory_5);
-#line 109
+$memory_5 = "\"";
+#line 96
+$memory_5 = c_rt_lib::to_nl($memory_4 eq $memory_5);
+#line 96
+$memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
+#line 96
+if (c_rt_lib::check_true($memory_5)) {goto label_8;}
+#line 96
 undef($memory_4);
-#line 87
+#line 96
+undef($memory_5);
+#line 96
+goto label_3;
+#line 96
+goto label_8;
+#line 96
+label_8:
+#line 96
+undef($memory_5);
+#line 97
+$memory_5 = "\\";
+#line 97
+$memory_5 = c_rt_lib::to_nl($memory_4 eq $memory_5);
+#line 97
+$memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
+#line 97
+if (c_rt_lib::check_true($memory_5)) {goto label_10;}
+#line 98
+$memory_6 = dfile_priv::get_char($memory_0);
+#line 99
+$memory_7 = "n";
+#line 99
+$memory_7 = c_rt_lib::to_nl($memory_6 eq $memory_7);
+#line 99
+$memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
+#line 99
+if (c_rt_lib::check_true($memory_7)) {goto label_12;}
+#line 100
+$memory_8 = string::lf();
+#line 100
+$memory_3 = $memory_3 . $memory_8;
+#line 100
+undef($memory_8);
+#line 101
+goto label_11;
+#line 101
+label_12:
+#line 101
+$memory_7 = "r";
+#line 101
+$memory_7 = c_rt_lib::to_nl($memory_6 eq $memory_7);
+#line 101
+$memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
+#line 101
+if (c_rt_lib::check_true($memory_7)) {goto label_13;}
+#line 102
+$memory_8 = string::r();
+#line 102
+$memory_3 = $memory_3 . $memory_8;
+#line 102
+undef($memory_8);
+#line 103
+goto label_11;
+#line 103
+label_13:
+#line 103
+$memory_7 = "t";
+#line 103
+$memory_7 = c_rt_lib::to_nl($memory_6 eq $memory_7);
+#line 103
+$memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
+#line 103
+if (c_rt_lib::check_true($memory_7)) {goto label_14;}
+#line 104
+$memory_8 = string::tab();
+#line 104
+$memory_3 = $memory_3 . $memory_8;
+#line 104
+undef($memory_8);
+#line 105
+goto label_11;
+#line 105
+label_14:
+#line 106
+$memory_3 = $memory_3 . $memory_6;
+#line 107
+goto label_11;
+#line 107
+label_11:
+#line 107
+undef($memory_7);
+#line 108
+$memory_7 = "pos";
+#line 108
+$memory_7 = c_rt_lib::get_ref_hash($memory_0, $memory_7);
+#line 108
+$memory_8 = 1;
+#line 108
+$memory_7 = $memory_7 + $memory_8;
+#line 108
+$memory_9 = "pos";
+#line 108
+c_rt_lib::set_ref_hash($memory_0, $memory_9, $memory_7);
+#line 108
+undef($memory_9);
+#line 108
+undef($memory_7);
+#line 108
+undef($memory_8);
+#line 108
+undef($memory_6);
+#line 109
+goto label_9;
+#line 109
+label_10:
+#line 110
+$memory_3 = $memory_3 . $memory_4;
+#line 111
+goto label_9;
+#line 111
+label_9:
+#line 111
+undef($memory_5);
+#line 111
+undef($memory_4);
+#line 89
 goto label_4;
-#line 87
+#line 89
 label_3:
-#line 111
+#line 113
 undef($memory_2);
-#line 111
+#line 113
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_3;
-#line 111
+#line 113
 undef($memory_3);
-#line 112
+#line 114
 goto label_1;
-#line 112
+#line 114
 label_2:
-#line 113
+#line 115
 $memory_3 = dfile_priv::eat_non_ws($memory_0, $memory_1);
-#line 113
+#line 115
 undef($memory_2);
-#line 113
+#line 115
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_3;
-#line 113
+#line 115
 undef($memory_3);
-#line 114
+#line 116
 goto label_1;
-#line 114
+#line 116
 label_1:
-#line 114
+#line 116
 undef($memory_2);
-#line 114
+#line 116
 $_[0] = $memory_0;$_[1] = $memory_1;return;
 $_[0] = $memory_0;$_[1] = $memory_1;}
 
 sub dfile_priv::match_s($$) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);$memory_1 = $_[1];
-#line 118
+#line 120
 $memory_2 = string::length($memory_1);
-#line 119
+#line 121
 $memory_4 = $memory_0->{'str'};
-#line 119
+#line 121
 $memory_5 = $memory_0->{'pos'};
-#line 119
+#line 121
 $memory_3 = c_std_lib::fast_substr($memory_4, $memory_5, $memory_2);
-#line 119
+#line 121
 undef($memory_5);
-#line 119
+#line 121
 undef($memory_4);
-#line 119
+#line 121
 $memory_3 = c_rt_lib::to_nl($memory_3 eq $memory_1);
-#line 119
+#line 121
 $memory_3 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
-#line 119
+#line 121
 if (c_rt_lib::check_true($memory_3)) {goto label_2;}
-#line 120
+#line 122
 $memory_4 = "pos";
-#line 120
+#line 122
 $memory_4 = c_rt_lib::get_ref_hash($memory_0, $memory_4);
-#line 120
+#line 122
 $memory_4 = $memory_4 + $memory_2;
-#line 120
+#line 122
 $memory_5 = "pos";
-#line 120
+#line 122
 c_rt_lib::set_ref_hash($memory_0, $memory_5, $memory_4);
-#line 120
+#line 122
 undef($memory_5);
-#line 120
+#line 122
 undef($memory_4);
-#line 121
+#line 123
 $memory_4 = c_rt_lib::to_nl(1);
-#line 121
+#line 123
 undef($memory_1);
-#line 121
+#line 123
 undef($memory_2);
-#line 121
+#line 123
 undef($memory_3);
-#line 121
+#line 123
 $_[0] = $memory_0;return $memory_4;
-#line 121
+#line 123
 undef($memory_4);
-#line 122
+#line 124
 goto label_1;
-#line 122
+#line 124
 label_2:
-#line 123
+#line 125
 $memory_4 = c_rt_lib::to_nl(0);
-#line 123
+#line 125
 undef($memory_1);
-#line 123
+#line 125
 undef($memory_2);
-#line 123
+#line 125
 undef($memory_3);
-#line 123
+#line 125
 $_[0] = $memory_0;return $memory_4;
-#line 123
+#line 125
 undef($memory_4);
-#line 124
+#line 126
 goto label_1;
-#line 124
+#line 126
 label_1:
-#line 124
+#line 126
 undef($memory_3);
-#line 124
+#line 126
 undef($memory_2);
-#line 124
+#line 126
 undef($memory_1);
-#line 124
+#line 126
 $_[0] = $memory_0;return;
 $_[0] = $memory_0;}
 
 sub dfile::__state_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 128
+#line 130
 $memory_3 = ptd::sim();
-#line 128
+#line 130
 $memory_2 = ptd::arr($memory_3);
-#line 128
+#line 130
 undef($memory_3);
-#line 128
+#line 130
 $memory_3 = ptd::sim();
-#line 128
+#line 130
 $memory_4 = ptd::sim();
-#line 128
+#line 130
 $memory_1 = {str => $memory_2,len => $memory_3,pos => $memory_4,};
-#line 128
+#line 130
 undef($memory_2);
-#line 128
+#line 130
 undef($memory_3);
-#line 128
+#line 130
 undef($memory_4);
-#line 128
+#line 130
 $memory_0 = ptd::rec($memory_1);
-#line 128
+#line 130
 undef($memory_1);
-#line 128
+#line 130
 return $memory_0;
-#line 128
+#line 130
 undef($memory_0);
-#line 128
+#line 130
 return;
 }
 
@@ -955,894 +955,894 @@ sub dfile::state_t() {
 
 sub dfile_priv::parse($$) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;my $memory_9;my $memory_10;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);$memory_1 = $_[1];Scalar::Util::weaken($_[1]) if ref($_[1]);
-#line 136
+#line 134
 dfile_priv::eat_ws($memory_0);
-#line 137
+#line 135
 $memory_2 = dfile_priv::get_char($memory_0);
-#line 138
+#line 136
 $memory_3 = "{";
-#line 138
+#line 136
 $memory_3 = c_rt_lib::to_nl($memory_2 eq $memory_3);
-#line 138
+#line 136
 $memory_3 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
-#line 138
+#line 136
 if (c_rt_lib::check_true($memory_3)) {goto label_2;}
-#line 139
+#line 137
 $memory_4 = 1;
-#line 139
+#line 137
 $memory_5 = "pos";
-#line 139
+#line 137
 $memory_5 = c_rt_lib::get_ref_hash($memory_0, $memory_5);
-#line 139
+#line 137
 $memory_5 = $memory_5 + $memory_4;
-#line 139
+#line 137
 $memory_6 = "pos";
-#line 139
+#line 137
 c_rt_lib::set_ref_hash($memory_0, $memory_6, $memory_5);
-#line 139
+#line 137
 undef($memory_6);
-#line 139
+#line 137
 undef($memory_4);
-#line 139
+#line 137
 undef($memory_5);
-#line 140
+#line 138
 $memory_4 = {};
-#line 141
+#line 139
 dfile_priv::eat_ws($memory_0);
-#line 142
+#line 140
 label_4:
-#line 142
+#line 140
 $memory_6 = "}";
-#line 142
+#line 140
 $memory_5 = dfile_priv::match_s($memory_0, $memory_6);
-#line 142
+#line 140
 undef($memory_6);
-#line 142
+#line 140
 $memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 142
+#line 140
 $memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 142
+#line 140
 if (c_rt_lib::check_true($memory_5)) {goto label_3;}
-#line 143
+#line 141
 $memory_6 = dfile_priv::parse_scalar($memory_0, $memory_1);
-#line 144
+#line 142
 $memory_7 = $memory_1;
-#line 144
+#line 142
 $memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
-#line 144
+#line 142
 if (c_rt_lib::check_true($memory_7)) {goto label_6;}
-#line 144
+#line 142
 undef($memory_2);
-#line 144
+#line 142
 undef($memory_3);
-#line 144
+#line 142
 undef($memory_4);
-#line 144
+#line 142
 undef($memory_5);
-#line 144
+#line 142
 undef($memory_7);
-#line 144
+#line 142
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_6;
-#line 144
+#line 142
 goto label_6;
-#line 144
+#line 142
 label_6:
+#line 142
+undef($memory_7);
+#line 143
+dfile_priv::eat_ws($memory_0);
 #line 144
-undef($memory_7);
-#line 145
-dfile_priv::eat_ws($memory_0);
-#line 146
 $memory_8 = "=>";
-#line 146
+#line 144
 $memory_7 = dfile_priv::match_s($memory_0, $memory_8);
-#line 146
+#line 144
 undef($memory_8);
-#line 146
+#line 144
 $memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
-#line 146
+#line 144
 $memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
-#line 146
+#line 144
 if (c_rt_lib::check_true($memory_7)) {goto label_8;}
-#line 147
+#line 145
 $memory_8 = c_rt_lib::to_nl(1);
-#line 147
+#line 145
 $memory_1 = $memory_8;
-#line 147
+#line 145
 undef($memory_8);
-#line 148
+#line 146
 $memory_8 = "pos ";
-#line 148
+#line 146
 $memory_9 = $memory_0->{'pos'};
-#line 148
+#line 146
 $memory_8 = $memory_8 . $memory_9;
-#line 148
+#line 146
 undef($memory_9);
-#line 148
+#line 146
 $memory_9 = ": expected =>";
-#line 148
+#line 146
 $memory_8 = $memory_8 . $memory_9;
-#line 148
+#line 146
 undef($memory_9);
-#line 148
+#line 146
 undef($memory_2);
-#line 148
+#line 146
 undef($memory_3);
-#line 148
+#line 146
 undef($memory_4);
-#line 148
+#line 146
 undef($memory_5);
-#line 148
+#line 146
 undef($memory_6);
-#line 148
+#line 146
 undef($memory_7);
-#line 148
+#line 146
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_8;
-#line 148
+#line 146
 undef($memory_8);
-#line 149
+#line 147
 goto label_8;
-#line 149
+#line 147
 label_8:
-#line 149
+#line 147
 undef($memory_7);
-#line 150
+#line 148
 $memory_7 = dfile_priv::parse($memory_0, $memory_1);
-#line 151
+#line 149
 $memory_8 = $memory_1;
-#line 151
+#line 149
 $memory_8 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_8));
-#line 151
+#line 149
 if (c_rt_lib::check_true($memory_8)) {goto label_10;}
-#line 151
+#line 149
 undef($memory_2);
-#line 151
+#line 149
 undef($memory_3);
-#line 151
+#line 149
 undef($memory_4);
-#line 151
+#line 149
 undef($memory_5);
-#line 151
+#line 149
 undef($memory_6);
-#line 151
+#line 149
 undef($memory_8);
-#line 151
+#line 149
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_7;
-#line 151
+#line 149
 goto label_10;
-#line 151
+#line 149
 label_10:
-#line 151
+#line 149
 undef($memory_8);
-#line 152
+#line 150
 hash::set_value($memory_4, $memory_6, $memory_7);
-#line 153
+#line 151
 dfile_priv::eat_ws($memory_0);
-#line 154
+#line 152
 $memory_9 = ",";
-#line 154
+#line 152
 $memory_8 = dfile_priv::match_s($memory_0, $memory_9);
-#line 154
+#line 152
 undef($memory_9);
-#line 154
+#line 152
 $memory_8 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_8));
-#line 154
+#line 152
 $memory_8 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_8));
-#line 154
+#line 152
 if (c_rt_lib::check_true($memory_8)) {goto label_12;}
-#line 155
+#line 153
 $memory_9 = c_rt_lib::to_nl(1);
-#line 155
+#line 153
 $memory_1 = $memory_9;
-#line 155
+#line 153
 undef($memory_9);
-#line 156
+#line 154
 $memory_9 = "pos ";
-#line 156
+#line 154
 $memory_10 = $memory_0->{'pos'};
-#line 156
+#line 154
 $memory_9 = $memory_9 . $memory_10;
-#line 156
+#line 154
 undef($memory_10);
-#line 156
+#line 154
 $memory_10 = ": expected ,";
-#line 156
+#line 154
 $memory_9 = $memory_9 . $memory_10;
-#line 156
+#line 154
 undef($memory_10);
-#line 156
+#line 154
 undef($memory_2);
-#line 156
+#line 154
 undef($memory_3);
-#line 156
+#line 154
 undef($memory_4);
-#line 156
+#line 154
 undef($memory_5);
-#line 156
+#line 154
 undef($memory_6);
-#line 156
+#line 154
 undef($memory_7);
-#line 156
+#line 154
 undef($memory_8);
-#line 156
+#line 154
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_9;
-#line 156
+#line 154
 undef($memory_9);
-#line 157
+#line 155
 goto label_12;
-#line 157
+#line 155
 label_12:
+#line 155
+undef($memory_8);
+#line 156
+dfile_priv::eat_ws($memory_0);
+#line 156
+undef($memory_6);
+#line 156
+undef($memory_7);
 #line 157
-undef($memory_8);
-#line 158
-dfile_priv::eat_ws($memory_0);
-#line 158
-undef($memory_6);
-#line 158
-undef($memory_7);
-#line 159
 goto label_4;
-#line 159
+#line 157
 label_3:
+#line 157
+undef($memory_5);
+#line 158
+undef($memory_2);
+#line 158
+undef($memory_3);
+#line 158
+$_[0] = $memory_0;$_[1] = $memory_1;return $memory_4;
+#line 158
+undef($memory_4);
 #line 159
-undef($memory_5);
-#line 160
-undef($memory_2);
-#line 160
-undef($memory_3);
-#line 160
-$_[0] = $memory_0;$_[1] = $memory_1;return $memory_4;
-#line 160
-undef($memory_4);
-#line 161
 goto label_1;
-#line 161
+#line 159
 label_2:
-#line 161
+#line 159
 $memory_3 = "[";
-#line 161
+#line 159
 $memory_3 = c_rt_lib::to_nl($memory_2 eq $memory_3);
-#line 161
+#line 159
 $memory_3 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
-#line 161
+#line 159
 if (c_rt_lib::check_true($memory_3)) {goto label_13;}
-#line 162
+#line 160
 $memory_4 = 1;
-#line 162
+#line 160
 $memory_5 = "pos";
-#line 162
+#line 160
 $memory_5 = c_rt_lib::get_ref_hash($memory_0, $memory_5);
-#line 162
+#line 160
 $memory_5 = $memory_5 + $memory_4;
-#line 162
+#line 160
 $memory_6 = "pos";
-#line 162
+#line 160
 c_rt_lib::set_ref_hash($memory_0, $memory_6, $memory_5);
-#line 162
+#line 160
 undef($memory_6);
-#line 162
+#line 160
 undef($memory_4);
-#line 162
+#line 160
 undef($memory_5);
-#line 163
+#line 161
 $memory_4 = [];
-#line 164
+#line 162
 dfile_priv::eat_ws($memory_0);
-#line 165
+#line 163
 label_15:
-#line 165
+#line 163
 $memory_6 = "]";
-#line 165
+#line 163
 $memory_5 = dfile_priv::match_s($memory_0, $memory_6);
-#line 165
+#line 163
 undef($memory_6);
-#line 165
+#line 163
 $memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 165
+#line 163
 $memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 165
+#line 163
 if (c_rt_lib::check_true($memory_5)) {goto label_14;}
-#line 166
+#line 164
 $memory_6 = dfile_priv::parse($memory_0, $memory_1);
-#line 167
+#line 165
 $memory_7 = $memory_1;
-#line 167
+#line 165
 $memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
-#line 167
+#line 165
 if (c_rt_lib::check_true($memory_7)) {goto label_17;}
-#line 167
+#line 165
 undef($memory_2);
-#line 167
+#line 165
 undef($memory_3);
-#line 167
+#line 165
 undef($memory_4);
-#line 167
+#line 165
 undef($memory_5);
-#line 167
+#line 165
 undef($memory_7);
-#line 167
+#line 165
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_6;
-#line 167
+#line 165
 goto label_17;
-#line 167
+#line 165
 label_17:
-#line 167
+#line 165
 undef($memory_7);
-#line 168
+#line 166
 array::push($memory_4, $memory_6);
-#line 169
+#line 167
 $memory_8 = ",";
-#line 169
+#line 167
 $memory_7 = dfile_priv::match_s($memory_0, $memory_8);
-#line 169
+#line 167
 undef($memory_8);
-#line 169
+#line 167
 $memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
-#line 169
+#line 167
 $memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
-#line 169
+#line 167
 if (c_rt_lib::check_true($memory_7)) {goto label_19;}
-#line 170
+#line 168
 $memory_8 = c_rt_lib::to_nl(1);
-#line 170
+#line 168
 $memory_1 = $memory_8;
-#line 170
+#line 168
 undef($memory_8);
-#line 171
+#line 169
 $memory_8 = "pos ";
-#line 171
+#line 169
 $memory_9 = $memory_0->{'pos'};
-#line 171
+#line 169
 $memory_8 = $memory_8 . $memory_9;
-#line 171
+#line 169
 undef($memory_9);
-#line 171
+#line 169
 $memory_9 = ": expected ,";
-#line 171
+#line 169
 $memory_8 = $memory_8 . $memory_9;
-#line 171
+#line 169
 undef($memory_9);
-#line 171
+#line 169
 undef($memory_2);
-#line 171
+#line 169
 undef($memory_3);
-#line 171
+#line 169
 undef($memory_4);
-#line 171
+#line 169
 undef($memory_5);
-#line 171
+#line 169
 undef($memory_6);
-#line 171
+#line 169
 undef($memory_7);
-#line 171
+#line 169
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_8;
-#line 171
+#line 169
 undef($memory_8);
-#line 172
+#line 170
 goto label_19;
-#line 172
+#line 170
 label_19:
-#line 172
+#line 170
 undef($memory_7);
-#line 173
+#line 171
 dfile_priv::eat_ws($memory_0);
-#line 173
+#line 171
 undef($memory_6);
-#line 174
+#line 172
 goto label_15;
-#line 174
+#line 172
 label_14:
-#line 174
+#line 172
 undef($memory_5);
-#line 175
+#line 173
 undef($memory_2);
-#line 175
+#line 173
 undef($memory_3);
-#line 175
+#line 173
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_4;
+#line 173
+undef($memory_4);
+#line 174
+goto label_1;
+#line 174
+label_13:
+#line 174
+$memory_3 = "o";
+#line 174
+$memory_3 = c_rt_lib::to_nl($memory_2 eq $memory_3);
+#line 174
+$memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
+#line 174
+if (c_rt_lib::check_true($memory_4)) {goto label_21;}
+#line 174
+$memory_3 = dfile_priv::is_ov($memory_0);
+#line 174
+label_21:
+#line 174
+undef($memory_4);
+#line 174
+$memory_3 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
+#line 174
+if (c_rt_lib::check_true($memory_3)) {goto label_20;}
+#line 175
+$memory_4 = 7;
+#line 175
+$memory_5 = "pos";
+#line 175
+$memory_5 = c_rt_lib::get_ref_hash($memory_0, $memory_5);
+#line 175
+$memory_5 = $memory_5 + $memory_4;
+#line 175
+$memory_6 = "pos";
+#line 175
+c_rt_lib::set_ref_hash($memory_0, $memory_6, $memory_5);
+#line 175
+undef($memory_6);
 #line 175
 undef($memory_4);
+#line 175
+undef($memory_5);
 #line 176
-goto label_1;
-#line 176
-label_13:
-#line 176
-$memory_3 = "o";
-#line 176
-$memory_3 = c_rt_lib::to_nl($memory_2 eq $memory_3);
-#line 176
-$memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
-#line 176
-if (c_rt_lib::check_true($memory_4)) {goto label_21;}
-#line 176
-$memory_3 = dfile_priv::is_ov($memory_0);
-#line 176
-label_21:
-#line 176
-undef($memory_4);
-#line 176
-$memory_3 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
-#line 176
-if (c_rt_lib::check_true($memory_3)) {goto label_20;}
+$memory_4 = dfile_priv::parse_scalar($memory_0, $memory_1);
 #line 177
-$memory_4 = 7;
+$memory_5 = $memory_1;
 #line 177
-$memory_5 = "pos";
+$memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
 #line 177
-$memory_5 = c_rt_lib::get_ref_hash($memory_0, $memory_5);
+if (c_rt_lib::check_true($memory_5)) {goto label_23;}
 #line 177
-$memory_5 = $memory_5 + $memory_4;
+undef($memory_2);
 #line 177
-$memory_6 = "pos";
+undef($memory_3);
 #line 177
-c_rt_lib::set_ref_hash($memory_0, $memory_6, $memory_5);
+undef($memory_5);
 #line 177
-undef($memory_6);
+$_[0] = $memory_0;$_[1] = $memory_1;return $memory_4;
 #line 177
-undef($memory_4);
+goto label_23;
+#line 177
+label_23:
 #line 177
 undef($memory_5);
 #line 178
-$memory_4 = dfile_priv::parse_scalar($memory_0, $memory_1);
-#line 179
-$memory_5 = $memory_1;
-#line 179
-$memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 179
-if (c_rt_lib::check_true($memory_5)) {goto label_23;}
-#line 179
-undef($memory_2);
-#line 179
-undef($memory_3);
-#line 179
-undef($memory_5);
-#line 179
-$_[0] = $memory_0;$_[1] = $memory_1;return $memory_4;
-#line 179
-goto label_23;
-#line 179
-label_23:
-#line 179
-undef($memory_5);
-#line 180
 dfile_priv::eat_ws($memory_0);
-#line 181
+#line 179
 $memory_6 = ",";
-#line 181
+#line 179
 $memory_5 = dfile_priv::match_s($memory_0, $memory_6);
-#line 181
+#line 179
 undef($memory_6);
-#line 181
+#line 179
 $memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 181
+#line 179
 if (c_rt_lib::check_true($memory_5)) {goto label_25;}
-#line 182
+#line 180
 $memory_6 = dfile_priv::parse($memory_0, $memory_1);
-#line 183
+#line 181
 $memory_7 = $memory_1;
-#line 183
+#line 181
 $memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
-#line 183
+#line 181
 if (c_rt_lib::check_true($memory_7)) {goto label_27;}
-#line 183
+#line 181
 undef($memory_2);
-#line 183
+#line 181
 undef($memory_3);
-#line 183
+#line 181
 undef($memory_4);
-#line 183
+#line 181
 undef($memory_5);
-#line 183
+#line 181
 undef($memory_7);
-#line 183
+#line 181
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_6;
-#line 183
+#line 181
 goto label_27;
-#line 183
+#line 181
 label_27:
+#line 181
+undef($memory_7);
+#line 182
+dfile_priv::eat_ws($memory_0);
 #line 183
-undef($memory_7);
-#line 184
-dfile_priv::eat_ws($memory_0);
-#line 185
 $memory_8 = ")";
-#line 185
+#line 183
 $memory_7 = dfile_priv::match_s($memory_0, $memory_8);
-#line 185
+#line 183
 undef($memory_8);
-#line 185
+#line 183
 $memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
-#line 185
+#line 183
 $memory_7 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_7));
-#line 185
+#line 183
 if (c_rt_lib::check_true($memory_7)) {goto label_29;}
-#line 186
+#line 184
 $memory_8 = c_rt_lib::to_nl(1);
-#line 186
+#line 184
 $memory_1 = $memory_8;
-#line 186
+#line 184
 undef($memory_8);
-#line 187
+#line 185
 $memory_8 = "pos ";
-#line 187
+#line 185
 $memory_9 = $memory_0->{'pos'};
-#line 187
+#line 185
 $memory_8 = $memory_8 . $memory_9;
-#line 187
+#line 185
 undef($memory_9);
-#line 187
+#line 185
 $memory_9 = ": expected )";
-#line 187
+#line 185
 $memory_8 = $memory_8 . $memory_9;
-#line 187
+#line 185
 undef($memory_9);
-#line 187
+#line 185
 undef($memory_2);
-#line 187
+#line 185
 undef($memory_3);
-#line 187
+#line 185
 undef($memory_4);
-#line 187
+#line 185
 undef($memory_5);
-#line 187
+#line 185
 undef($memory_6);
-#line 187
+#line 185
 undef($memory_7);
-#line 187
+#line 185
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_8;
-#line 187
+#line 185
 undef($memory_8);
-#line 188
+#line 186
 goto label_29;
-#line 188
+#line 186
 label_29:
-#line 188
+#line 186
 undef($memory_7);
-#line 189
+#line 187
 $memory_7 = ov::mk_val($memory_4, $memory_6);
-#line 189
+#line 187
 undef($memory_2);
-#line 189
+#line 187
 undef($memory_3);
-#line 189
+#line 187
 undef($memory_4);
-#line 189
+#line 187
 undef($memory_5);
-#line 189
+#line 187
 undef($memory_6);
-#line 189
+#line 187
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_7;
-#line 189
+#line 187
 undef($memory_7);
-#line 189
+#line 187
 undef($memory_6);
-#line 190
+#line 188
 goto label_25;
-#line 190
+#line 188
 label_25:
+#line 188
+undef($memory_5);
+#line 189
+dfile_priv::eat_ws($memory_0);
 #line 190
-undef($memory_5);
-#line 191
-dfile_priv::eat_ws($memory_0);
-#line 192
 $memory_6 = ")";
-#line 192
+#line 190
 $memory_5 = dfile_priv::match_s($memory_0, $memory_6);
-#line 192
+#line 190
 undef($memory_6);
-#line 192
+#line 190
 $memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 192
+#line 190
 $memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 192
+#line 190
 if (c_rt_lib::check_true($memory_5)) {goto label_31;}
-#line 193
+#line 191
 $memory_6 = c_rt_lib::to_nl(1);
-#line 193
+#line 191
 $memory_1 = $memory_6;
-#line 193
+#line 191
 undef($memory_6);
-#line 194
+#line 192
 $memory_6 = "pos ";
-#line 194
+#line 192
 $memory_7 = $memory_0->{'pos'};
-#line 194
+#line 192
 $memory_6 = $memory_6 . $memory_7;
-#line 194
+#line 192
 undef($memory_7);
-#line 194
+#line 192
 $memory_7 = ": expected )";
-#line 194
+#line 192
 $memory_6 = $memory_6 . $memory_7;
-#line 194
+#line 192
 undef($memory_7);
-#line 194
+#line 192
 undef($memory_2);
-#line 194
+#line 192
 undef($memory_3);
-#line 194
+#line 192
 undef($memory_4);
-#line 194
+#line 192
 undef($memory_5);
-#line 194
+#line 192
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_6;
-#line 194
+#line 192
 undef($memory_6);
-#line 195
+#line 193
 goto label_31;
-#line 195
+#line 193
 label_31:
+#line 193
+undef($memory_5);
+#line 194
+dfile_priv::eat_ws($memory_0);
+#line 195
+$memory_5 = ov::mk($memory_4);
+#line 195
+undef($memory_2);
+#line 195
+undef($memory_3);
+#line 195
+undef($memory_4);
+#line 195
+$_[0] = $memory_0;$_[1] = $memory_1;return $memory_5;
 #line 195
 undef($memory_5);
+#line 195
+undef($memory_4);
 #line 196
-dfile_priv::eat_ws($memory_0);
-#line 197
-$memory_5 = ov::mk($memory_4);
-#line 197
-undef($memory_2);
-#line 197
-undef($memory_3);
-#line 197
-undef($memory_4);
-#line 197
-$_[0] = $memory_0;$_[1] = $memory_1;return $memory_5;
-#line 197
-undef($memory_5);
-#line 197
-undef($memory_4);
-#line 198
 goto label_1;
-#line 198
+#line 196
 label_20:
-#line 199
+#line 197
 $memory_4 = dfile_priv::parse_scalar($memory_0, $memory_1);
-#line 199
+#line 197
 undef($memory_2);
-#line 199
+#line 197
 undef($memory_3);
-#line 199
+#line 197
 $_[0] = $memory_0;$_[1] = $memory_1;return $memory_4;
-#line 199
+#line 197
 undef($memory_4);
-#line 200
+#line 198
 goto label_1;
-#line 200
+#line 198
 label_1:
-#line 200
+#line 198
 undef($memory_3);
-#line 200
+#line 198
 undef($memory_2);
-#line 200
+#line 198
 $_[0] = $memory_0;$_[1] = $memory_1;return;
 $_[0] = $memory_0;$_[1] = $memory_1;}
 
 sub dfile::sload($) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;$memory_0 = $_[0];
-#line 204
+#line 202
 $memory_3 = dfile::try_sload($memory_0);
-#line 204
+#line 202
 $memory_2 = c_rt_lib::ov_is($memory_3, 'ok');
-#line 204
+#line 202
 if (c_rt_lib::check_true($memory_2)) {goto label_1;}
-#line 204
+#line 202
 $memory_3 = c_rt_lib::ov_mk_arg('ensure', $memory_3);
-#line 204
+#line 202
 die(dfile::ssave($memory_3));
-#line 204
+#line 202
 label_1:
-#line 204
+#line 202
 $memory_1 = c_rt_lib::ov_as($memory_3, 'ok');
-#line 204
+#line 202
 undef($memory_2);
-#line 204
+#line 202
 undef($memory_3);
-#line 205
+#line 203
 undef($memory_0);
-#line 205
+#line 203
 return $memory_1;
-#line 205
+#line 203
 undef($memory_1);
-#line 205
+#line 203
 undef($memory_0);
-#line 205
+#line 203
 return;
 }
 
 sub dfile::try_sload($) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;$memory_0 = $_[0];
-#line 209
+#line 207
 $memory_2 = ptd::sim();
-#line 209
+#line 207
 $memory_1 = ptd::ensure($memory_2, $memory_0);
-#line 209
+#line 207
 undef($memory_2);
-#line 210
+#line 208
 $memory_3 = [$memory_1];
-#line 210
+#line 208
 $memory_4 = 0;
-#line 210
+#line 208
 $memory_5 = string::length($memory_1);
-#line 210
+#line 208
 $memory_2 = {str => $memory_3,pos => $memory_4,len => $memory_5,};
-#line 210
+#line 208
 undef($memory_3);
-#line 210
+#line 208
 undef($memory_4);
-#line 210
+#line 208
 undef($memory_5);
-#line 211
+#line 209
 $memory_3 = c_rt_lib::to_nl(0);
-#line 212
+#line 210
 $memory_4 = "use utf8;";
-#line 212
+#line 210
 dfile_priv::match_s($memory_2, $memory_4);
-#line 212
+#line 210
 undef($memory_4);
+#line 211
+dfile_priv::eat_ws($memory_2);
+#line 212
+$memory_4 = dfile_priv::parse($memory_2, $memory_3);
 #line 213
 dfile_priv::eat_ws($memory_2);
 #line 214
-$memory_4 = dfile_priv::parse($memory_2, $memory_3);
-#line 215
-dfile_priv::eat_ws($memory_2);
-#line 216
 $memory_5 = $memory_3;
-#line 216
+#line 214
 $memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 216
+#line 214
 $memory_6 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 216
+#line 214
 if (c_rt_lib::check_true($memory_6)) {goto label_3;}
-#line 216
+#line 214
 $memory_5 = $memory_2->{'pos'};
-#line 216
+#line 214
 $memory_7 = $memory_2->{'len'};
-#line 216
+#line 214
 $memory_5 = c_rt_lib::to_nl($memory_5 != $memory_7);
-#line 216
+#line 214
 undef($memory_7);
-#line 216
+#line 214
 label_3:
-#line 216
+#line 214
 undef($memory_6);
-#line 216
+#line 214
 $memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 216
+#line 214
 if (c_rt_lib::check_true($memory_5)) {goto label_2;}
-#line 217
+#line 215
 $memory_6 = c_rt_lib::to_nl(1);
-#line 217
+#line 215
 $memory_3 = $memory_6;
-#line 217
+#line 215
 undef($memory_6);
-#line 218
+#line 216
 $memory_6 = "pos ";
-#line 218
+#line 216
 $memory_7 = $memory_2->{'pos'};
-#line 218
+#line 216
 $memory_6 = $memory_6 . $memory_7;
-#line 218
+#line 216
 undef($memory_7);
-#line 218
+#line 216
 $memory_7 = ": expected eof";
-#line 218
+#line 216
 $memory_6 = $memory_6 . $memory_7;
-#line 218
+#line 216
 undef($memory_7);
-#line 218
+#line 216
 $memory_4 = $memory_6;
-#line 218
+#line 216
 undef($memory_6);
-#line 219
+#line 217
 goto label_2;
-#line 219
+#line 217
 label_2:
-#line 219
+#line 217
 undef($memory_5);
-#line 220
+#line 218
 $memory_5 = $memory_3;
-#line 220
+#line 218
 $memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 220
+#line 218
 if (c_rt_lib::check_true($memory_5)) {goto label_5;}
-#line 221
+#line 219
 $memory_7 = ptd::sim();
-#line 221
+#line 219
 $memory_6 = ptd::ensure($memory_7, $memory_4);
-#line 221
+#line 219
 undef($memory_7);
-#line 221
+#line 219
 $memory_4 = $memory_6;
-#line 221
+#line 219
 undef($memory_6);
-#line 222
+#line 220
 $memory_6 = c_rt_lib::ov_mk_arg('err', $memory_4);
-#line 222
+#line 220
 undef($memory_0);
-#line 222
+#line 220
 undef($memory_1);
-#line 222
+#line 220
 undef($memory_2);
-#line 222
+#line 220
 undef($memory_3);
-#line 222
+#line 220
 undef($memory_4);
-#line 222
+#line 220
 undef($memory_5);
-#line 222
+#line 220
 return $memory_6;
-#line 222
+#line 220
 undef($memory_6);
-#line 223
+#line 221
 goto label_4;
-#line 223
+#line 221
 label_5:
-#line 224
+#line 222
 $memory_6 = c_rt_lib::ov_mk_arg('ok', $memory_4);
-#line 224
+#line 222
 undef($memory_0);
-#line 224
+#line 222
 undef($memory_1);
-#line 224
+#line 222
 undef($memory_2);
-#line 224
+#line 222
 undef($memory_3);
-#line 224
+#line 222
 undef($memory_4);
-#line 224
+#line 222
 undef($memory_5);
-#line 224
+#line 222
 return $memory_6;
-#line 224
+#line 222
 undef($memory_6);
-#line 225
+#line 223
 goto label_4;
-#line 225
+#line 223
 label_4:
-#line 225
+#line 223
 undef($memory_5);
-#line 225
+#line 223
 undef($memory_1);
-#line 225
+#line 223
 undef($memory_2);
-#line 225
+#line 223
 undef($memory_3);
-#line 225
+#line 223
 undef($memory_4);
-#line 225
+#line 223
 undef($memory_0);
-#line 225
+#line 223
 return;
 }
 
 sub dfile::__state_out() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 230
+#line 227
 $memory_2 = ptd::sim();
-#line 230
+#line 227
 $memory_4 = {
 	module => "boolean_t",
 	name => "type",
 };
-#line 230
+#line 227
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 230
+#line 227
 $memory_3 = ptd::hash($memory_4);
-#line 230
+#line 227
 undef($memory_4);
-#line 230
+#line 227
 $memory_1 = {str => $memory_2,objects => $memory_3,};
-#line 230
+#line 227
 undef($memory_2);
-#line 230
+#line 227
 undef($memory_3);
-#line 230
+#line 227
 $memory_0 = ptd::rec($memory_1);
-#line 230
+#line 227
 undef($memory_1);
-#line 230
+#line 227
 return $memory_0;
-#line 230
+#line 227
 undef($memory_0);
-#line 230
+#line 227
 return;
 }
 
@@ -1854,1108 +1854,1120 @@ sub dfile::state_out() {
 
 sub dfile_priv::sp($$) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);$memory_1 = $_[1];
-#line 236
+#line 231
 $memory_2 = "str";
-#line 236
+#line 231
 $memory_2 = c_rt_lib::get_ref_hash($memory_0, $memory_2);
-#line 236
+#line 231
 $memory_2 = $memory_2 . $memory_1;
-#line 236
+#line 231
 $memory_3 = "str";
-#line 236
+#line 231
 c_rt_lib::set_ref_hash($memory_0, $memory_3, $memory_2);
-#line 236
+#line 231
 undef($memory_3);
-#line 236
+#line 231
 undef($memory_2);
-#line 236
+#line 231
 undef($memory_1);
-#line 236
+#line 231
 $_[0] = $memory_0;return;
 $_[0] = $memory_0;}
 
 sub dfile_priv::sprintstr($$) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);$memory_1 = $_[1];
-#line 240
+#line 235
 $memory_2 = "";
-#line 240
+#line 235
 $memory_1 = $memory_1 . $memory_2;
+#line 235
+undef($memory_2);
+#line 236
+$memory_3 = "\\";
+#line 236
+$memory_4 = "\\\\";
+#line 236
+$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
+#line 236
+undef($memory_4);
+#line 236
+undef($memory_3);
+#line 236
+$memory_1 = $memory_2;
+#line 236
+undef($memory_2);
+#line 237
+$memory_3 = "\$";
+#line 237
+$memory_4 = "\\\$";
+#line 237
+$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
+#line 237
+undef($memory_4);
+#line 237
+undef($memory_3);
+#line 237
+$memory_1 = $memory_2;
+#line 237
+undef($memory_2);
+#line 238
+$memory_3 = "\@";
+#line 238
+$memory_4 = "\\\@";
+#line 238
+$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
+#line 238
+undef($memory_4);
+#line 238
+undef($memory_3);
+#line 238
+$memory_1 = $memory_2;
+#line 238
+undef($memory_2);
+#line 239
+$memory_3 = "\"";
+#line 239
+$memory_4 = "\\\"";
+#line 239
+$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
+#line 239
+undef($memory_4);
+#line 239
+undef($memory_3);
+#line 239
+$memory_1 = $memory_2;
+#line 239
+undef($memory_2);
+#line 240
+$memory_2 = "\"";
+#line 240
+$memory_2 = $memory_2 . $memory_1;
+#line 240
+$memory_3 = "\"";
+#line 240
+$memory_2 = $memory_2 . $memory_3;
+#line 240
+undef($memory_3);
+#line 240
+dfile_priv::sp($memory_0, $memory_2);
 #line 240
 undef($memory_2);
-#line 241
-$memory_3 = "\\";
-#line 241
-$memory_4 = "\\\\";
-#line 241
-$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
-#line 241
-undef($memory_4);
-#line 241
-undef($memory_3);
-#line 241
-$memory_1 = $memory_2;
-#line 241
-undef($memory_2);
-#line 242
-$memory_3 = "\$";
-#line 242
-$memory_4 = "\\\$";
-#line 242
-$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
-#line 242
-undef($memory_4);
-#line 242
-undef($memory_3);
-#line 242
-$memory_1 = $memory_2;
-#line 242
-undef($memory_2);
-#line 243
-$memory_3 = "\@";
-#line 243
-$memory_4 = "\\\@";
-#line 243
-$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
-#line 243
-undef($memory_4);
-#line 243
-undef($memory_3);
-#line 243
-$memory_1 = $memory_2;
-#line 243
-undef($memory_2);
-#line 244
-$memory_3 = "\"";
-#line 244
-$memory_4 = "\\\"";
-#line 244
-$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
-#line 244
-undef($memory_4);
-#line 244
-undef($memory_3);
-#line 244
-$memory_1 = $memory_2;
-#line 244
-undef($memory_2);
-#line 245
-$memory_2 = "\"";
-#line 245
-$memory_2 = $memory_2 . $memory_1;
-#line 245
-$memory_3 = "\"";
-#line 245
-$memory_2 = $memory_2 . $memory_3;
-#line 245
-undef($memory_3);
-#line 245
-dfile_priv::sp($memory_0, $memory_2);
-#line 245
-undef($memory_2);
-#line 245
+#line 240
 undef($memory_1);
-#line 245
+#line 240
 $_[0] = $memory_0;return;
 $_[0] = $memory_0;}
 
 sub dfile_priv::is_simple_string($) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;$memory_0 = $_[0];
-#line 249
+#line 244
 $memory_1 = string::length($memory_0);
-#line 250
+#line 245
 $memory_2 = 0;
-#line 250
+#line 245
 $memory_2 = c_rt_lib::to_nl($memory_1 == $memory_2);
-#line 250
+#line 245
 $memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
-#line 250
+#line 245
 if (c_rt_lib::check_true($memory_2)) {goto label_2;}
-#line 250
+#line 245
 $memory_3 = c_rt_lib::to_nl(0);
-#line 250
+#line 245
 undef($memory_0);
-#line 250
+#line 245
 undef($memory_1);
-#line 250
+#line 245
 undef($memory_2);
-#line 250
+#line 245
 return $memory_3;
-#line 250
+#line 245
 undef($memory_3);
-#line 250
+#line 245
 goto label_2;
-#line 250
+#line 245
 label_2:
+#line 245
+undef($memory_2);
+#line 246
+$memory_4 = 0;
+#line 246
+$memory_5 = 1;
+#line 246
+$memory_3 = string::substr($memory_0, $memory_4, $memory_5);
+#line 246
+undef($memory_5);
+#line 246
+undef($memory_4);
+#line 246
+$memory_2 = string::is_letter($memory_3);
+#line 246
+undef($memory_3);
+#line 246
+if (c_rt_lib::check_true($memory_2)) {goto label_5;}
+#line 246
+$memory_3 = 0;
+#line 246
+$memory_4 = 1;
+#line 246
+$memory_2 = string::substr($memory_0, $memory_3, $memory_4);
+#line 246
+undef($memory_4);
+#line 246
+undef($memory_3);
+#line 246
+$memory_3 = "_";
+#line 246
+$memory_2 = c_rt_lib::to_nl($memory_2 eq $memory_3);
+#line 246
+undef($memory_3);
+#line 246
+label_5:
+#line 246
+$memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
+#line 246
+$memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
+#line 246
+if (c_rt_lib::check_true($memory_2)) {goto label_4;}
+#line 246
+$memory_3 = c_rt_lib::to_nl(0);
+#line 246
+undef($memory_0);
+#line 246
+undef($memory_1);
+#line 246
+undef($memory_2);
+#line 246
+return $memory_3;
+#line 246
+undef($memory_3);
+#line 246
+goto label_4;
+#line 246
+label_4:
+#line 246
+undef($memory_2);
+#line 247
+$memory_2 = 0;
+#line 247
+$memory_3 = 1;
+#line 247
+label_8:
+#line 247
+$memory_4 = c_rt_lib::to_nl($memory_2 >= $memory_1);
+#line 247
+if (c_rt_lib::check_true($memory_4)) {goto label_6;}
+#line 248
+$memory_6 = 1;
+#line 248
+$memory_5 = string::substr($memory_0, $memory_2, $memory_6);
+#line 248
+undef($memory_6);
+#line 249
+$memory_6 = string::is_letter($memory_5);
+#line 249
+if (c_rt_lib::check_true($memory_6)) {goto label_12;}
+#line 249
+$memory_6 = string::is_digit($memory_5);
+#line 249
+label_12:
+#line 249
+if (c_rt_lib::check_true($memory_6)) {goto label_11;}
+#line 249
+$memory_6 = "_";
+#line 249
+$memory_6 = c_rt_lib::to_nl($memory_5 eq $memory_6);
+#line 249
+label_11:
+#line 249
+$memory_6 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_6));
+#line 249
+$memory_6 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_6));
+#line 249
+if (c_rt_lib::check_true($memory_6)) {goto label_10;}
+#line 249
+$memory_7 = c_rt_lib::to_nl(0);
+#line 249
+undef($memory_0);
+#line 249
+undef($memory_1);
+#line 249
+undef($memory_2);
+#line 249
+undef($memory_3);
+#line 249
+undef($memory_4);
+#line 249
+undef($memory_5);
+#line 249
+undef($memory_6);
+#line 249
+return $memory_7;
+#line 249
+undef($memory_7);
+#line 249
+goto label_10;
+#line 249
+label_10:
+#line 249
+undef($memory_6);
+#line 249
+undef($memory_5);
+#line 250
+$memory_2 = $memory_2 + $memory_3;
+#line 250
+goto label_8;
+#line 250
+label_6:
 #line 250
 undef($memory_2);
-#line 251
-$memory_4 = 0;
-#line 251
-$memory_5 = 1;
-#line 251
-$memory_3 = string::substr($memory_0, $memory_4, $memory_5);
-#line 251
-undef($memory_5);
-#line 251
+#line 250
+undef($memory_3);
+#line 250
 undef($memory_4);
 #line 251
-$memory_2 = string::is_letter($memory_3);
-#line 251
-undef($memory_3);
-#line 251
-if (c_rt_lib::check_true($memory_2)) {goto label_5;}
-#line 251
-$memory_3 = 0;
-#line 251
-$memory_4 = 1;
-#line 251
-$memory_2 = string::substr($memory_0, $memory_3, $memory_4);
-#line 251
-undef($memory_4);
-#line 251
-undef($memory_3);
-#line 251
-$memory_3 = "_";
-#line 251
-$memory_2 = c_rt_lib::to_nl($memory_2 eq $memory_3);
-#line 251
-undef($memory_3);
-#line 251
-label_5:
-#line 251
-$memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
-#line 251
-$memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
-#line 251
-if (c_rt_lib::check_true($memory_2)) {goto label_4;}
-#line 251
-$memory_3 = c_rt_lib::to_nl(0);
-#line 251
-undef($memory_0);
-#line 251
-undef($memory_1);
-#line 251
-undef($memory_2);
-#line 251
-return $memory_3;
-#line 251
-undef($memory_3);
-#line 251
-goto label_4;
-#line 251
-label_4:
-#line 251
-undef($memory_2);
-#line 252
-$memory_2 = 0;
-#line 252
-$memory_3 = 1;
-#line 252
-label_8:
-#line 252
-$memory_4 = c_rt_lib::to_nl($memory_2 >= $memory_1);
-#line 252
-if (c_rt_lib::check_true($memory_4)) {goto label_6;}
-#line 253
-$memory_6 = 1;
-#line 253
-$memory_5 = string::substr($memory_0, $memory_2, $memory_6);
-#line 253
-undef($memory_6);
-#line 254
-$memory_6 = string::is_letter($memory_5);
-#line 254
-if (c_rt_lib::check_true($memory_6)) {goto label_12;}
-#line 254
-$memory_6 = string::is_digit($memory_5);
-#line 254
-label_12:
-#line 254
-if (c_rt_lib::check_true($memory_6)) {goto label_11;}
-#line 254
-$memory_6 = "_";
-#line 254
-$memory_6 = c_rt_lib::to_nl($memory_5 eq $memory_6);
-#line 254
-label_11:
-#line 254
-$memory_6 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_6));
-#line 254
-$memory_6 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_6));
-#line 254
-if (c_rt_lib::check_true($memory_6)) {goto label_10;}
-#line 254
-$memory_7 = c_rt_lib::to_nl(0);
-#line 254
-undef($memory_0);
-#line 254
-undef($memory_1);
-#line 254
-undef($memory_2);
-#line 254
-undef($memory_3);
-#line 254
-undef($memory_4);
-#line 254
-undef($memory_5);
-#line 254
-undef($memory_6);
-#line 254
-return $memory_7;
-#line 254
-undef($memory_7);
-#line 254
-goto label_10;
-#line 254
-label_10:
-#line 254
-undef($memory_6);
-#line 254
-undef($memory_5);
-#line 255
-$memory_2 = $memory_2 + $memory_3;
-#line 255
-goto label_8;
-#line 255
-label_6:
-#line 255
-undef($memory_2);
-#line 255
-undef($memory_3);
-#line 255
-undef($memory_4);
-#line 256
 $memory_2 = c_rt_lib::to_nl(1);
-#line 256
+#line 251
 undef($memory_0);
-#line 256
+#line 251
 undef($memory_1);
-#line 256
+#line 251
 return $memory_2;
-#line 256
+#line 251
 undef($memory_2);
-#line 256
+#line 251
 undef($memory_1);
-#line 256
+#line 251
 undef($memory_0);
-#line 256
+#line 251
 return;
 }
 
 sub dfile_priv::sprint_hash_key($$) {
 my $memory_0;my $memory_1;my $memory_2;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);$memory_1 = $_[1];
-#line 260
+#line 255
 $memory_2 = dfile_priv::is_simple_string($memory_1);
-#line 260
+#line 255
 $memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
-#line 260
+#line 255
 if (c_rt_lib::check_true($memory_2)) {goto label_2;}
-#line 261
+#line 256
 dfile_priv::sp($memory_0, $memory_1);
-#line 262
+#line 257
 goto label_1;
-#line 262
+#line 257
 label_2:
-#line 263
+#line 258
 dfile_priv::sprintstr($memory_0, $memory_1);
-#line 264
+#line 259
 goto label_1;
-#line 264
+#line 259
 label_1:
-#line 264
+#line 259
 undef($memory_2);
-#line 264
+#line 259
 undef($memory_1);
-#line 264
+#line 259
 $_[0] = $memory_0;return;
 $_[0] = $memory_0;}
 
 sub dfile_priv::get_ind($) {
 my $memory_0;my $memory_1;my $memory_2;$memory_0 = $_[0];
-#line 268
+#line 263
 $memory_2 = string::tab();
-#line 268
+#line 263
 $memory_1 = string::char_times($memory_2, $memory_0);
-#line 268
+#line 263
 undef($memory_2);
-#line 268
+#line 263
 undef($memory_0);
-#line 268
+#line 263
 return $memory_1;
-#line 268
+#line 263
 undef($memory_1);
-#line 268
+#line 263
 undef($memory_0);
-#line 268
+#line 263
 return;
 }
 
 sub dfile_priv::sprint_hash($$$$) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;my $memory_9;my $memory_10;my $memory_11;my $memory_12;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);$memory_1 = $_[1];$memory_2 = $_[2];$memory_3 = $_[3];
-#line 273
+#line 268
 $memory_4 = "{";
-#line 273
+#line 268
 $memory_5 = string::lf();
-#line 273
+#line 268
 $memory_4 = $memory_4 . $memory_5;
-#line 273
+#line 268
 undef($memory_5);
-#line 273
+#line 268
 dfile_priv::sp($memory_0, $memory_4);
-#line 273
+#line 268
 undef($memory_4);
-#line 274
-$memory_4 = hash::keys($memory_1);
-#line 275
+#line 269
+$memory_6 = ptd::sim();
+#line 269
+$memory_5 = ptd::arr($memory_6);
+#line 269
+undef($memory_6);
+#line 269
+$memory_6 = hash::keys($memory_1);
+#line 269
+$memory_4 = ptd::ensure($memory_5, $memory_6);
+#line 269
+undef($memory_6);
+#line 269
+undef($memory_5);
+#line 270
 array::sort($memory_4);
-#line 276
+#line 271
 $memory_6 = 0;
-#line 276
+#line 271
 $memory_7 = 1;
-#line 276
+#line 271
 $memory_8 = c_rt_lib::array_len($memory_4);
-#line 276
+#line 271
 label_3:
-#line 276
+#line 271
 $memory_9 = c_rt_lib::to_nl($memory_6 >= $memory_8);
-#line 276
+#line 271
 if (c_rt_lib::check_true($memory_9)) {goto label_1;}
-#line 276
+#line 271
 $memory_5 = $memory_4->[$memory_6];
-#line 277
+#line 272
 $memory_10 = hash::get_value($memory_1, $memory_5);
-#line 278
+#line 273
 $memory_12 = 1;
-#line 278
+#line 273
 $memory_12 = $memory_2 + $memory_12;
-#line 278
+#line 273
 $memory_11 = dfile_priv::get_ind($memory_12);
-#line 278
+#line 273
 undef($memory_12);
-#line 278
+#line 273
 dfile_priv::sp($memory_0, $memory_11);
-#line 278
+#line 273
 undef($memory_11);
-#line 279
+#line 274
 dfile_priv::sprint_hash_key($memory_0, $memory_5);
-#line 280
+#line 275
 $memory_11 = " => ";
-#line 280
+#line 275
 dfile_priv::sp($memory_0, $memory_11);
-#line 280
+#line 275
 undef($memory_11);
-#line 281
+#line 276
 $memory_11 = 1;
-#line 281
+#line 276
 $memory_11 = $memory_2 + $memory_11;
-#line 281
+#line 276
 dfile_priv::sprint($memory_0, $memory_10, $memory_11, $memory_3);
-#line 281
+#line 276
 undef($memory_11);
-#line 282
+#line 277
 $memory_11 = ",";
-#line 282
+#line 277
 $memory_12 = string::lf();
-#line 282
+#line 277
 $memory_11 = $memory_11 . $memory_12;
-#line 282
+#line 277
 undef($memory_12);
-#line 282
+#line 277
 dfile_priv::sp($memory_0, $memory_11);
-#line 282
+#line 277
 undef($memory_11);
-#line 282
+#line 277
 undef($memory_10);
-#line 283
+#line 278
 $memory_6 = $memory_6 + $memory_7;
-#line 283
+#line 278
 goto label_3;
-#line 283
+#line 278
 label_1:
-#line 283
+#line 278
 undef($memory_5);
-#line 283
+#line 278
 undef($memory_6);
-#line 283
+#line 278
 undef($memory_7);
-#line 283
+#line 278
 undef($memory_8);
-#line 283
+#line 278
 undef($memory_9);
-#line 284
+#line 279
 $memory_5 = dfile_priv::get_ind($memory_2);
-#line 284
+#line 279
 $memory_6 = "}";
-#line 284
+#line 279
 $memory_5 = $memory_5 . $memory_6;
-#line 284
+#line 279
 undef($memory_6);
-#line 284
+#line 279
 dfile_priv::sp($memory_0, $memory_5);
-#line 284
+#line 279
 undef($memory_5);
-#line 284
+#line 279
 undef($memory_4);
-#line 284
+#line 279
 undef($memory_1);
-#line 284
+#line 279
 undef($memory_2);
-#line 284
+#line 279
 undef($memory_3);
-#line 284
+#line 279
 $_[0] = $memory_0;return;
 $_[0] = $memory_0;}
 
 sub dfile_priv::handle_debug($$) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);$memory_1 = $_[1];
-#line 288
+#line 283
 $memory_2 = nl::is_hash($memory_1);
-#line 288
+#line 283
 if (c_rt_lib::check_true($memory_2)) {goto label_4;}
-#line 288
+#line 283
 $memory_2 = nl::is_array($memory_1);
-#line 288
+#line 283
 label_4:
-#line 288
+#line 283
 $memory_3 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
-#line 288
+#line 283
 if (c_rt_lib::check_true($memory_3)) {goto label_3;}
-#line 288
+#line 283
 $memory_4 = $memory_0->{'objects'};
-#line 288
+#line 283
 $memory_2 = hash::has_key($memory_4, $memory_1);
-#line 288
+#line 283
 undef($memory_4);
-#line 288
+#line 283
 label_3:
-#line 288
+#line 283
 undef($memory_3);
-#line 288
+#line 283
 $memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
-#line 288
+#line 283
 if (c_rt_lib::check_true($memory_2)) {goto label_2;}
-#line 289
+#line 284
 dfile_priv::sp($memory_0, $memory_1);
-#line 290
+#line 285
 $memory_3 = c_rt_lib::to_nl(1);
-#line 290
+#line 285
 undef($memory_1);
-#line 290
+#line 285
 undef($memory_2);
-#line 290
+#line 285
 $_[0] = $memory_0;return $memory_3;
-#line 290
+#line 285
 undef($memory_3);
-#line 291
+#line 286
 goto label_1;
-#line 291
+#line 286
 label_2:
-#line 292
+#line 287
 $memory_3 = "objects";
-#line 292
+#line 287
 $memory_3 = c_rt_lib::get_ref_hash($memory_0, $memory_3);
-#line 292
+#line 287
 $memory_4 = c_rt_lib::to_nl(1);
-#line 292
+#line 287
 hash::set_value($memory_3, $memory_1, $memory_4);
-#line 292
+#line 287
 undef($memory_4);
-#line 292
+#line 287
 $memory_4 = "objects";
-#line 292
+#line 287
 c_rt_lib::set_ref_hash($memory_0, $memory_4, $memory_3);
-#line 292
+#line 287
 undef($memory_4);
-#line 292
+#line 287
 undef($memory_3);
-#line 293
+#line 288
 $memory_3 = c_rt_lib::to_nl(0);
-#line 293
+#line 288
 undef($memory_1);
-#line 293
+#line 288
 undef($memory_2);
-#line 293
+#line 288
 $_[0] = $memory_0;return $memory_3;
-#line 293
+#line 288
 undef($memory_3);
-#line 294
+#line 289
 goto label_1;
-#line 294
+#line 289
 label_1:
-#line 294
+#line 289
 undef($memory_2);
-#line 294
+#line 289
 undef($memory_1);
-#line 294
+#line 289
 $_[0] = $memory_0;return;
 $_[0] = $memory_0;}
 
 sub dfile_priv::sprint($$$$) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;my $memory_9;my $memory_10;my $memory_11;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);$memory_1 = $_[1];$memory_2 = $_[2];$memory_3 = $_[3];
-#line 298
+#line 294
 $memory_4 = $memory_3;
-#line 298
+#line 294
 $memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_4));
-#line 298
+#line 294
 if (c_rt_lib::check_true($memory_5)) {goto label_3;}
-#line 298
+#line 294
 $memory_4 = dfile_priv::handle_debug($memory_0, $memory_1);
-#line 298
+#line 294
 label_3:
-#line 298
+#line 294
 undef($memory_5);
-#line 298
+#line 294
 $memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_4));
-#line 298
+#line 294
 if (c_rt_lib::check_true($memory_4)) {goto label_2;}
-#line 298
+#line 294
 undef($memory_1);
-#line 298
+#line 294
 undef($memory_2);
-#line 298
+#line 294
 undef($memory_3);
-#line 298
+#line 294
 undef($memory_4);
-#line 298
+#line 294
 $_[0] = $memory_0;return;
-#line 298
+#line 294
 goto label_2;
-#line 298
+#line 294
 label_2:
-#line 298
+#line 294
 undef($memory_4);
-#line 299
+#line 295
 $memory_4 = nl::is_sim($memory_1);
-#line 299
+#line 295
 $memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_4));
-#line 299
+#line 295
 if (c_rt_lib::check_true($memory_4)) {goto label_5;}
-#line 300
+#line 296
 dfile_priv::sprintstr($memory_0, $memory_1);
-#line 301
+#line 297
 goto label_4;
-#line 301
+#line 297
 label_5:
-#line 301
+#line 297
 $memory_4 = nl::is_array($memory_1);
-#line 301
+#line 297
 $memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_4));
-#line 301
+#line 297
 if (c_rt_lib::check_true($memory_4)) {goto label_6;}
-#line 302
+#line 298
 $memory_5 = "[";
-#line 302
+#line 298
 $memory_6 = string::lf();
-#line 302
+#line 298
 $memory_5 = $memory_5 . $memory_6;
-#line 302
+#line 298
 undef($memory_6);
-#line 302
+#line 298
 dfile_priv::sp($memory_0, $memory_5);
-#line 302
+#line 298
 undef($memory_5);
-#line 303
+#line 299
 $memory_6 = 0;
-#line 303
+#line 299
 $memory_7 = 1;
-#line 303
+#line 299
 $memory_8 = c_rt_lib::array_len($memory_1);
-#line 303
+#line 299
 label_9:
-#line 303
+#line 299
 $memory_9 = c_rt_lib::to_nl($memory_6 >= $memory_8);
-#line 303
+#line 299
 if (c_rt_lib::check_true($memory_9)) {goto label_7;}
-#line 303
+#line 299
 $memory_5 = $memory_1->[$memory_6];
-#line 304
+#line 300
 $memory_11 = 1;
-#line 304
+#line 300
 $memory_11 = $memory_2 + $memory_11;
-#line 304
+#line 300
 $memory_10 = dfile_priv::get_ind($memory_11);
-#line 304
+#line 300
 undef($memory_11);
-#line 304
+#line 300
 dfile_priv::sp($memory_0, $memory_10);
-#line 304
+#line 300
 undef($memory_10);
-#line 305
+#line 301
 $memory_10 = 1;
-#line 305
+#line 301
 $memory_10 = $memory_2 + $memory_10;
-#line 305
+#line 301
 dfile_priv::sprint($memory_0, $memory_5, $memory_10, $memory_3);
-#line 305
+#line 301
 undef($memory_10);
-#line 306
+#line 302
 $memory_10 = ",";
-#line 306
+#line 302
 $memory_11 = string::lf();
-#line 306
+#line 302
 $memory_10 = $memory_10 . $memory_11;
-#line 306
+#line 302
 undef($memory_11);
-#line 306
+#line 302
 dfile_priv::sp($memory_0, $memory_10);
-#line 306
+#line 302
 undef($memory_10);
-#line 307
+#line 303
 $memory_6 = $memory_6 + $memory_7;
-#line 307
+#line 303
 goto label_9;
-#line 307
+#line 303
 label_7:
-#line 307
+#line 303
 undef($memory_5);
-#line 307
+#line 303
 undef($memory_6);
-#line 307
+#line 303
 undef($memory_7);
-#line 307
+#line 303
 undef($memory_8);
-#line 307
+#line 303
 undef($memory_9);
-#line 308
+#line 304
 $memory_5 = dfile_priv::get_ind($memory_2);
-#line 308
+#line 304
 $memory_6 = "]";
-#line 308
+#line 304
 $memory_5 = $memory_5 . $memory_6;
-#line 308
+#line 304
 undef($memory_6);
-#line 308
+#line 304
 dfile_priv::sp($memory_0, $memory_5);
-#line 308
+#line 304
 undef($memory_5);
-#line 309
+#line 305
 goto label_4;
-#line 309
+#line 305
 label_6:
-#line 309
+#line 305
 $memory_4 = nl::is_hash($memory_1);
-#line 309
+#line 305
 $memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_4));
-#line 309
+#line 305
 if (c_rt_lib::check_true($memory_4)) {goto label_10;}
-#line 310
+#line 306
 dfile_priv::sprint_hash($memory_0, $memory_1, $memory_2, $memory_3);
-#line 311
+#line 307
 goto label_4;
-#line 311
+#line 307
 label_10:
-#line 311
+#line 307
 $memory_4 = nl::is_variant($memory_1);
-#line 311
+#line 307
 $memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_4));
-#line 311
+#line 307
 if (c_rt_lib::check_true($memory_4)) {goto label_11;}
-#line 312
+#line 308
 $memory_5 = "ov::mk(";
-#line 312
+#line 308
 dfile_priv::sp($memory_0, $memory_5);
-#line 312
+#line 308
 undef($memory_5);
-#line 313
+#line 309
 $memory_5 = ov::get_element($memory_1);
-#line 313
+#line 309
 dfile_priv::sprintstr($memory_0, $memory_5);
+#line 309
+undef($memory_5);
+#line 310
+$memory_5 = ov::has_value($memory_1);
+#line 310
+$memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
+#line 310
+if (c_rt_lib::check_true($memory_5)) {goto label_13;}
+#line 311
+$memory_6 = ", ";
+#line 311
+dfile_priv::sp($memory_0, $memory_6);
+#line 311
+undef($memory_6);
+#line 312
+$memory_6 = ov::get_value($memory_1);
+#line 312
+dfile_priv::sprint($memory_0, $memory_6, $memory_2, $memory_3);
+#line 312
+undef($memory_6);
+#line 313
+goto label_13;
+#line 313
+label_13:
 #line 313
 undef($memory_5);
 #line 314
-$memory_5 = ov::has_value($memory_1);
-#line 314
-$memory_5 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_5));
-#line 314
-if (c_rt_lib::check_true($memory_5)) {goto label_13;}
-#line 315
-$memory_6 = ", ";
-#line 315
-dfile_priv::sp($memory_0, $memory_6);
-#line 315
-undef($memory_6);
-#line 316
-$memory_6 = ov::get_value($memory_1);
-#line 316
-dfile_priv::sprint($memory_0, $memory_6, $memory_2, $memory_3);
-#line 316
-undef($memory_6);
-#line 317
-goto label_13;
-#line 317
-label_13:
-#line 317
-undef($memory_5);
-#line 318
 $memory_5 = ")";
-#line 318
+#line 314
 dfile_priv::sp($memory_0, $memory_5);
-#line 318
+#line 314
 undef($memory_5);
-#line 319
+#line 315
 goto label_4;
-#line 319
+#line 315
 label_11:
-#line 320
+#line 316
 $memory_5 = [];
-#line 320
+#line 316
 die(dfile::ssave($memory_5));
-#line 320
+#line 316
 undef($memory_5);
-#line 321
+#line 317
 goto label_4;
-#line 321
+#line 317
 label_4:
-#line 321
+#line 317
 undef($memory_4);
-#line 321
+#line 317
 undef($memory_1);
-#line 321
+#line 317
 undef($memory_2);
-#line 321
+#line 317
 undef($memory_3);
-#line 321
+#line 317
 $_[0] = $memory_0;return;
 $_[0] = $memory_0;}
 
 sub dfile_priv::print_net_formatstr($$) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);$memory_1 = $_[1];
-#line 325
+#line 321
 $memory_2 = "";
-#line 325
+#line 321
 $memory_1 = $memory_1 . $memory_2;
+#line 321
+undef($memory_2);
+#line 322
+$memory_3 = "\\";
+#line 322
+$memory_4 = "\\\\";
+#line 322
+$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
+#line 322
+undef($memory_4);
+#line 322
+undef($memory_3);
+#line 322
+$memory_1 = $memory_2;
+#line 322
+undef($memory_2);
+#line 323
+$memory_3 = string::lf();
+#line 323
+$memory_4 = "\\n";
+#line 323
+$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
+#line 323
+undef($memory_4);
+#line 323
+undef($memory_3);
+#line 323
+$memory_1 = $memory_2;
+#line 323
+undef($memory_2);
+#line 324
+$memory_3 = "\$";
+#line 324
+$memory_4 = "\\\$";
+#line 324
+$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
+#line 324
+undef($memory_4);
+#line 324
+undef($memory_3);
+#line 324
+$memory_1 = $memory_2;
+#line 324
+undef($memory_2);
+#line 325
+$memory_3 = "\@";
+#line 325
+$memory_4 = "\\\@";
+#line 325
+$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
+#line 325
+undef($memory_4);
+#line 325
+undef($memory_3);
+#line 325
+$memory_1 = $memory_2;
 #line 325
 undef($memory_2);
 #line 326
-$memory_3 = "\\";
-#line 326
-$memory_4 = "\\\\";
-#line 326
-$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
-#line 326
-undef($memory_4);
-#line 326
-undef($memory_3);
-#line 326
-$memory_1 = $memory_2;
-#line 326
-undef($memory_2);
-#line 327
-$memory_3 = string::lf();
-#line 327
-$memory_4 = "\\n";
-#line 327
-$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
-#line 327
-undef($memory_4);
-#line 327
-undef($memory_3);
-#line 327
-$memory_1 = $memory_2;
-#line 327
-undef($memory_2);
-#line 328
-$memory_3 = "\$";
-#line 328
-$memory_4 = "\\\$";
-#line 328
-$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
-#line 328
-undef($memory_4);
-#line 328
-undef($memory_3);
-#line 328
-$memory_1 = $memory_2;
-#line 328
-undef($memory_2);
-#line 329
-$memory_3 = "\@";
-#line 329
-$memory_4 = "\\\@";
-#line 329
-$memory_2 = string::replace($memory_1, $memory_3, $memory_4);
-#line 329
-undef($memory_4);
-#line 329
-undef($memory_3);
-#line 329
-$memory_1 = $memory_2;
-#line 329
-undef($memory_2);
-#line 330
 $memory_3 = "\"";
-#line 330
+#line 326
 $memory_4 = "\\\"";
-#line 330
+#line 326
 $memory_2 = string::replace($memory_1, $memory_3, $memory_4);
-#line 330
+#line 326
 undef($memory_4);
-#line 330
+#line 326
 undef($memory_3);
-#line 330
+#line 326
 $memory_1 = $memory_2;
-#line 330
+#line 326
 undef($memory_2);
-#line 331
+#line 327
 $memory_2 = "\"";
-#line 331
+#line 327
 $memory_2 = $memory_2 . $memory_1;
-#line 331
+#line 327
 $memory_3 = "\"";
-#line 331
+#line 327
 $memory_2 = $memory_2 . $memory_3;
-#line 331
+#line 327
 undef($memory_3);
-#line 331
+#line 327
 dfile_priv::sp($memory_0, $memory_2);
-#line 331
+#line 327
 undef($memory_2);
-#line 331
+#line 327
 undef($memory_1);
-#line 331
+#line 327
 $_[0] = $memory_0;return;
 $_[0] = $memory_0;}
 
 sub dfile_priv::print_net_format($$) {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;my $memory_9;my $memory_10;my $memory_11;$memory_0 = $_[0];Scalar::Util::weaken($_[0]) if ref($_[0]);$memory_1 = $_[1];
-#line 336
+#line 331
 $memory_2 = nl::is_sim($memory_1);
-#line 336
+#line 331
 $memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
-#line 336
+#line 331
 if (c_rt_lib::check_true($memory_2)) {goto label_2;}
-#line 337
+#line 332
 dfile_priv::print_net_formatstr($memory_0, $memory_1);
-#line 338
+#line 333
 goto label_1;
-#line 338
+#line 333
 label_2:
-#line 338
+#line 333
 $memory_2 = nl::is_array($memory_1);
-#line 338
+#line 333
 $memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
-#line 338
+#line 333
 if (c_rt_lib::check_true($memory_2)) {goto label_3;}
-#line 339
+#line 334
 $memory_3 = "[";
-#line 339
+#line 334
 dfile_priv::sp($memory_0, $memory_3);
-#line 339
+#line 334
 undef($memory_3);
-#line 340
+#line 335
 $memory_4 = 0;
-#line 340
+#line 335
 $memory_5 = 1;
-#line 340
+#line 335
 $memory_6 = c_rt_lib::array_len($memory_1);
-#line 340
+#line 335
 label_6:
-#line 340
+#line 335
 $memory_7 = c_rt_lib::to_nl($memory_4 >= $memory_6);
-#line 340
+#line 335
 if (c_rt_lib::check_true($memory_7)) {goto label_4;}
-#line 340
+#line 335
 $memory_3 = $memory_1->[$memory_4];
-#line 341
+#line 336
 dfile_priv::print_net_format($memory_0, $memory_3);
-#line 342
+#line 337
 $memory_8 = ",";
-#line 342
+#line 337
 dfile_priv::sp($memory_0, $memory_8);
-#line 342
+#line 337
 undef($memory_8);
-#line 343
+#line 338
 $memory_4 = $memory_4 + $memory_5;
-#line 343
+#line 338
 goto label_6;
-#line 343
+#line 338
 label_4:
-#line 343
+#line 338
 undef($memory_3);
-#line 343
+#line 338
 undef($memory_4);
-#line 343
+#line 338
 undef($memory_5);
-#line 343
+#line 338
 undef($memory_6);
-#line 343
+#line 338
 undef($memory_7);
-#line 344
+#line 339
 $memory_3 = "]";
-#line 344
+#line 339
 dfile_priv::sp($memory_0, $memory_3);
-#line 344
+#line 339
 undef($memory_3);
-#line 345
+#line 340
 goto label_1;
-#line 345
+#line 340
 label_3:
-#line 345
+#line 340
 $memory_2 = nl::is_hash($memory_1);
-#line 345
+#line 340
 $memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
-#line 345
+#line 340
 if (c_rt_lib::check_true($memory_2)) {goto label_7;}
-#line 346
+#line 341
 $memory_3 = "{";
-#line 346
+#line 341
 dfile_priv::sp($memory_0, $memory_3);
-#line 346
+#line 341
 undef($memory_3);
-#line 347
+#line 342
 $memory_3 = hash::keys($memory_1);
-#line 347
+#line 342
 $memory_5 = 0;
-#line 347
+#line 342
 $memory_6 = 1;
-#line 347
+#line 342
 $memory_7 = c_rt_lib::array_len($memory_3);
-#line 347
+#line 342
 label_10:
-#line 347
+#line 342
 $memory_8 = c_rt_lib::to_nl($memory_5 >= $memory_7);
-#line 347
+#line 342
 if (c_rt_lib::check_true($memory_8)) {goto label_8;}
-#line 347
+#line 342
 $memory_4 = $memory_3->[$memory_5];
-#line 348
+#line 343
 $memory_9 = hash::get_value($memory_1, $memory_4);
-#line 349
+#line 344
 $memory_11 = "";
-#line 349
+#line 344
 $memory_11 = $memory_4 . $memory_11;
-#line 349
+#line 344
 $memory_10 = dfile_priv::is_simple_string($memory_11);
-#line 349
+#line 344
 undef($memory_11);
-#line 349
+#line 344
 $memory_10 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_10));
-#line 349
+#line 344
 if (c_rt_lib::check_true($memory_10)) {goto label_12;}
-#line 350
+#line 345
 dfile_priv::sp($memory_0, $memory_4);
-#line 351
+#line 346
 goto label_11;
-#line 351
+#line 346
 label_12:
-#line 352
+#line 347
 dfile_priv::print_net_formatstr($memory_0, $memory_4);
-#line 353
+#line 348
 goto label_11;
-#line 353
+#line 348
 label_11:
-#line 353
+#line 348
 undef($memory_10);
-#line 354
+#line 349
 $memory_10 = "=>";
-#line 354
+#line 349
 dfile_priv::sp($memory_0, $memory_10);
-#line 354
+#line 349
 undef($memory_10);
-#line 355
+#line 350
 dfile_priv::print_net_format($memory_0, $memory_9);
-#line 356
+#line 351
 $memory_10 = ",";
-#line 356
+#line 351
 dfile_priv::sp($memory_0, $memory_10);
-#line 356
+#line 351
 undef($memory_10);
-#line 356
+#line 351
 undef($memory_9);
-#line 357
+#line 352
 $memory_5 = $memory_5 + $memory_6;
-#line 357
+#line 352
 goto label_10;
-#line 357
+#line 352
 label_8:
-#line 357
+#line 352
 undef($memory_3);
-#line 357
+#line 352
 undef($memory_4);
-#line 357
+#line 352
 undef($memory_5);
-#line 357
+#line 352
 undef($memory_6);
-#line 357
+#line 352
 undef($memory_7);
-#line 357
+#line 352
 undef($memory_8);
-#line 358
+#line 353
 $memory_3 = "}";
-#line 358
+#line 353
 dfile_priv::sp($memory_0, $memory_3);
-#line 358
+#line 353
 undef($memory_3);
-#line 359
+#line 354
 goto label_1;
-#line 359
+#line 354
 label_7:
-#line 359
+#line 354
 $memory_2 = nl::is_variant($memory_1);
-#line 359
+#line 354
 $memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
-#line 359
+#line 354
 if (c_rt_lib::check_true($memory_2)) {goto label_13;}
-#line 360
+#line 355
 $memory_3 = "ov::mk(";
-#line 360
+#line 355
 dfile_priv::sp($memory_0, $memory_3);
-#line 360
+#line 355
 undef($memory_3);
-#line 361
+#line 356
 $memory_3 = ov::get_element($memory_1);
-#line 361
+#line 356
 dfile_priv::print_net_formatstr($memory_0, $memory_3);
+#line 356
+undef($memory_3);
+#line 357
+$memory_3 = ov::has_value($memory_1);
+#line 357
+$memory_3 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
+#line 357
+if (c_rt_lib::check_true($memory_3)) {goto label_15;}
+#line 358
+$memory_4 = ",";
+#line 358
+dfile_priv::sp($memory_0, $memory_4);
+#line 358
+undef($memory_4);
+#line 359
+$memory_4 = ov::get_value($memory_1);
+#line 359
+dfile_priv::print_net_format($memory_0, $memory_4);
+#line 359
+undef($memory_4);
+#line 360
+goto label_15;
+#line 360
+label_15:
+#line 360
+undef($memory_3);
+#line 361
+$memory_3 = ")";
+#line 361
+dfile_priv::sp($memory_0, $memory_3);
 #line 361
 undef($memory_3);
 #line 362
-$memory_3 = ov::has_value($memory_1);
-#line 362
-$memory_3 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
-#line 362
-if (c_rt_lib::check_true($memory_3)) {goto label_15;}
-#line 363
-$memory_4 = ",";
-#line 363
-dfile_priv::sp($memory_0, $memory_4);
-#line 363
-undef($memory_4);
-#line 364
-$memory_4 = ov::get_value($memory_1);
-#line 364
-dfile_priv::print_net_format($memory_0, $memory_4);
-#line 364
-undef($memory_4);
-#line 365
-goto label_15;
-#line 365
-label_15:
-#line 365
-undef($memory_3);
-#line 366
-$memory_3 = ")";
-#line 366
-dfile_priv::sp($memory_0, $memory_3);
-#line 366
-undef($memory_3);
-#line 367
 goto label_1;
-#line 367
+#line 362
 label_13:
-#line 368
+#line 363
 $memory_3 = [$memory_1];
-#line 368
+#line 363
 die(dfile::ssave($memory_3));
-#line 368
+#line 363
 undef($memory_3);
-#line 369
+#line 364
 goto label_1;
-#line 369
+#line 364
 label_1:
-#line 369
+#line 364
 undef($memory_2);
-#line 369
+#line 364
 undef($memory_1);
-#line 369
+#line 364
 $_[0] = $memory_0;return;
 $_[0] = $memory_0;}

@@ -2,6 +2,7 @@
 # (c) Atinea Sp. z o.o.
 ###
 
+
 use c_rt_lib;
 
 def ov::mk(label) {
@@ -31,3 +32,4 @@ def ov::is(variant, label) {
 def ov::as(variant, label) {
 	return c_rt_lib::ov_as(variant, label);
 }
+

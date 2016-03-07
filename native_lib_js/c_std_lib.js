@@ -17,7 +17,8 @@ function c_std_lib0array_sort(arr, func) {
 	var result = arr.value.slice();
 	var f = window[c_std_lib_priv0get_fun_name(func)];
 	result.sort(function(a, b) {
-		return c_rt_lib0check_true_native(new ImRef(f(a, b)));
+		var cc = c_rt_lib0check_true_native(new ImRef(f(new ImRef(a), new ImRef(b))));
+		return cc;
 	});
 	return result;
 }
@@ -74,7 +75,16 @@ function c_std_lib0string_index(str, substr, start) {
 }
 
 function c_std_lib0string_sub(str, start, length) {
-	return str.value.toString().substring(parseInt(start.value), parseInt(start.value) + parseInt(length.value));
+	return str.value.toString().substring(start.value, start.value + length.value);
+}
+function c_std_lib0string_get_char(str, position) {
+	return str.value.charCodeAt(position.value);
+}
+function c_std_lib0string_lc(str) {
+	return str.value.toString().toLowerCase();
+}
+function c_std_lib0string_uc(str) {
+	return str.value.toString().toUpperCase();
 }
 
 function c_std_lib0string_replace(str, old, new_part) {
@@ -89,19 +99,39 @@ function c_std_lib0string_compare(a, b) {
 }
 
 function c_std_lib0is_array(imm) {
+	if(imm === undefined || imm == null || imm.value === undefined || imm.value == null){
+		return c_rt_lib0get_false();
+	}
 	return c_rt_lib0native_to_nl(imm.value.constructor.name == 'Array');
 }
 
 function c_std_lib0is_hash(imm) {
+	if(imm === undefined || imm == null || imm.value === undefined || imm.value == null){
+		return c_rt_lib0get_false();
+	}
 	return c_rt_lib0native_to_nl(imm.value.constructor.name == 'Object');
 }
 
 function c_std_lib0is_sim(imm) {
+	if(imm === undefined || imm == null || imm.value === undefined || imm.value == null){
+		return c_rt_lib0get_false();
+	}
 	return c_rt_lib0native_to_nl(imm.value.constructor.name == 'String' || imm.value.constructor.name == 'Number');
 }
 
 function c_std_lib0is_variant(imm) {
+	if(imm === undefined || imm == null || imm.value === undefined || imm.value == null){
+		return c_rt_lib0get_false();
+	}
 	return c_rt_lib0native_to_nl(imm.value.constructor.name == 'OV');
+}
+
+function c_std_lib0escape_characters(str) {
+	str = str.value;
+	str = str.replace(new RegExp("\n", 'g'), "\\n");
+	str = str.replace(new RegExp("\r", 'g'), "\\r");
+	str = str.replace(new RegExp("\t", 'g'), "\\t");
+	return str;
 }
 
 function c_std_lib0exec(func, /*ref*/arr) {

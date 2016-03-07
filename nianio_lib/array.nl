@@ -2,6 +2,7 @@
 # (c) Atinea Sp. z o.o.
 ###
 
+
 use c_std_lib;
 
 def array::subarray(array, beg, len) {
@@ -22,6 +23,7 @@ def array::join(str, array) {
 def array::push(ref array, new) {
 	c_std_lib::array_push(ref array, new);
 }
+
 def array::pop(ref array) {
 	c_std_lib::array_pop(ref array);
 }
@@ -36,10 +38,11 @@ def array::len(array) {
 	return c_std_lib::array_len(array);
 }
 
-def array::cmp(a, b){
+def array::cmp(a, b) {
 	return c_std_lib::string_compare(a, b) < 0;
 }
 
 def array::sort(ref variable) {
 	variable = c_std_lib::array_sort(variable, @array::cmp);
 }
+

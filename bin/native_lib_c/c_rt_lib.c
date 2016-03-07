@@ -79,6 +79,7 @@ ImmT priv_to_nl_native(int i);
 NlArray *priv_arr_to_change(ImmT *arrI);
 void inc_ref(ImmT dI);
 void dec_ref(ImmT dI);
+void dec_ref_adv(ImmT dI, int with_struct);
 ImmT c_rt_lib0array_new_alloc();
 ImmT c_rt_lib0hash_new_alloc();
 ImmT set_to_hash(NlHash* hash, ImmT key, ImmT val);
@@ -147,14 +148,8 @@ void c_rt_lib0finish(){
 	if (_global_const_begin_ != NULL) {
 		ImmT const_element = _global_const_begin_;
 		while (const_element < _global_const_end_) {
-			char type = ((NlData *)const_element)->type;
-			if (((NlData *)const_element)->refs == 1) {
-				++_deleted[(unsigned)type];
-				if (type == ___TYPE_STRING) {
-					free_mem(((NlString *)const_element)->s, ((NlString*)const_element)->capacity);
-				}
-				const_element += _global_const_offset_;
-			}
+			dec_ref_adv(const_element, 0);
+			const_element += _global_const_offset_;
 		}
 	}
 	free_mem(_global_const_begin_, _global_const_end_ - _global_const_begin_);
@@ -172,13 +167,16 @@ void c_rt_lib0func_num_args(int a, int b, const char *s){
 		nl_die_internal("In dynamic call of function: %s, given: %d arguments, expected: %d", s, a, b);
 }
 ImmT c_rt_lib0exec(ImmT ___nl__func, ImmT *___ref___arrI){
-	if(!IS_FUNC(___nl__func))
-		nl_die_internal("can call only function: %s", NAME(___nl__func));
+	if(!IS_HASH(___nl__func) && !IS_ARRHASH(___nl__func))
+		nl_die_internal("function struct must by a hash", NAME(___nl__func));
+	NlFunction *func = (NlFunction*)c_rt_lib0hash_get_value_dec(___nl__func, c_rt_lib0string_new("name"));
+	if(!IS_FUNC(func))
+		nl_die_internal("can call only function: %s", NAME(func));
 	if(!IS_ARR(*___ref___arrI))
 		nl_die_internal("expected array: %s", NAME(*___ref___arrI));
 	NlArray *arr = priv_arr_to_change(___ref___arrI);
-	NlFunction *ret = (NlFunction *)___nl__func;
-	ImmT (*f)(int n, ImmT *arg) = ret->f;
+	ImmT (*f)(int n, ImmT *arg) = func->f;
+	dec_ref((ImmT*)func);
 	return (*f)(arr->size, arr->arr);
 }
 ImmT c_rt_lib0func_new(ImmT (*f)(int, ImmT*), ImmT module, ImmT name){
@@ -187,7 +185,8 @@ ImmT c_rt_lib0func_new(ImmT (*f)(int, ImmT*), ImmT module, ImmT name){
 	ret->module = (NlString*)module;
 	ret->name = (NlString*)name;
 	ret->f = f;
-	return ret;
+	inc_ref(module);
+	return c_rt_lib0hash_mk_dec(2, c_rt_lib0string_new("module"), module, c_rt_lib0string_new("name"),  ret);
 }
 int eq_int_string(NlInt* a, NlString* b){
 	int i = a->i;
@@ -818,12 +817,9 @@ NlString* toStringIfSim(ImmT sim){
 		inc_ref(sim);
 		return (NlString*)sim;
 	} else if(IS_FUNC(sim)){
-		ImmT ret = c_rt_lib0string_new("::");
-		ImmT ret2 = c_rt_lib0concat_new(((NlFunction *)sim)->module, ret);
-		dec_ref(ret);
-		ret2 = c_rt_lib0concat_add(ret2, ((NlFunction *)sim)->name);
-		dec_ref(ret2);
-		return (NlString*)ret2;
+		NlString* ret = ((NlFunction *)sim)->name;
+		inc_ref((ImmT*)ret);
+		return ret;
 	} else
 		nl_die_internal("can not converted to string %s;", NAME(sim));
 	return NULL;
@@ -1337,7 +1333,7 @@ ImmT c_rt_lib0print(ImmT ___nl__arg) {
 		sPrintFloat(tab, ((NlFloat *)___nl__arg)->f);
 		printf("%s", tab);
 	} else if (IS_FUNC(d)) {
-		printf("%s::%s", ((NlFunction*)___nl__arg)->name->s, ((NlFunction*)___nl__arg)->module->s);
+		printf("%s", ((NlFunction*)___nl__arg)->name->s);
 	} else {
 		printf("ADDR:(%p)", ___nl__arg);
 	}
@@ -1499,6 +1495,10 @@ void inc_ref(ImmT dI) {
 }
 
 void dec_ref(ImmT dI) {
+	dec_ref_adv(dI, 1);
+}
+
+void dec_ref_adv(ImmT dI, int with_struct) {
 	NlData *d = (NlData *)dI;
 	checktype(dI);
 	--d->refs;
@@ -1507,26 +1507,26 @@ void dec_ref(ImmT dI) {
 		if (type == ___TYPE_ARR) {
 			NlArray *arr = (NlArray *)d;
 			REP(i, arr->size) {
-				dec_ref(arr->arr[i]);
+				dec_ref_adv(arr->arr[i], with_struct);
 			}
 			free_mem(arr->arr, sizeof(ImmT)*arr->capacity);
-			free_mem(dI, sizeof(NlArray));
+			if(with_struct) free_mem(dI, sizeof(NlArray));
 		} else if (type == ___TYPE_INT) {
-			free_mem(dI, sizeof(NlInt));
+			if(with_struct) free_mem(dI, sizeof(NlInt));
 		} else if (type == ___TYPE_FLOAT) {
-			free_mem(dI, sizeof(NlFloat));
+			if(with_struct) free_mem(dI, sizeof(NlFloat));
 		} else if (type == ___TYPE_STRING) {
 			free_mem(((NlString *)d)->s, ((NlString*)dI)->capacity);
-			free_mem(dI, sizeof(NlString));
+			if(with_struct) free_mem(dI, sizeof(NlString));
 		} else if (type == ___TYPE_ARRHASH) {
 			NlArrHash *hash = (NlArrHash *)d;
 			REP(i, hash->size) {
-				dec_ref(hash->values[i]);
-				dec_ref(hash->keys[i]);
+				dec_ref_adv(hash->values[i], with_struct);
+				dec_ref_adv(hash->keys[i], with_struct);
 			}
 			free_mem(hash->values, sizeof(ImmT)*hash->capacity);
 			free_mem(hash->keys, sizeof(ImmT)*hash->capacity);
-			free_mem(dI, sizeof(NlArrHash));
+			if(with_struct) free_mem(dI, sizeof(NlArrHash));
 		} else if (type == ___TYPE_HASH) {
 			NlHash *hash = (NlHash *)d;
 			REP (i, hash->capacity) {
@@ -1535,21 +1535,21 @@ void dec_ref(ImmT dI) {
 				}
 			}
 			free_mem(hash->tab, sizeof(NlHashNode) * hash->capacity);
-			free_mem(hash, sizeof(NlHash));
+			if(with_struct) free_mem(hash, sizeof(NlHash));
 		} else if (type == ___TYPE_OV_NONE) {
 			NlOvNone *ov = (NlOvNone *)d;
-			dec_ref((ImmT)ov->name);
-			free_mem(dI, sizeof(NlOvNone));
+			dec_ref_adv((ImmT)ov->name, with_struct);
+			if(with_struct) free_mem(dI, sizeof(NlOvNone));
 		} else if (type == ___TYPE_OV) {
 			NlOv *ov = (NlOv *)d;
-			dec_ref((ImmT)ov->name);
-			dec_ref(ov->value);
-			free_mem(dI, sizeof(NlOv));
+			dec_ref_adv((ImmT)ov->name, with_struct);
+			dec_ref_adv(ov->value, with_struct);
+			if(with_struct) free_mem(dI, sizeof(NlOv));
 		} else if (type == ___TYPE_FUNC) {
 			NlFunction *func = (NlFunction *)d;
-			dec_ref((ImmT)func->name);
-			dec_ref((ImmT)func->module);
-			free_mem(dI, sizeof(NlFunction));
+			dec_ref_adv((ImmT)func->name, with_struct);
+			dec_ref_adv((ImmT)func->module, with_struct);
+			if(with_struct) free_mem(dI, sizeof(NlFunction));
 		} else {
 			nl_die_internal("unimplementing deleting type");
 		}

@@ -23,29 +23,29 @@ ImmT nl0is_array(ImmT ___nl__0) {
 c_rt_lib0arg_val(___nl__0);
 nl_priv0__const__init();
 ImmT ___nl__1 = NULL;
-#line 9
+#line 10
 c_rt_lib0move(&___nl__1, c_std_lib0is_array(___nl__0));
-#line 9
+#line 10
 if(c_rt_lib0check_true_native(___nl__1)){ goto label_2;}
-#line 9
+#line 10
 c_rt_lib0move(&___nl__1, c_rt_lib0get_false());
-#line 9
+#line 10
 goto label_1;
-#line 9
+#line 10
 label_2:
-#line 9
+#line 10
 c_rt_lib0move(&___nl__1, c_rt_lib0get_true());
-#line 9
+#line 10
 label_1:
-#line 9
+#line 10
 c_rt_lib0clear(&___nl__0);
-#line 9
+#line 10
 return ___nl__1;
-#line 9
+#line 10
 c_rt_lib0clear(&___nl__1);
-#line 9
+#line 10
 c_rt_lib0clear(&___nl__0);
-#line 9
+#line 10
 return NULL;
 }
 
@@ -56,29 +56,29 @@ ImmT nl0is_hash(ImmT ___nl__0) {
 c_rt_lib0arg_val(___nl__0);
 nl_priv0__const__init();
 ImmT ___nl__1 = NULL;
-#line 13
+#line 14
 c_rt_lib0move(&___nl__1, c_std_lib0is_hash(___nl__0));
-#line 13
+#line 14
 if(c_rt_lib0check_true_native(___nl__1)){ goto label_2;}
-#line 13
+#line 14
 c_rt_lib0move(&___nl__1, c_rt_lib0get_false());
-#line 13
+#line 14
 goto label_1;
-#line 13
+#line 14
 label_2:
-#line 13
+#line 14
 c_rt_lib0move(&___nl__1, c_rt_lib0get_true());
-#line 13
+#line 14
 label_1:
-#line 13
+#line 14
 c_rt_lib0clear(&___nl__0);
-#line 13
+#line 14
 return ___nl__1;
-#line 13
+#line 14
 c_rt_lib0clear(&___nl__1);
-#line 13
+#line 14
 c_rt_lib0clear(&___nl__0);
-#line 13
+#line 14
 return NULL;
 }
 
@@ -89,29 +89,29 @@ ImmT nl0is_sim(ImmT ___nl__0) {
 c_rt_lib0arg_val(___nl__0);
 nl_priv0__const__init();
 ImmT ___nl__1 = NULL;
-#line 17
+#line 18
 c_rt_lib0move(&___nl__1, c_std_lib0is_sim(___nl__0));
-#line 17
+#line 18
 if(c_rt_lib0check_true_native(___nl__1)){ goto label_2;}
-#line 17
+#line 18
 c_rt_lib0move(&___nl__1, c_rt_lib0get_false());
-#line 17
+#line 18
 goto label_1;
-#line 17
+#line 18
 label_2:
-#line 17
+#line 18
 c_rt_lib0move(&___nl__1, c_rt_lib0get_true());
-#line 17
+#line 18
 label_1:
-#line 17
+#line 18
 c_rt_lib0clear(&___nl__0);
-#line 17
+#line 18
 return ___nl__1;
-#line 17
+#line 18
 c_rt_lib0clear(&___nl__1);
-#line 17
+#line 18
 c_rt_lib0clear(&___nl__0);
-#line 17
+#line 18
 return NULL;
 }
 
@@ -122,29 +122,29 @@ ImmT nl0is_variant(ImmT ___nl__0) {
 c_rt_lib0arg_val(___nl__0);
 nl_priv0__const__init();
 ImmT ___nl__1 = NULL;
-#line 21
+#line 22
 c_rt_lib0move(&___nl__1, c_std_lib0is_variant(___nl__0));
-#line 21
+#line 22
 if(c_rt_lib0check_true_native(___nl__1)){ goto label_2;}
-#line 21
+#line 22
 c_rt_lib0move(&___nl__1, c_rt_lib0get_false());
-#line 21
+#line 22
 goto label_1;
-#line 21
+#line 22
 label_2:
-#line 21
+#line 22
 c_rt_lib0move(&___nl__1, c_rt_lib0get_true());
-#line 21
+#line 22
 label_1:
-#line 21
+#line 22
 c_rt_lib0clear(&___nl__0);
-#line 21
+#line 22
 return ___nl__1;
-#line 21
+#line 22
 c_rt_lib0clear(&___nl__1);
-#line 21
+#line 22
 c_rt_lib0clear(&___nl__0);
-#line 21
+#line 22
 return NULL;
 }
 
@@ -154,11 +154,11 @@ return nl0print(_tab[0]);}
 ImmT nl0print(ImmT ___nl__0) {
 c_rt_lib0arg_val(___nl__0);
 nl_priv0__const__init();
-#line 25
+#line 26
 c_rt_lib0delete(c_std_lib0print(___nl__0));
-#line 25
+#line 26
 c_rt_lib0clear(&___nl__0);
-#line 25
+#line 26
 return NULL;
 }
 

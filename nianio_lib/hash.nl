@@ -2,6 +2,7 @@
 # (c) Atinea Sp. z o.o.
 ###
 
+
 use c_std_lib;
 
 def hash::get_value(hash, key) {
@@ -26,8 +27,13 @@ def hash::size(hash) {
 
 def hash::keys(hash) {
 	var ret = [];
-	forh var key, var val (hash){
+	forh var key, var val (hash) {
 		c_std_lib::array_push(ref ret, key);
 	}
 	return ret;
+}
+
+
+def hash::add_all(ref hasha, hashb) {
+	hash::set_value(ref hasha, key, val) forh var key, var val (hashb);
 }

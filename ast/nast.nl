@@ -74,7 +74,6 @@ def nast::get_bin_ops() : @nast::op_struct_t {
 	return singleton::sigleton_do_not_use_without_approval(ret);
 }
 
-
 def nast::get_max_precedence() : ptd::sim() {
 	return 2000;
 }
@@ -141,8 +140,13 @@ def nast::hash_decl_t() {
 def nast::bin_op_t() {
 	return ptd::rec({left => @nast::value_t, right => @nast::value_t, op => ptd::sim()});
 }
+
 def nast::var_op_t() {
-	return ptd::rec({left => @nast::value_t, op => ptd::var({ov_is => ptd::none(), ov_as => ptd::none()}), case => ptd::sim()});
+	return ptd::rec({
+			left => @nast::value_t,
+			op => ptd::var({ov_is => ptd::none(), ov_as => ptd::none()}),
+			case => ptd::sim()
+		});
 }
 
 def nast::fun_label_t() {
@@ -152,13 +156,9 @@ def nast::fun_label_t() {
 def nast::unary_op_t() {
 	return ptd::rec({val => @nast::value_t, op => ptd::sim()});
 }
+
 def nast::ternary_op_t() {
-	return ptd::rec({
-			fst => @nast::value_t,
-			snd => @nast::value_t,
-			thrd => @nast::value_t,
-			op => ptd::sim()
-		});
+	return ptd::rec({fst => @nast::value_t, snd => @nast::value_t, thrd => @nast::value_t, op => ptd::sim()});
 }
 
 def nast::value_t() {
@@ -236,45 +236,40 @@ def nast::while_t() {
 def nast::try_ensure_t() {
 	return ptd::var({decl => @nast::variable_declaration_t, lval => @nast::bin_op_t, expr => @nast::value_t});
 }
+
 def nast::if_t() {
 	return ptd::rec({
 			cond => @nast::value_t,
 			if => @nast::cmd_t,
 			elsif => ptd::arr(ptd::rec({cond => @nast::value_t, cmd => @nast::cmd_t, debug => @nast::debug_t})),
-			else => @nast::cmd_t,
+			else => @nast::cmd_t
 		});
 }
 
 def nast::for_t() {
 	return ptd::rec({
-		start => ptd::var({var_decl => @nast::variable_declaration_t, value => @nast::value_t}),
-		iter => @nast::value_t,
-		cond => @nast::value_t,
-		cmd => @nast::cmd_t
-	});
+			start => ptd::var({var_decl => @nast::variable_declaration_t, value => @nast::value_t}),
+			iter => @nast::value_t,
+			cond => @nast::value_t,
+			cmd => @nast::cmd_t
+		});
 }
 
 def nast::place_t() {
-	return ptd::rec({
-		line => ptd::sim(),
-		position => ptd::sim()
-	});
+	return ptd::rec({line => ptd::sim(), position => ptd::sim()});
 }
 
 def nast::debug_t() {
-	return ptd::rec({
-		begin => @nast::place_t,
-		end => @nast::place_t
-	});
+	return ptd::rec({begin => @nast::place_t, end => @nast::place_t});
 }
 
 def nast::empty_debug() : @nast::debug_t {
-	return {begin => {line => 1, position => 1}, end => {line => 1, position => 1}};
+	return {begin => {line => 1, position => -1}, end => {line => 1, position => -1}};
 }
 
 def nast::cmd_t() {
 	return ptd::rec({
-			debug => @nast::debug_t, 
+			debug => @nast::debug_t,
 			cmd => ptd::var({
 					if => @nast::if_t,
 					for => @nast::for_t,
@@ -299,3 +294,4 @@ def nast::cmd_t() {
 				})
 		});
 }
+

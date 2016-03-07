@@ -10,10 +10,8 @@ use nast;
 use tc_types;
 use tct;
 use string;
-use ov;
 use boolean_t;
 use ptd_parser;
-
 
 def module_checker::stack_t() {
 	return ptd::arr(ptd::sim());
@@ -75,54 +73,70 @@ def get_loop_from_stack(last_elem : ptd::sim(), stack : @module_checker::stack_t
 	array::push(ref ret, last_elem);
 	return ret;
 }
-def module_checker::var_t(){
+
+def module_checker::var_t() {
 	return ptd::rec({
-			write => ptd::var({const=>ptd::none(), none=>ptd::none(), value=>ptd::none()}),
+			write => ptd::var({const => ptd::none(), none => ptd::none(), value => ptd::none()}),
 			read => @boolean_t::type,
-			is_required => @boolean_t::type,
+			is_required => @boolean_t::type
 		});
 }
-def module_checker::return_t(){
-	return ptd::var({void => ptd::none(), none => ptd::none(), value => ptd::none(), was_void => ptd::none(), was_value => ptd::none()});
+
+def module_checker::return_t() {
+	return ptd::var({
+			void => ptd::none(),
+			none => ptd::none(),
+			value => ptd::none(),
+			was_void => ptd::none(),
+			was_value => ptd::none()
+		});
 }
-def module_checker::state_t(){
+
+def module_checker::state_t() {
 	return ptd::rec({
-		in_loop => @boolean_t::type,
-		return => ptd::rec({was => @boolean_t::type, arg => @module_checker::return_t}),
-		vars => ptd::hash(@module_checker::var_t),
-		errors => @tc_types::errors_t,
-		called => ptd::rec({
-			func=>ptd::hash(ptd::sim()),
-			module=>ptd::hash(ptd::sim())
-		}),
-		current_module => ptd::sim()
-	});
+			in_loop => @boolean_t::type,
+			return => ptd::rec({was => @boolean_t::type, arg => @module_checker::return_t}),
+			vars => ptd::hash(@module_checker::var_t),
+			errors => @tc_types::errors_t,
+			called => ptd::rec({func => ptd::hash(ptd::sim()), module => ptd::hash(ptd::sim())}),
+			current_module => ptd::sim()
+		});
 }
+
 def module_checker::save_t() {
-	return ptd::rec({
-		in_loop => @boolean_t::type,
-		vars => ptd::hash(@module_checker::var_t)
-	});
+	return ptd::rec({in_loop => @boolean_t::type, vars => ptd::hash(@module_checker::var_t)});
 }
 
 def add_error(ref errors : @tc_types::errors_t, msg : ptd::sim()) : ptd::void() {
-	array::push(ref errors->errors, {msg => msg, line => errors->current_line, module=>errors->module});
+	array::push(ref errors->errors, 
+		{message => msg, line => errors->current_line, module => errors->module, type => :error, column => -1});
 }
+
 def add_warning(ref errors : @tc_types::errors_t, msg : ptd::sim()) : ptd::void() {
-	array::push(ref errors->warnings, {msg => msg, line => errors->current_line, module=>errors->module});
+	array::push(ref errors->warnings, 
+		{message => msg, line => errors->current_line, module => errors->module, type => :warning, column => -1});
 }
-def set_used_function(fun_key : ptd::sim(), func, ref func_used : ptd::hash(ptd::sim())){
+
+def set_used_function(fun_key : ptd::sim(), func, ref func_used : ptd::hash(ptd::sim())) {
 	hash::set_value(ref func_used, fun_key, 0);
-	forh var name, var line (hash::get_value(func, fun_key)){
+	forh var name, var line (hash::get_value(func, fun_key)) {
 		continue unless hash::has_key(func, name);
 		continue if hash::has_key(func_used, name);
 		set_used_function(name, func, ref func_used);
 	}
 }
+
 def module_checker::check_module(module : @nast::module_t) : @tc_types::errors_t {
-	var errors : @tc_types::errors_t = {errors => [], warnings => [], current_line => -1, module=>module->name};
-	var called = {func=>{}, module=>{}};
-	var state : @module_checker::state_t = {return => {was => false, arg => :none}, current_module => module->name, in_loop => false, called => called, vars => {}, errors=>errors};
+	var errors : @tc_types::errors_t = {errors => [], warnings => [], current_line => -1, module => module->name};
+	var called = {func => {}, module => {}};
+	var state : @module_checker::state_t = {
+			return => {was => false, arg => :none},
+			current_module => module->name,
+			in_loop => false,
+			called => called,
+			vars => {},
+			errors => errors
+		};
 	var func = {};
 	var func_used = {};
 	fora var fun_def (module->fun_def) {
@@ -137,13 +151,13 @@ def module_checker::check_module(module : @nast::module_t) : @tc_types::errors_t
 		}
 		check_cmd(fun_def->cmd, ref state);
 		fora var fun_arg (fun_def->args) {
-			if(fun_arg->mod is :ref){
+			if (fun_arg->mod is :ref) {
 				use_var(fun_arg->name, :get, ref state);
 			}
 		}
 		load_block(ref state, prev);
-		if(!state->return->was){
-			add_error(ref state->errors, 'no return value at end of function') 
+		if (!state->return->was) {
+			add_error(ref state->errors, 'no return value at end of function')
 				if state->return->arg is :value || state->return->arg is :was_value;
 		}
 		var fun_key = get_fun_key(fun_def->access is :pub ? module->name : '', fun_def->name, module->name);
@@ -154,17 +168,15 @@ def module_checker::check_module(module : @nast::module_t) : @tc_types::errors_t
 	var imports = {};
 	fora var import (module->import) {
 		state->errors->current_line = import->line;
-		add_warning(ref state->errors, 'multiple use module:' . import->name)
-			if(hash::has_key(imports, import->name));
+		add_warning(ref state->errors, 'multiple use module:' . import->name) if (hash::has_key(imports, import->name));
 		add_warning(ref state->errors, 'unused module:' . import->name)
-			unless(hash::has_key(state->called->module, import->name));
+			unless (hash::has_key(state->called->module, import->name));
 		hash::set_value(ref imports, import->name, true);
 	}
-	forh var name, var line (state->called->module){
+	forh var name, var line (state->called->module) {
 		state->errors->current_line = line;
 		continue if module->name eq name;
-		add_error(ref state->errors, 'module ''' . name . ''' not imported')
-			unless(hash::has_key(imports, name));
+		add_error(ref state->errors, 'module ''' . name . ''' not imported') unless (hash::has_key(imports, name));
 	}
 	var copy = func_used;
 	forh var fun_key, var none (copy) {
@@ -172,13 +184,14 @@ def module_checker::check_module(module : @nast::module_t) : @tc_types::errors_t
 	}
 	fora var fun_def (module->fun_def) {
 		continue if fun_def->access is :pub;
-		continue if hash::has_key(func_used, 'priv:'.module->name . '::' . fun_def->name);
+		continue if hash::has_key(func_used, 'priv:' . module->name . '::' . fun_def->name);
 		state->errors->current_line = fun_def->line;
 		add_warning(ref state->errors, 'unused function: ' . module->name . '_priv::' . fun_def->name);
 	}
 	return state->errors;
 }
-def check_types_imported(type : @tct::meta_type, ref state : @module_checker::state_t) : ptd::void(){
+
+def check_types_imported(type : @tct::meta_type, ref state : @module_checker::state_t) : ptd::void() {
 	match (type) case :tct_im {
 	} case :tct_arr(var arr_type) {
 		check_types_imported(arr_type, ref state);
@@ -190,7 +203,7 @@ def check_types_imported(type : @tct::meta_type, ref state : @module_checker::st
 		}
 	} case :tct_ref(var ref_name) {
 		var ix = string::index2(ref_name, '::');
-		if(ix >= 0){
+		if (ix >= 0) {
 			var module = string::substr(ref_name, 0, ix);
 			var fun_name = string::substr(ref_name, ix + 2, string::length(ref_name) - ix - 2);
 			add_fun_used(module, fun_name, ref state);
@@ -201,8 +214,8 @@ def check_types_imported(type : @tct::meta_type, ref state : @module_checker::st
 	} case :tct_sim {
 	} case :tct_var(var vars) {
 		forh var name, var from_type (vars) {
-			match (from_type) case :no_param{
-			} case :with_param(var param){
+			match (from_type) case :no_param {
+			} case :with_param(var param) {
 				check_types_imported(param, ref state);
 			}
 		}
@@ -224,12 +237,12 @@ def add_fun_used(module : ptd::sim(), name : ptd::sim(), ref state : @module_che
 }
 
 def check_return_type(type : @nast::variable_type_t, ref state : @module_checker::state_t) : @module_checker::return_t {
-	match(type) case :none{
+	match (type) case :none {
 		return :none;
-	} case :type(var value){
-		if(value is :fun_val){
+	} case :type(var value) {
+		if (value is :fun_val) {
 			var fun_val = value as :fun_val;
-			if(fun_val->module eq 'ptd' && fun_val->name eq 'void'){
+			if (fun_val->module eq 'ptd' && fun_val->name eq 'void') {
 				add_fun_used('ptd', 'void', ref state);
 				return :void;
 			}
@@ -238,10 +251,11 @@ def check_return_type(type : @nast::variable_type_t, ref state : @module_checker
 	check_type(type, ref state);
 	return :value;
 }
-def check_type(type : @nast::variable_type_t, ref state : @module_checker::state_t) : ptd::void(){
-	match(type) case :none{
-	} case :type(var value){
-		if(value is :fun_val){
+
+def check_type(type : @nast::variable_type_t, ref state : @module_checker::state_t) : ptd::void() {
+	match (type) case :none {
+	} case :type(var value) {
+		if (value is :fun_val) {
 			var fun_val = value as :fun_val;
 			add_fun_used(fun_val->module, fun_val->name, ref state);
 		}
@@ -253,52 +267,57 @@ def check_type(type : @nast::variable_type_t, ref state : @module_checker::state
 	}
 }
 
-def add_var(name : ptd::sim(), is_const : @boolean_t::type, is_required : @boolean_t::type, ref state : @module_checker::state_t) : ptd::void(){
-	if(hash::has_key(state->vars, name)){
+def add_var(name : ptd::sim(), is_const : @boolean_t::type, is_required : @boolean_t::type, ref state : 
+	@module_checker::state_t) : ptd::void() {
+	if (hash::has_key(state->vars, name)) {
 		add_error(ref state->errors, 'redeclaration variable: ' . name);
 	}
 	var val = {write => :none, read => false, is_required => is_required};
-	val->write = :const if(is_const);
+	val->write = :const if (is_const);
 	hash::set_value(ref state->vars, name, val);
 }
-def use_var(name : ptd::sim(), mode : ptd::var({mod=>ptd::none(), set=>ptd::none(), get=>ptd::none()}), ref state : @module_checker::state_t) : ptd::void(){
-	if(!hash::has_key(state->vars, name)){
+
+def use_var(name : ptd::sim(), mode : ptd::var({mod => ptd::none(), set => ptd::none(), get => ptd::none()}), ref state 
+	: @module_checker::state_t) : ptd::void() {
+	if (!hash::has_key(state->vars, name)) {
 		add_error(ref state->errors, 'unknown variable: ' . name);
 		return;
 	}
 	var info = hash::get_value(state->vars, name);
-	match(mode) case :get{
+	match (mode) case :get {
 		info->read = true;
-	} case :set{
-		if(info->write is :const){
+	} case :set {
+		if (info->write is :const) {
 			add_error(ref state->errors, 'can''t change const variable: ' . name);
 			return;
 		}
 		info->write = :value;
-	} case :mod{
+	} case :mod {
 		info->read = true;
-		if(info->write is :const){
+		if (info->write is :const) {
 			add_error(ref state->errors, 'can''t change const variable: ' . name);
 			return;
 		}
 		info->write = :value;
-	} 
+	}
 	hash::set_value(ref state->vars, name, info);
 }
-def add_var_dec(var_dec : @nast::variable_declaration_t, is_const : @boolean_t::type, is_required : @boolean_t::type, ref state : @module_checker::state_t) : ptd::void(){
+
+def add_var_dec(var_dec : @nast::variable_declaration_t, is_const : @boolean_t::type, is_required : @boolean_t::type, 
+	ref state : @module_checker::state_t) : ptd::void() {
 	add_var(var_dec->name, is_const, is_required, ref state);
 	check_type(var_dec->type, ref state);
-	match(var_dec->value) case :value(var value){
+	match (var_dec->value) case :value(var value) {
 		check_val(value, ref state);
 		die if is_const;
 		use_var(var_dec->name, :set, ref state);
-	} case :none{
+	} case :none {
 	}
 }
 
-def check_cmd(cmd : @nast::cmd_t, ref state : @module_checker::state_t){
+def check_cmd(cmd : @nast::cmd_t, ref state : @module_checker::state_t) {
 	state->errors->current_line = cmd->debug->begin->line;
-	if(state->return->was){
+	if (state->return->was) {
 		add_warning(ref state->errors, 'never used command');
 		state->return->was = false;
 	}
@@ -375,21 +394,21 @@ def check_cmd(cmd : @nast::cmd_t, ref state : @module_checker::state_t){
 		check_cmd(unless_mod->cmd, ref state);
 		state->return->was = false;
 	} case :break {
-		if(!state->in_loop){
+		if (!state->in_loop) {
 			add_error(ref state->errors, 'command break can be used only in cyclic block');
 		}
 	} case :continue {
-		if(!state->in_loop){
+		if (!state->in_loop) {
 			add_error(ref state->errors, 'command continue can be used only in cyclic block');
 		}
 	} case :match(var as_match) {
 		check_val(as_match->val, ref state);
 		var was = true;
-		fora var branch (as_match->branch_list){
+		fora var branch (as_match->branch_list) {
 			state->return->was = false;
 			var prev = save_block(ref state);
-			match(branch->variant->value) case :none{
-			} case :value(var value){
+			match (branch->variant->value) case :none {
+			} case :value(var value) {
 				add_var_dec(value, false, true, ref state);
 			}
 			check_cmd(branch->cmd, ref state);
@@ -401,18 +420,18 @@ def check_cmd(cmd : @nast::cmd_t, ref state : @module_checker::state_t){
 		check_val(val, ref state);
 	} case :return(var as_return) {
 		check_val(as_return, ref state);
-		match(state->return->arg) case :value{
+		match (state->return->arg) case :value {
 			add_error(ref state->errors, 'return command without value') if as_return is :nop;
-		} case :none{
+		} case :none {
 			state->return->arg = as_return is :nop ? :was_void : :was_value;
-		} case :was_value{
+		} case :was_value {
 			add_error(ref state->errors, 'previously was return with value') if as_return is :nop;
 			state->return->arg = as_return is :nop ? :was_void : :was_value;
-		} case :was_void{
+		} case :was_void {
 			add_error(ref state->errors, 'previously was empty return') unless as_return is :nop;
 			state->return->arg = as_return is :nop ? :was_void : :was_value;
-		} case :void{
-			add_error(ref state->errors, 'return value in void function') unless as_return is :nop;;
+		} case :void {
+			add_error(ref state->errors, 'return value in void function') unless as_return is :nop;
 		}
 		state->return->was = true;
 	} case :block(var block) {
@@ -429,25 +448,26 @@ def check_cmd(cmd : @nast::cmd_t, ref state : @module_checker::state_t){
 	} case :var_decl(var var_decl) {
 		add_var_dec(var_decl, false, false, ref state);
 	} case :try(var as_try) {
-		match(as_try) case :decl(var var_decl){
+		match (as_try) case :decl(var var_decl) {
 			add_var_dec(var_decl, false, false, ref state);
-		} case :lval(var lval){
+		} case :lval(var lval) {
 			check_val(:bin_op(lval), ref state);
-		} case :expr(var expr){
+		} case :expr(var expr) {
 			check_val(expr, ref state);
 		}
 	} case :ensure(var as_ensure) {
-		match(as_ensure) case :decl(var var_decl){
+		match (as_ensure) case :decl(var var_decl) {
 			add_var_dec(var_decl, false, false, ref state);
-		} case :lval(var lval){
+		} case :lval(var lval) {
 			check_val(:bin_op(lval), ref state);
-		} case :expr(var expr){
+		} case :expr(var expr) {
 			check_val(expr, ref state);
 		}
 	} case :nop {
 	}
 }
-def check_lvalue(lval : @nast::value_t, ref state : @module_checker::state_t) : ptd::void(){
+
+def check_lvalue(lval : @nast::value_t, ref state : @module_checker::state_t) : ptd::void() {
 	if (lval is :var) {
 		use_var(lval as :var, :mod, ref state);
 		return;
@@ -461,7 +481,8 @@ def check_lvalue(lval : @nast::value_t, ref state : @module_checker::state_t) : 
 	}
 	add_error(ref state->errors, 'invalid expression for lvalue');
 }
-def check_val(val : @nast::value_t, ref state : @module_checker::state_t) : ptd::void(){
+
+def check_val(val : @nast::value_t, ref state : @module_checker::state_t) : ptd::void() {
 	match (val) case :ternary_op(var ternary_op) {
 		check_val(ternary_op->fst, ref state);
 		check_val(ternary_op->snd, ref state);
@@ -475,20 +496,20 @@ def check_val(val : @nast::value_t, ref state : @module_checker::state_t) : ptd:
 	} case :nop {
 	} case :hash_key(var hash_key) {
 	} case :arr_decl(var arr_decl) {
-		fora var dec (arr_decl){
+		fora var dec (arr_decl) {
 			check_val(dec, ref state);
 		}
 	} case :hash_decl(var hash_decl) {
 		fora var el (hash_decl) {
-			ov::as(el->key, 'hash_key');
+			el->key as :hash_key;
 			check_val(el->val, ref state);
 		}
 	} case :var(var variable_name) {
 		use_var(variable_name, :get, ref state);
 	} case :bin_op(var bin_op) {
 		var op = bin_op->op;
-		if(op eq '=' || op eq '+=' || op eq '-=' || op eq '*=' || op eq '/=' || op eq '.='){
-			if(bin_op->left is :var && op eq '='){
+		if (op eq '=' || op eq '+=' || op eq '-=' || op eq '*=' || op eq '/=' || op eq '.=') {
+			if (bin_op->left is :var && op eq '=') {
 				use_var(bin_op->left as :var, :set, ref state);
 			} else {
 				check_lvalue(bin_op->left, ref state);
@@ -505,9 +526,9 @@ def check_val(val : @nast::value_t, ref state : @module_checker::state_t) : ptd:
 		add_fun_used(fun_label->module, fun_label->name, ref state);
 	} case :fun_val(var fun_val) {
 		fora var fun_val_arg (fun_val->args) {
-			match(fun_val_arg->mod) case :none{
+			match (fun_val_arg->mod) case :none {
 				check_val(fun_val_arg->val, ref state);
-			} case :ref{
+			} case :ref {
 				check_lvalue(fun_val_arg->val, ref state);
 			}
 		}
@@ -518,19 +539,22 @@ def check_val(val : @nast::value_t, ref state : @module_checker::state_t) : ptd:
 		check_val(dec, ref state);
 	}
 }
+
 def save_block(ref state : @module_checker::state_t) : @module_checker::save_t {
 	return {in_loop => state->in_loop, vars => state->vars};
 }
+
 def load_block(ref state : @module_checker::state_t, prev : @module_checker::save_t) : ptd::void() {
 	state->in_loop = prev->in_loop;
 	var keys = hash::keys(state->vars);
-	fora var key (keys){
-		if(!hash::has_key(prev->vars, key)){
+	fora var key (keys) {
+		if (!hash::has_key(prev->vars, key)) {
 			var info = hash::get_value(state->vars, key);
 			hash::delete(ref state->vars, key);
-			if(!info->read && !info->is_required){
+			if (!info->read && !info->is_required) {
 				add_warning(ref state->errors, 'never read variable: ' . key);
 			}
 		}
 	}
 }
+

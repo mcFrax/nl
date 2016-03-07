@@ -14,5 +14,3 @@ ImmT nparser0try_cmd_t();
 ImmT nparser0try_cmd_t0ptr(int _num, ImmT *_tab);
 ImmT nparser0sparse(ImmT ___nl__0,ImmT ___nl__1);
 ImmT nparser0sparse0ptr(int _num, ImmT *_tab);
-ImmT nparser0errors_t();
-ImmT nparser0errors_t0ptr(int _num, ImmT *_tab);

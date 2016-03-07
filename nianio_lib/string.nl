@@ -2,6 +2,7 @@
 # (c) Atinea Sp. z o.o.
 ###
 
+
 use c_std_lib;
 use boolean_t;
 use ptd;
@@ -93,3 +94,4 @@ def string::le(string_1, string_2) {
 def string::ge(string_1, string_2) {
 	return string::compare(string_1, string_2) >= 0;
 }
+

@@ -17,42 +17,42 @@ return 1;
 
 sub nlasm::__result_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;
-#line 9
+#line 10
 $memory_2 = ptd::sim();
-#line 9
+#line 10
 $memory_4 = {
 	module => "nlasm",
 	name => "function_t",
 };
-#line 9
+#line 10
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 9
+#line 10
 $memory_3 = ptd::arr($memory_4);
-#line 9
+#line 10
 undef($memory_4);
-#line 9
+#line 10
 $memory_5 = ptd::sim();
-#line 9
+#line 10
 $memory_4 = ptd::arr($memory_5);
-#line 9
+#line 10
 undef($memory_5);
-#line 9
+#line 10
 $memory_1 = {module_name => $memory_2,functions => $memory_3,imports => $memory_4,};
-#line 9
+#line 10
 undef($memory_2);
-#line 9
+#line 10
 undef($memory_3);
-#line 9
+#line 10
 undef($memory_4);
-#line 9
+#line 10
 $memory_0 = ptd::rec($memory_1);
-#line 9
+#line 10
 undef($memory_1);
-#line 9
+#line 10
 return $memory_0;
-#line 9
+#line 10
 undef($memory_0);
-#line 9
+#line 10
 return;
 }
 
@@ -64,25 +64,25 @@ sub nlasm::result_t() {
 
 sub nlasm::__access_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;
-#line 17
+#line 18
 $memory_2 = ptd::none();
-#line 17
+#line 18
 $memory_3 = ptd::none();
-#line 17
+#line 18
 $memory_1 = {pub => $memory_2,priv => $memory_3,};
-#line 17
+#line 18
 undef($memory_2);
-#line 17
+#line 18
 undef($memory_3);
-#line 17
+#line 18
 $memory_0 = ptd::var($memory_1);
-#line 17
+#line 18
 undef($memory_1);
-#line 17
+#line 18
 return $memory_0;
-#line 17
+#line 18
 undef($memory_0);
-#line 17
+#line 18
 return;
 }
 
@@ -94,25 +94,25 @@ sub nlasm::access_t() {
 
 sub nlasm::__arg_type_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;
-#line 24
+#line 22
 $memory_2 = ptd::none();
-#line 24
+#line 22
 $memory_3 = ptd::none();
-#line 24
+#line 22
 $memory_1 = {val => $memory_2,ref => $memory_3,};
-#line 24
+#line 22
 undef($memory_2);
-#line 24
+#line 22
 undef($memory_3);
-#line 24
+#line 22
 $memory_0 = ptd::var($memory_1);
-#line 24
+#line 22
 undef($memory_1);
-#line 24
+#line 22
 return $memory_0;
-#line 24
+#line 22
 undef($memory_0);
-#line 24
+#line 22
 return;
 }
 
@@ -124,80 +124,80 @@ sub nlasm::arg_type_t() {
 
 sub nlasm::__function_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;
-#line 31
+#line 26
 $memory_4 = ptd::none();
-#line 31
+#line 26
 $memory_5 = ptd::none();
-#line 31
+#line 26
 $memory_6 = ptd::none();
-#line 31
+#line 26
 $memory_3 = {none => $memory_4,math => $memory_5,state => $memory_6,};
-#line 31
+#line 26
 undef($memory_4);
-#line 31
+#line 26
 undef($memory_5);
-#line 31
+#line 26
 undef($memory_6);
-#line 31
+#line 26
 $memory_2 = ptd::var($memory_3);
-#line 31
+#line 26
 undef($memory_3);
-#line 31
+#line 26
 $memory_3 = {
 	module => "nlasm",
 	name => "access_t",
 };
-#line 31
+#line 26
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 31
+#line 26
 $memory_4 = ptd::sim();
-#line 31
+#line 26
 $memory_6 = {
 	module => "nlasm",
 	name => "arg_type_t",
 };
-#line 31
+#line 26
 $memory_6 = c_rt_lib::ov_mk_arg('ref', $memory_6);
-#line 31
+#line 26
 $memory_5 = ptd::arr($memory_6);
-#line 31
+#line 26
 undef($memory_6);
-#line 31
+#line 26
 $memory_7 = {
 	module => "nlasm",
 	name => "cmd_t",
 };
-#line 31
+#line 26
 $memory_7 = c_rt_lib::ov_mk_arg('ref', $memory_7);
-#line 31
+#line 26
 $memory_6 = ptd::arr($memory_7);
-#line 31
+#line 26
 undef($memory_7);
-#line 31
+#line 26
 $memory_7 = ptd::sim();
-#line 31
+#line 26
 $memory_1 = {annotation => $memory_2,access => $memory_3,reg_size => $memory_4,args_type => $memory_5,commands => $memory_6,name => $memory_7,};
-#line 31
+#line 26
 undef($memory_2);
-#line 31
+#line 26
 undef($memory_3);
-#line 31
+#line 26
 undef($memory_4);
-#line 31
+#line 26
 undef($memory_5);
-#line 31
+#line 26
 undef($memory_6);
-#line 31
+#line 26
 undef($memory_7);
-#line 31
+#line 26
 $memory_0 = ptd::rec($memory_1);
-#line 31
+#line 26
 undef($memory_1);
-#line 31
+#line 26
 return $memory_0;
-#line 31
+#line 26
 undef($memory_0);
-#line 31
+#line 26
 return;
 }
 
@@ -209,13 +209,13 @@ sub nlasm::function_t() {
 
 sub nlasm::__reg_t() {
 my $memory_0;
-#line 46
+#line 37
 $memory_0 = ptd::sim();
-#line 46
+#line 37
 return $memory_0;
-#line 46
+#line 37
 undef($memory_0);
-#line 46
+#line 37
 return;
 }
 
@@ -227,38 +227,38 @@ sub nlasm::reg_t() {
 
 sub nlasm::__debug_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;
-#line 50
+#line 41
 $memory_2 = {
 	module => "nast",
 	name => "debug_t",
 };
-#line 50
+#line 41
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 50
+#line 41
 $memory_3 = ptd::sim();
-#line 50
+#line 41
 $memory_5 = ptd::sim();
-#line 50
+#line 41
 $memory_4 = ptd::hash($memory_5);
-#line 50
+#line 41
 undef($memory_5);
-#line 50
+#line 41
 $memory_1 = {nast_debug => $memory_2,instruction_nr => $memory_3,declarations => $memory_4,};
-#line 50
+#line 41
 undef($memory_2);
-#line 50
+#line 41
 undef($memory_3);
-#line 50
+#line 41
 undef($memory_4);
-#line 50
+#line 41
 $memory_0 = ptd::rec($memory_1);
-#line 50
+#line 41
 undef($memory_1);
-#line 50
+#line 41
 return $memory_0;
-#line 50
+#line 41
 undef($memory_0);
-#line 50
+#line 41
 return;
 }
 
@@ -270,25 +270,25 @@ sub nlasm::debug_t() {
 
 sub nlasm::__empty_debug() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;
-#line 58
+#line 45
 $memory_1 = nast::empty_debug();
-#line 58
+#line 45
 $memory_2 = 0;
-#line 58
+#line 45
 $memory_3 = {};
-#line 58
+#line 45
 $memory_0 = {nast_debug => $memory_1,instruction_nr => $memory_2,declarations => $memory_3,};
-#line 58
+#line 45
 undef($memory_1);
-#line 58
+#line 45
 undef($memory_2);
-#line 58
+#line 45
 undef($memory_3);
-#line 58
+#line 45
 return $memory_0;
-#line 58
+#line 45
 undef($memory_0);
-#line 58
+#line 45
 return;
 }
 
@@ -300,55 +300,55 @@ sub nlasm::empty_debug() {
 
 sub nlasm::__cmd_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;
-#line 66
+#line 49
 $memory_2 = {
 	module => "nlasm",
 	name => "debug_t",
 };
-#line 66
+#line 49
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 66
+#line 49
 $memory_5 = ptd::none();
-#line 66
+#line 49
 $memory_7 = ptd::sim();
-#line 66
+#line 49
 $memory_6 = ptd::arr($memory_7);
-#line 66
+#line 49
 undef($memory_7);
-#line 66
+#line 49
 $memory_4 = {none => $memory_5,const => $memory_6,};
-#line 66
+#line 49
 undef($memory_5);
-#line 66
+#line 49
 undef($memory_6);
-#line 66
+#line 49
 $memory_3 = ptd::var($memory_4);
-#line 66
+#line 49
 undef($memory_4);
-#line 66
+#line 49
 $memory_4 = {
 	module => "nlasm",
 	name => "order_t",
 };
-#line 66
+#line 49
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 66
+#line 49
 $memory_1 = {debug => $memory_2,annotation => $memory_3,cmd => $memory_4,};
-#line 66
+#line 49
 undef($memory_2);
-#line 66
+#line 49
 undef($memory_3);
-#line 66
+#line 49
 undef($memory_4);
-#line 66
+#line 49
 $memory_0 = ptd::rec($memory_1);
-#line 66
+#line 49
 undef($memory_1);
-#line 66
+#line 49
 return $memory_0;
-#line 66
+#line 49
 undef($memory_0);
-#line 66
+#line 49
 return;
 }
 
@@ -360,506 +360,506 @@ sub nlasm::cmd_t() {
 
 sub nlasm::__order_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;my $memory_9;my $memory_10;my $memory_11;my $memory_12;my $memory_13;my $memory_14;my $memory_15;my $memory_16;my $memory_17;my $memory_18;my $memory_19;my $memory_20;my $memory_21;my $memory_22;my $memory_23;
-#line 76
+#line 57
 $memory_4 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 76
+#line 57
 $memory_6 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_6 = c_rt_lib::ov_mk_arg('ref', $memory_6);
-#line 76
+#line 57
 $memory_5 = ptd::arr($memory_6);
-#line 76
+#line 57
 undef($memory_6);
-#line 76
+#line 57
 $memory_3 = {dest => $memory_4,src => $memory_5,};
-#line 76
+#line 57
 undef($memory_4);
-#line 76
+#line 57
 undef($memory_5);
-#line 76
+#line 57
 $memory_2 = ptd::rec($memory_3);
-#line 76
+#line 57
 undef($memory_3);
-#line 76
+#line 57
 $memory_5 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 76
+#line 57
 $memory_9 = ptd::sim();
-#line 76
+#line 57
 $memory_10 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_10 = c_rt_lib::ov_mk_arg('ref', $memory_10);
-#line 76
+#line 57
 $memory_8 = {key => $memory_9,val => $memory_10,};
-#line 76
+#line 57
 undef($memory_9);
-#line 76
+#line 57
 undef($memory_10);
-#line 76
+#line 57
 $memory_7 = ptd::rec($memory_8);
-#line 76
+#line 57
 undef($memory_8);
-#line 76
+#line 57
 $memory_6 = ptd::arr($memory_7);
-#line 76
+#line 57
 undef($memory_7);
-#line 76
+#line 57
 $memory_4 = {dest => $memory_5,src => $memory_6,};
-#line 76
+#line 57
 undef($memory_5);
-#line 76
+#line 57
 undef($memory_6);
-#line 76
+#line 57
 $memory_3 = ptd::rec($memory_4);
-#line 76
+#line 57
 undef($memory_4);
-#line 76
+#line 57
 $memory_6 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_6 = c_rt_lib::ov_mk_arg('ref', $memory_6);
-#line 76
+#line 57
 $memory_7 = ptd::sim();
-#line 76
+#line 57
 $memory_8 = ptd::sim();
-#line 76
+#line 57
 $memory_5 = {dest => $memory_6,module => $memory_7,name => $memory_8,};
-#line 76
+#line 57
 undef($memory_6);
-#line 76
+#line 57
 undef($memory_7);
-#line 76
+#line 57
 undef($memory_8);
-#line 76
+#line 57
 $memory_4 = ptd::rec($memory_5);
-#line 76
+#line 57
 undef($memory_5);
-#line 76
+#line 57
 $memory_5 = {
 	module => "nlasm",
 	name => "call_t",
 };
-#line 76
+#line 57
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 76
+#line 57
 $memory_8 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_8 = c_rt_lib::ov_mk_arg('ref', $memory_8);
-#line 76
+#line 57
 $memory_9 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_9 = c_rt_lib::ov_mk_arg('ref', $memory_9);
-#line 76
+#line 57
 $memory_10 = ptd::sim();
-#line 76
+#line 57
 $memory_7 = {dest => $memory_8,src => $memory_9,op => $memory_10,};
-#line 76
+#line 57
 undef($memory_8);
-#line 76
+#line 57
 undef($memory_9);
-#line 76
+#line 57
 undef($memory_10);
-#line 76
+#line 57
 $memory_6 = ptd::rec($memory_7);
-#line 76
+#line 57
 undef($memory_7);
-#line 76
+#line 57
 $memory_9 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_9 = c_rt_lib::ov_mk_arg('ref', $memory_9);
-#line 76
+#line 57
 $memory_10 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_10 = c_rt_lib::ov_mk_arg('ref', $memory_10);
-#line 76
+#line 57
 $memory_11 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_11 = c_rt_lib::ov_mk_arg('ref', $memory_11);
-#line 76
+#line 57
 $memory_12 = ptd::sim();
-#line 76
+#line 57
 $memory_8 = {dest => $memory_9,left => $memory_10,right => $memory_11,op => $memory_12,};
-#line 76
+#line 57
 undef($memory_9);
-#line 76
+#line 57
 undef($memory_10);
-#line 76
+#line 57
 undef($memory_11);
-#line 76
+#line 57
 undef($memory_12);
-#line 76
+#line 57
 $memory_7 = ptd::rec($memory_8);
-#line 76
+#line 57
 undef($memory_8);
-#line 76
+#line 57
 $memory_10 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_10 = c_rt_lib::ov_mk_arg('ref', $memory_10);
-#line 76
+#line 57
 $memory_11 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_11 = c_rt_lib::ov_mk_arg('ref', $memory_11);
-#line 76
+#line 57
 $memory_12 = ptd::sim();
-#line 76
+#line 57
 $memory_9 = {dest => $memory_10,src => $memory_11,type => $memory_12,};
-#line 76
+#line 57
 undef($memory_10);
-#line 76
+#line 57
 undef($memory_11);
-#line 76
+#line 57
 undef($memory_12);
-#line 76
+#line 57
 $memory_8 = ptd::rec($memory_9);
-#line 76
+#line 57
 undef($memory_9);
-#line 76
+#line 57
 $memory_11 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_11 = c_rt_lib::ov_mk_arg('ref', $memory_11);
-#line 76
+#line 57
 $memory_12 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_12 = c_rt_lib::ov_mk_arg('ref', $memory_12);
-#line 76
+#line 57
 $memory_13 = ptd::sim();
-#line 76
+#line 57
 $memory_10 = {dest => $memory_11,src => $memory_12,type => $memory_13,};
-#line 76
+#line 57
 undef($memory_11);
-#line 76
+#line 57
 undef($memory_12);
-#line 76
+#line 57
 undef($memory_13);
-#line 76
+#line 57
 $memory_9 = ptd::rec($memory_10);
-#line 76
+#line 57
 undef($memory_10);
-#line 76
+#line 57
 $memory_12 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_12 = c_rt_lib::ov_mk_arg('ref', $memory_12);
-#line 76
+#line 57
 $memory_13 = ptd::none();
-#line 76
+#line 57
 $memory_11 = {val => $memory_12,emp => $memory_13,};
-#line 76
+#line 57
 undef($memory_12);
-#line 76
+#line 57
 undef($memory_13);
-#line 76
+#line 57
 $memory_10 = ptd::var($memory_11);
-#line 76
+#line 57
 undef($memory_11);
-#line 76
+#line 57
 $memory_11 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_11 = c_rt_lib::ov_mk_arg('ref', $memory_11);
-#line 76
+#line 57
 $memory_14 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_14 = c_rt_lib::ov_mk_arg('ref', $memory_14);
-#line 76
+#line 57
 $memory_15 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_15 = c_rt_lib::ov_mk_arg('ref', $memory_15);
-#line 76
+#line 57
 $memory_13 = {dest => $memory_14,src => $memory_15,};
-#line 76
+#line 57
 undef($memory_14);
-#line 76
+#line 57
 undef($memory_15);
-#line 76
+#line 57
 $memory_12 = ptd::rec($memory_13);
-#line 76
+#line 57
 undef($memory_13);
-#line 76
+#line 57
 $memory_15 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_15 = c_rt_lib::ov_mk_arg('ref', $memory_15);
-#line 76
+#line 57
 $memory_16 = ptd::ptd_im();
-#line 76
+#line 57
 $memory_14 = {dest => $memory_15,val => $memory_16,};
-#line 76
+#line 57
 undef($memory_15);
-#line 76
+#line 57
 undef($memory_16);
-#line 76
+#line 57
 $memory_13 = ptd::rec($memory_14);
-#line 76
+#line 57
 undef($memory_14);
-#line 76
+#line 57
 $memory_16 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_16 = c_rt_lib::ov_mk_arg('ref', $memory_16);
-#line 76
+#line 57
 $memory_17 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_17 = c_rt_lib::ov_mk_arg('ref', $memory_17);
-#line 76
+#line 57
 $memory_18 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_18 = c_rt_lib::ov_mk_arg('ref', $memory_18);
-#line 76
+#line 57
 $memory_15 = {dest => $memory_16,src => $memory_17,idx => $memory_18,};
-#line 76
+#line 57
 undef($memory_16);
-#line 76
+#line 57
 undef($memory_17);
-#line 76
+#line 57
 undef($memory_18);
-#line 76
+#line 57
 $memory_14 = ptd::rec($memory_15);
-#line 76
+#line 57
 undef($memory_15);
-#line 76
+#line 57
 $memory_17 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_17 = c_rt_lib::ov_mk_arg('ref', $memory_17);
-#line 76
+#line 57
 $memory_18 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_18 = c_rt_lib::ov_mk_arg('ref', $memory_18);
-#line 76
+#line 57
 $memory_19 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_19 = c_rt_lib::ov_mk_arg('ref', $memory_19);
-#line 76
+#line 57
 $memory_16 = {src => $memory_17,idx => $memory_18,val => $memory_19,};
-#line 76
+#line 57
 undef($memory_17);
-#line 76
+#line 57
 undef($memory_18);
-#line 76
+#line 57
 undef($memory_19);
-#line 76
+#line 57
 $memory_15 = ptd::rec($memory_16);
-#line 76
+#line 57
 undef($memory_16);
-#line 76
+#line 57
 $memory_18 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_18 = c_rt_lib::ov_mk_arg('ref', $memory_18);
-#line 76
+#line 57
 $memory_19 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_19 = c_rt_lib::ov_mk_arg('ref', $memory_19);
-#line 76
+#line 57
 $memory_20 = ptd::sim();
-#line 76
+#line 57
 $memory_17 = {dest => $memory_18,src => $memory_19,key => $memory_20,};
-#line 76
+#line 57
 undef($memory_18);
-#line 76
+#line 57
 undef($memory_19);
-#line 76
+#line 57
 undef($memory_20);
-#line 76
+#line 57
 $memory_16 = ptd::rec($memory_17);
-#line 76
+#line 57
 undef($memory_17);
-#line 76
+#line 57
 $memory_19 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_19 = c_rt_lib::ov_mk_arg('ref', $memory_19);
-#line 76
+#line 57
 $memory_20 = ptd::sim();
-#line 76
+#line 57
 $memory_21 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_21 = c_rt_lib::ov_mk_arg('ref', $memory_21);
-#line 76
+#line 57
 $memory_18 = {src => $memory_19,key => $memory_20,val => $memory_21,};
-#line 76
+#line 57
 undef($memory_19);
-#line 76
+#line 57
 undef($memory_20);
-#line 76
+#line 57
 undef($memory_21);
-#line 76
+#line 57
 $memory_17 = ptd::rec($memory_18);
-#line 76
+#line 57
 undef($memory_18);
-#line 76
+#line 57
 $memory_18 = {
 	module => "nlasm",
 	name => "ov_mk_t",
 };
-#line 76
+#line 57
 $memory_18 = c_rt_lib::ov_mk_arg('ref', $memory_18);
-#line 76
+#line 57
 $memory_19 = ptd::sim();
-#line 76
+#line 57
 $memory_22 = ptd::sim();
-#line 76
+#line 57
 $memory_23 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_23 = c_rt_lib::ov_mk_arg('ref', $memory_23);
-#line 76
+#line 57
 $memory_21 = {dest => $memory_22,src => $memory_23,};
-#line 76
+#line 57
 undef($memory_22);
-#line 76
+#line 57
 undef($memory_23);
-#line 76
+#line 57
 $memory_20 = ptd::rec($memory_21);
-#line 76
+#line 57
 undef($memory_21);
-#line 76
+#line 57
 $memory_21 = ptd::sim();
-#line 76
+#line 57
 $memory_22 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 76
+#line 57
 $memory_22 = c_rt_lib::ov_mk_arg('ref', $memory_22);
-#line 76
+#line 57
 $memory_1 = {arr_decl => $memory_2,hash_decl => $memory_3,func => $memory_4,call => $memory_5,una_op => $memory_6,bin_op => $memory_7,ov_is => $memory_8,ov_as => $memory_9,return => $memory_10,die => $memory_11,move => $memory_12,load_const => $memory_13,get_frm_idx => $memory_14,set_at_idx => $memory_15,get_val => $memory_16,set_val => $memory_17,ov_mk => $memory_18,prt_lbl => $memory_19,if_goto => $memory_20,goto => $memory_21,clear => $memory_22,};
-#line 76
+#line 57
 undef($memory_2);
-#line 76
+#line 57
 undef($memory_3);
-#line 76
+#line 57
 undef($memory_4);
-#line 76
+#line 57
 undef($memory_5);
-#line 76
+#line 57
 undef($memory_6);
-#line 76
+#line 57
 undef($memory_7);
-#line 76
+#line 57
 undef($memory_8);
-#line 76
+#line 57
 undef($memory_9);
-#line 76
+#line 57
 undef($memory_10);
-#line 76
+#line 57
 undef($memory_11);
-#line 76
+#line 57
 undef($memory_12);
-#line 76
+#line 57
 undef($memory_13);
-#line 76
+#line 57
 undef($memory_14);
-#line 76
+#line 57
 undef($memory_15);
-#line 76
+#line 57
 undef($memory_16);
-#line 76
+#line 57
 undef($memory_17);
-#line 76
+#line 57
 undef($memory_18);
-#line 76
+#line 57
 undef($memory_19);
-#line 76
+#line 57
 undef($memory_20);
-#line 76
+#line 57
 undef($memory_21);
-#line 76
+#line 57
 undef($memory_22);
-#line 76
+#line 57
 $memory_0 = ptd::var($memory_1);
-#line 76
+#line 57
 undef($memory_1);
-#line 76
+#line 57
 return $memory_0;
-#line 76
+#line 57
 undef($memory_0);
-#line 76
+#line 57
 return;
 }
 
@@ -871,51 +871,51 @@ sub nlasm::order_t() {
 
 sub nlasm::__ov_mk_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;
-#line 162
+#line 86
 $memory_2 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 162
+#line 86
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 162
+#line 86
 $memory_5 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 162
+#line 86
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 162
+#line 86
 $memory_6 = ptd::none();
-#line 162
+#line 86
 $memory_4 = {arg => $memory_5,emp => $memory_6,};
-#line 162
+#line 86
 undef($memory_5);
-#line 162
+#line 86
 undef($memory_6);
-#line 162
+#line 86
 $memory_3 = ptd::var($memory_4);
-#line 162
+#line 86
 undef($memory_4);
-#line 162
+#line 86
 $memory_4 = ptd::sim();
-#line 162
+#line 86
 $memory_1 = {dest => $memory_2,src => $memory_3,name => $memory_4,};
-#line 162
+#line 86
 undef($memory_2);
-#line 162
+#line 86
 undef($memory_3);
-#line 162
+#line 86
 undef($memory_4);
-#line 162
+#line 86
 $memory_0 = ptd::rec($memory_1);
-#line 162
+#line 86
 undef($memory_1);
-#line 162
+#line 86
 return $memory_0;
-#line 162
+#line 86
 undef($memory_0);
-#line 162
+#line 86
 return;
 }
 
@@ -927,64 +927,64 @@ sub nlasm::ov_mk_t() {
 
 sub nlasm::__call_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;my $memory_9;
-#line 173
+#line 94
 $memory_2 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 173
+#line 94
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 173
+#line 94
 $memory_3 = ptd::sim();
-#line 173
+#line 94
 $memory_4 = ptd::sim();
-#line 173
+#line 94
 $memory_8 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 173
+#line 94
 $memory_8 = c_rt_lib::ov_mk_arg('ref', $memory_8);
-#line 173
+#line 94
 $memory_9 = {
 	module => "nlasm",
 	name => "reg_t",
 };
-#line 173
+#line 94
 $memory_9 = c_rt_lib::ov_mk_arg('ref', $memory_9);
-#line 173
+#line 94
 $memory_7 = {val => $memory_8,ref => $memory_9,};
-#line 173
+#line 94
 undef($memory_8);
-#line 173
+#line 94
 undef($memory_9);
-#line 173
+#line 94
 $memory_6 = ptd::var($memory_7);
-#line 173
+#line 94
 undef($memory_7);
-#line 173
+#line 94
 $memory_5 = ptd::arr($memory_6);
-#line 173
+#line 94
 undef($memory_6);
-#line 173
+#line 94
 $memory_1 = {dest => $memory_2,mod => $memory_3,fun_name => $memory_4,args => $memory_5,};
-#line 173
+#line 94
 undef($memory_2);
-#line 173
+#line 94
 undef($memory_3);
-#line 173
+#line 94
 undef($memory_4);
-#line 173
+#line 94
 undef($memory_5);
-#line 173
+#line 94
 $memory_0 = ptd::rec($memory_1);
-#line 173
+#line 94
 undef($memory_1);
-#line 173
+#line 94
 return $memory_0;
-#line 173
+#line 94
 undef($memory_0);
-#line 173
+#line 94
 return;
 }
 

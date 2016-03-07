@@ -6,6 +6,9 @@ function OV(name, value) {
 	this.name = name;
 	this.value = value;
 }
+function oV(name, value) {
+	return new OV(name, value);
+}
 
 function nl_die() {
 	throw "DIE";
@@ -72,31 +75,31 @@ function c_rt_lib0next_iter(iter) {
 }
 
 function c_rt_lib0ov_as(ov, name) {
-	if (ov.value.constructor.name != 'OV' || ov.value.name.toString() != name.value.toString() || ov.value.value == null)
+	if (!ov.value instanceof OV || ov.value.name.toString() != name.value.toString() || ov.value.value == null)
 		nl_die();
 	return ov.value.value;
 }
 
 function c_rt_lib0ov_is(ov, name) {
-	if (ov.value.constructor.name != 'OV')
+	if (!ov.value instanceof OV)
 		nl_die();
 	return c_rt_lib0native_to_nl(ov.value.name.toString() == name.value.toString());
 }
 
 function c_rt_lib0ov_has_value(ov) {
-	if (ov.value.constructor.name != 'OV')
+	if (!ov.value instanceof OV)
 		nl_die();
 	return c_rt_lib0native_to_nl(ov.value.value != null);
 }
 
 function c_rt_lib0ov_get_value(ov) {
-	if (ov.value.constructor.name != 'OV' || ov.value.value == null)
+	if (!ov.value instanceof OV || ov.value.value == null)
 		nl_die();
 	return ov.value.value;
 }
 
 function c_rt_lib0ov_get_element(ov) {
-	if (ov.value.constructor.name != 'OV')
+	if (!ov.value instanceof OV)
 		nl_die();
 	return ov.value.name;
 }
@@ -130,5 +133,5 @@ function c_rt_lib0get_true() {
 }
 
 function c_rt_lib0native_to_nl(bool) {
-	return bool ? c_rt_lib0get_true() : c_rt_lib0get_false();
+	return Number(bool) ? c_rt_lib0get_true() : c_rt_lib0get_false();
 }

@@ -16,3 +16,5 @@ ImmT hash0size(ImmT ___nl__0);
 ImmT hash0size0ptr(int _num, ImmT *_tab);
 ImmT hash0keys(ImmT ___nl__0);
 ImmT hash0keys0ptr(int _num, ImmT *_tab);
+ImmT hash0add_all(ImmT * ___ref___0,ImmT ___nl__1);
+ImmT hash0add_all0ptr(int _num, ImmT *_tab);

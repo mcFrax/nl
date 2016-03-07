@@ -23,21 +23,21 @@ c_rt_lib0arg_val(___nl__0);
 c_rt_lib0arg_val(___nl__1);
 hash_priv0__const__init();
 ImmT ___nl__2 = NULL;
-#line 8
+#line 9
 c_rt_lib0move(&___nl__2, c_std_lib0hash_get_value(___nl__0, ___nl__1));
-#line 8
+#line 9
 c_rt_lib0clear(&___nl__0);
-#line 8
+#line 9
 c_rt_lib0clear(&___nl__1);
-#line 8
+#line 9
 return ___nl__2;
-#line 8
+#line 9
 c_rt_lib0clear(&___nl__2);
-#line 8
+#line 9
 c_rt_lib0clear(&___nl__0);
-#line 8
+#line 9
 c_rt_lib0clear(&___nl__1);
-#line 8
+#line 9
 return NULL;
 }
 
@@ -49,21 +49,21 @@ c_rt_lib0arg_val(___nl__0);
 c_rt_lib0arg_val(___nl__1);
 hash_priv0__const__init();
 ImmT ___nl__2 = NULL;
-#line 12
+#line 13
 c_rt_lib0move(&___nl__2, c_std_lib0hash_has_key(___nl__0, ___nl__1));
-#line 12
+#line 13
 c_rt_lib0clear(&___nl__0);
-#line 12
+#line 13
 c_rt_lib0clear(&___nl__1);
-#line 12
+#line 13
 return ___nl__2;
-#line 12
+#line 13
 c_rt_lib0clear(&___nl__2);
-#line 12
+#line 13
 c_rt_lib0clear(&___nl__0);
-#line 12
+#line 13
 c_rt_lib0clear(&___nl__1);
-#line 12
+#line 13
 return NULL;
 }
 
@@ -74,13 +74,13 @@ ImmT hash0set_value(ImmT * ___ref___0,ImmT ___nl__1,ImmT ___nl__2) {
 c_rt_lib0arg_val(___nl__1);
 c_rt_lib0arg_val(___nl__2);
 hash_priv0__const__init();
-#line 16
+#line 17
 c_rt_lib0delete(c_std_lib0hash_set_value(___ref___0, ___nl__1, ___nl__2));
-#line 16
+#line 17
 c_rt_lib0clear(&___nl__1);
-#line 16
+#line 17
 c_rt_lib0clear(&___nl__2);
-#line 16
+#line 17
 return NULL;
 }
 
@@ -90,11 +90,11 @@ return hash0delete(&_tab[0], _tab[1]);}
 ImmT hash0delete(ImmT * ___ref___0,ImmT ___nl__1) {
 c_rt_lib0arg_val(___nl__1);
 hash_priv0__const__init();
-#line 20
+#line 21
 c_rt_lib0delete(c_std_lib0hash_delete(___ref___0, ___nl__1));
-#line 20
+#line 21
 c_rt_lib0clear(&___nl__1);
-#line 20
+#line 21
 return NULL;
 }
 
@@ -105,17 +105,17 @@ ImmT hash0size(ImmT ___nl__0) {
 c_rt_lib0arg_val(___nl__0);
 hash_priv0__const__init();
 ImmT ___nl__1 = NULL;
-#line 24
+#line 25
 c_rt_lib0move(&___nl__1, c_std_lib0hash_size(___nl__0));
-#line 24
+#line 25
 c_rt_lib0clear(&___nl__0);
-#line 24
+#line 25
 return ___nl__1;
-#line 24
+#line 25
 c_rt_lib0clear(&___nl__1);
-#line 24
+#line 25
 c_rt_lib0clear(&___nl__0);
-#line 24
+#line 25
 return NULL;
 }
 
@@ -129,43 +129,84 @@ ImmT ___nl__1 = NULL;
 ImmT ___nl__2 = NULL;
 ImmT ___nl__3 = NULL;
 ImmT ___nl__4 = NULL;
-#line 28
+#line 29
 c_rt_lib0move(&___nl__1, c_rt_lib0array_mk(0));
-#line 29
-c_rt_lib0move(&___nl__4, c_rt_lib0init_iter(___nl__0));
-#line 29
-label_3:
-#line 29
-c_rt_lib0move(&___nl__2, c_rt_lib0is_end_hash(___nl__4));
-#line 29
-if(c_rt_lib0check_true_native(___nl__2)){ goto label_1;}
-#line 29
-c_rt_lib0move(&___nl__2, c_rt_lib0get_key_iter(___nl__4));
-#line 29
-c_rt_lib0move(&___nl__3, c_rt_lib0hash_get_value(___nl__0, ___nl__2));
 #line 30
+c_rt_lib0move(&___nl__4, c_rt_lib0init_iter(___nl__0));
+#line 30
+label_3:
+#line 30
+c_rt_lib0move(&___nl__2, c_rt_lib0is_end_hash(___nl__4));
+#line 30
+if(c_rt_lib0check_true_native(___nl__2)){ goto label_1;}
+#line 30
+c_rt_lib0move(&___nl__2, c_rt_lib0get_key_iter(___nl__4));
+#line 30
+c_rt_lib0move(&___nl__3, c_rt_lib0hash_get_value(___nl__0, ___nl__2));
+#line 31
 c_rt_lib0delete(c_std_lib0array_push(&___nl__1, ___nl__2));
-#line 31
+#line 32
 c_rt_lib0move(&___nl__4, c_rt_lib0next_iter(___nl__4));
-#line 31
+#line 32
 goto label_3;
-#line 31
+#line 32
 label_1:
-#line 31
+#line 32
 c_rt_lib0clear(&___nl__2);
-#line 31
+#line 32
 c_rt_lib0clear(&___nl__3);
-#line 31
+#line 32
 c_rt_lib0clear(&___nl__4);
-#line 32
+#line 33
 c_rt_lib0clear(&___nl__0);
-#line 32
+#line 33
 return ___nl__1;
-#line 32
+#line 33
 c_rt_lib0clear(&___nl__1);
-#line 32
+#line 33
 c_rt_lib0clear(&___nl__0);
-#line 32
+#line 33
+return NULL;
+}
+
+ImmT hash0add_all0ptr(int _num, ImmT *_tab){
+c_rt_lib0func_num_args(_num, 2, "hash0add_all");
+return hash0add_all(&_tab[0], _tab[1]);}
+ImmT hash0add_all(ImmT * ___ref___0,ImmT ___nl__1) {
+c_rt_lib0arg_val(___nl__1);
+hash_priv0__const__init();
+ImmT ___nl__2 = NULL;
+ImmT ___nl__3 = NULL;
+ImmT ___nl__4 = NULL;
+#line 38
+c_rt_lib0move(&___nl__4, c_rt_lib0init_iter(___nl__1));
+#line 38
+label_3:
+#line 38
+c_rt_lib0move(&___nl__2, c_rt_lib0is_end_hash(___nl__4));
+#line 38
+if(c_rt_lib0check_true_native(___nl__2)){ goto label_1;}
+#line 38
+c_rt_lib0move(&___nl__2, c_rt_lib0get_key_iter(___nl__4));
+#line 38
+c_rt_lib0move(&___nl__3, c_rt_lib0hash_get_value(___nl__1, ___nl__2));
+#line 38
+c_rt_lib0delete(hash0set_value(___ref___0, ___nl__2, ___nl__3));
+#line 38
+c_rt_lib0move(&___nl__4, c_rt_lib0next_iter(___nl__4));
+#line 38
+goto label_3;
+#line 38
+label_1:
+#line 38
+c_rt_lib0clear(&___nl__2);
+#line 38
+c_rt_lib0clear(&___nl__3);
+#line 38
+c_rt_lib0clear(&___nl__4);
+#line 38
+c_rt_lib0clear(&___nl__1);
+#line 38
 return NULL;
 }
 

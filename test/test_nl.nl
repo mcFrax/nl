@@ -12,6 +12,7 @@ use test_ref;
 use test_str;
 use test_type;
 use test_fun;
+use test_ensure;
 use nl;
 use string;
 use profile;
@@ -23,6 +24,7 @@ def p(arg) {
 def test_nl::test() {
 	profile::sub('test_nl', @test_nl::all, []);
 }
+
 def test_nl::all() {
 	p('forh');
 	profile::sub('test_forh', @test_forh::test, []);
@@ -42,5 +44,7 @@ def test_nl::all() {
 	profile::sub('test_type', @test_type::test, []);
 	p('function');
 	profile::sub('test_fun', @test_fun::test, []);
+	p('ensure');
+	profile::sub('test_ensure', @test_ensure::test, []);
 }
 
