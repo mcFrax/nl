@@ -317,6 +317,12 @@ def print_val(val : @nast::value_t) : @wprinter::pretty_t {
 					print_val(bin_op->right),
 					wprinter::build_sim(']')
 				]);
+		} elsif (op eq 'HASH_INDEX') {
+			return wprinter::build_pretty_a([
+					wprinter::build_pretty_l([print_val(bin_op->left), wprinter::build_sim('{')]),
+					print_val(bin_op->right),
+					wprinter::build_sim('}')
+				]);
 		} elsif (op eq '->') {
 			var left;
 			if (is_to_change_ov(bin_op->left)) {

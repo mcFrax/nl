@@ -130,7 +130,7 @@ def tc_types::value_src() {
 }
 
 def tc_types::lval_path() {
-	return ptd::arr(ptd::var({var => ptd::sim(), arr => ptd::none(), rec => ptd::sim()}));
+	return ptd::arr(ptd::var({var => ptd::sim(), arr => ptd::none(), rec => ptd::sim(), hashkey => ptd::none()}));
 }
 
 def tc_types::walk_arg() {

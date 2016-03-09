@@ -14,7 +14,7 @@ def test_forh::test() {
 	var h = {a => 'xx', b => 'yy', c => 'zz'};
 	var was = {};
 	forh var key, var value (h) {
-		hash::set_value(ref was, key . value, 1);
+		was{key . value} = 1;
 	}
 	die unless hash::has_key(was, 'axx');
 	die unless hash::has_key(was, 'byy');
@@ -29,11 +29,12 @@ def test_forh::test() {
 	var arr = [];
 	exec2(ref arr);
 	var hash = {arr => arr, inne => ''};
-	exec(ref hash->arr, i) rep var i (100000);
-	hash->arr[i] += i rep var i (100000);
+	exec(ref hash{'arr'}, i) rep var i (100000);
+	hash{'arr'}[i] += i rep var i (100000);
 	var long = {};
 	rep var i (20000) {
-		hash::set_value(ref long, i, true);
+		long{i} = true;
+		nassert::a(long{i}, true);
 	}
 	rep var i (20000) {
 		hash::delete(ref long, i);

@@ -537,11 +537,12 @@ ImmT c_rt_lib0hash_get_value_dec(ImmT ___nl__hashI, ImmT ___nl__keyI) {
 	dec_ref(___nl__keyI);
 	return ret;
 }
-void c_rt_lib0hash_set_value_dec(ImmT *___ref___hashI, ImmT ___nl__keyI, ImmT ___nl__val) {
+ImmT c_rt_lib0hash_set_value_dec(ImmT *___ref___hashI, ImmT ___nl__keyI, ImmT ___nl__val) {
 	c_rt_lib0hash_set_value(___ref___hashI, ___nl__keyI, ___nl__val);
 	dec_ref(___nl__keyI);
+	return NULL;
 }
-void c_rt_lib0hash_set_value(ImmT *___ref___hashI, ImmT ___nl__keyI, ImmT ___nl__val) {
+ImmT c_rt_lib0hash_set_value(ImmT *___ref___hashI, ImmT ___nl__keyI, ImmT ___nl__val) {
 	ImmT hash = *___ref___hashI;
 	if(IS_ARRHASH(hash) && ((NlArrHash *)hash)->size == MAX_ARR_HASH_SIZE){
 		hash = arr_hash_to_hash(hash);
@@ -554,6 +555,7 @@ void c_rt_lib0hash_set_value(ImmT *___ref___hashI, ImmT ___nl__keyI, ImmT ___nl_
 	else if(IS_HASH(hash))	prev = set_to_hash((NlHash*) hash, ___nl__keyI, ___nl__val);
 	else	nl_die_internal("Hash expected %s;", NAME(hash));
 	c_rt_lib0clear(&prev);
+	return NULL;
 }
 ImmT c_rt_lib0hash_size(ImmT ___nl__hashI) {
 	return c_rt_lib0int_new(((NlArrHash *)___nl__hashI)->size);

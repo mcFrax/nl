@@ -4,6 +4,7 @@
 
 
 use test_forh;
+use test_hash_oper;
 use test_mod;
 use test_num;
 use test_op;
@@ -26,6 +27,8 @@ def test_nl::test() {
 }
 
 def test_nl::all() {
+	p('test_hash_oper');
+	profile::sub('test_hash_oper', @test_hash_oper::test, []);
 	p('forh');
 	profile::sub('test_forh', @test_forh::test, []);
 	p('mod');

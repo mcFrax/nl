@@ -1019,6 +1019,9 @@ def rec_get_var_from_lval(lval : @nast::value_t, ref errors : @tc_types::errors_
 		} elsif (bin_op->op eq 'ARRAY_INDEX') {
 			a = rec_get_var_from_lval(bin_op->left, ref errors);
 			array::push(ref a, :arr);
+		} elsif (bin_op->op eq 'HASH_INDEX') {
+			a = rec_get_var_from_lval(bin_op->left, ref errors);
+			array::push(ref a, :hashkey);
 		} else {
 			add_error(ref errors, 'invalid operator ' . (bin_op->op) . ' used in lvalue');
 		}
@@ -1052,6 +1055,10 @@ def mk_new_type_lval(var_tab : @tc_types::lval_path, rtype : @tc_types::type, lt
 			return tct::tct_im() unless ltype->type is :tct_arr;
 			ltype->type = ltype->type as :tct_arr;
 			return tct::arr(mk_new_type_lval(var_tab, rtype, ltype, empty_type, ref modules, ref errors));
+		} case :hashkey {
+			return tct::tct_im() unless ltype->type is :tct_hash;
+			ltype->type = ltype->type as :tct_hash;
+			return tct::hash(mk_new_type_lval(var_tab, rtype, ltype, empty_type, ref modules, ref errors));
 		} case :rec(var name) {
 			return tct::tct_im() unless ltype->type is :tct_rec;
 			var tt : ptd::hash(@tct::meta_type) = ltype->type as :tct_rec;
@@ -1164,6 +1171,17 @@ def get_type_from_bin_op_and_check(bin_op : @nast::bin_op_t, ref modules : @tc_t
 			add_error(ref errors, 'array index should be number');
 		}
 		left_type2->type = left_type2->type as :tct_arr if left_type2->type is :tct_arr;
+		return left_type2;
+	}
+	if (op eq 'HASH_INDEX') {
+		if (!ptd_system::is_accepted(left_type2, tct::hash(tct::tct_im()), ref modules, ref errors)) {
+			add_error(ref errors, 'hash operator ''{}'' can be applied only to hash');
+			return ret_type;
+		}
+		if (!ptd_system::is_accepted(right_type, tct::sim(), ref modules, ref errors)) {
+			add_error(ref errors, 'hash index should be string');
+		}
+		left_type2->type = left_type2->type as :tct_hash if left_type2->type is :tct_hash;
 		return left_type2;
 	}
 	if (op eq '[]=') {

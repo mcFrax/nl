@@ -473,7 +473,7 @@ def check_lvalue(lval : @nast::value_t, ref state : @module_checker::state_t) : 
 		return;
 	} elsif (lval is :bin_op) {
 		var bin_op = lval as :bin_op;
-		if (bin_op->op eq '->' || bin_op->op eq 'ARRAY_INDEX') {
+		if (bin_op->op eq '->' || bin_op->op eq 'ARRAY_INDEX' || bin_op->op eq 'HASH_INDEX') {
 			check_lvalue(bin_op->left, ref state);
 			check_val(bin_op->right, ref state);
 			return;

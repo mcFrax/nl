@@ -296,6 +296,11 @@ def parse_expr_rec_left(ref state : @nparser::state_t, left : @nast::value_t, pr
 			try var right : @nast::value_t = parse_expr(ref state);
 			eat(ref state, ']');
 			left = :bin_op({op => op, left => left, right => right});
+		} elsif (try_eat(ref state, '{')) {
+			op = 'HASH_INDEX';
+			try var right : @nast::value_t = parse_expr(ref state);
+			eat(ref state, '}');
+			left = :bin_op({op => op, left => left, right => right});
 		} elsif (try_eat(ref state, '++')) {
 			left = :post_inc(left);
 		} elsif (try_eat(ref state, '--')) {
@@ -403,7 +408,7 @@ def check_lvalue(ref state : @nparser::state_t, lval : @nast::value_t) : ptd::vo
 		return;
 	} elsif (lval is :bin_op) {
 		var bin_op = lval as :bin_op;
-		if (bin_op->op eq '->' || bin_op->op eq 'ARRAY_INDEX') {
+		if (bin_op->op eq '->' || bin_op->op eq 'ARRAY_INDEX' || bin_op->op eq 'HASH_INDEX') {
 			check_lvalue(ref state, bin_op->left);
 			return;
 		}

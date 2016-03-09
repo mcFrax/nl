@@ -43,7 +43,8 @@ def translator::lvalue_values_t() {
 	return ptd::arr(ptd::var({
 			value => @nlasm::reg_t,
 			index => ptd::rec({value => @nlasm::reg_t, index => @nlasm::reg_t}),
-			key => ptd::rec({value => @nlasm::reg_t, key => ptd::sim()})
+			key => ptd::rec({value => @nlasm::reg_t, key => ptd::sim()}),
+			hashkey => ptd::rec({value => @nlasm::reg_t, key => @nlasm::reg_t}),
 		}));
 }
 
@@ -147,7 +148,7 @@ def print_fun_val(fun_val : @nast::fun_val_t, destination : @nlasm::reg_t, ref s
 	for(var i = array::len(fun_val->args) - 1; i >= 0; --i) {
 		continue unless fun_val->args[i]->mod is :ref;
 		var src = fun_val->args[i]->val;
-		get_stuct_of_lvalue(ref src);
+		get_struct_of_lvalue(ref src);
 		continue if hash::has_key(ref_was, src as :var);
 		hash::set_value(ref ref_was, src as :var, 0);
 		hash::set_value(ref ref_var, i, 0);
@@ -159,7 +160,7 @@ def print_fun_val(fun_val : @nast::fun_val_t, destination : @nlasm::reg_t, ref s
 			array::push(ref args, :val(calc_val(fun_arg->val, ref state)));
 		} case :ref {
 			if (hash::has_key(ref_var, i)) {
-				var lvalue = get_value_of_lvalue(fun_arg->val, 1, ref state);
+				var lvalue = get_value_of_lvalue(fun_arg->val, true, ref state);
 				var arg = lvalue[array::len(lvalue) - 1] as :value;
 				array::push(ref args, :ref(arg));
 				hash::set_value(ref lvalues, i, lvalue);
@@ -175,7 +176,7 @@ def print_fun_val(fun_val : @nast::fun_val_t, destination : @nlasm::reg_t, ref s
 	for(var i = array::len(registers) - 1; i >= 0; --i) {
 		restore_registers(registers[i], ref state);
 		continue unless hash::has_key(lvalues, i);
-		set_value_of_lvalue(hash::get_value(lvalues, i), 1, ref state);
+		set_value_of_lvalue(hash::get_value(lvalues, i), true, ref state);
 	}
 }
 
@@ -224,12 +225,12 @@ def print_variable(variable : ptd::sim(), destination : @nlasm::reg_t, ref state
 
 def print_post_operator(value : @nast::value_t, sign : ptd::sim(), destination : @nlasm::reg_t, ref state : 
 	@translator::state_t) {
-	var lvalue = get_value_of_lvalue(value, 1, ref state);
+	var lvalue = get_value_of_lvalue(value, true, ref state);
 	var dest = lvalue[array::len(lvalue) - 1] as :value;
 	move(destination, dest, ref state);
 	var const_reg = calc_val(:const(1), ref state);
 	print_bin_op_operator_command(dest, dest, const_reg, sign eq '++' ? '+' : '-', ref state);
-	set_value_of_lvalue(lvalue, 1, ref state);
+	set_value_of_lvalue(lvalue, true, ref state);
 }
 
 def print_unary_op(unary_op : @nast::unary_op_t, destination : @nlasm::reg_t, ref state : @translator::state_t) {
@@ -238,12 +239,12 @@ def print_unary_op(unary_op : @nast::unary_op_t, destination : @nlasm::reg_t, re
 		print_val(unary_op->val, destination, ref state);
 		print(ref state, :una_op({dest => destination, src => destination, op => unary_op->op}));
 	} elsif (unary_op->op eq '++' || unary_op->op eq '--') {
-		var lvalue = get_value_of_lvalue(unary_op->val, 1, ref state);
+		var lvalue = get_value_of_lvalue(unary_op->val, true, ref state);
 		var dest = lvalue[array::len(lvalue) - 1] as :value;
 		var src = dest_val(:const(1), destination, ref state);
 		print_bin_op_operator_command(dest, dest, src, unary_op->op eq '++' ? '+' : '-', ref state);
 		move(destination, dest, ref state);
-		set_value_of_lvalue(lvalue, 1, ref state);
+		set_value_of_lvalue(lvalue, true, ref state);
 	} elsif (unary_op->op eq '@') {
 		return if destination eq '';
 		var func = unary_op->val as :fun_label;
@@ -269,32 +270,35 @@ def print_var_op(var_op : @nast::var_op_t, destination : @nlasm::reg_t, ref stat
 def print_bin_op(bin_op : @nast::bin_op_t, destination : @nlasm::reg_t, ref state : @translator::state_t) {
 	if (bin_op->op eq '=') {
 		var right = dest_val(bin_op->right, destination, ref state);
-		var lvalue = get_value_of_lvalue(bin_op->left, 0, ref state);
+		var lvalue = get_value_of_lvalue(bin_op->left, false, ref state);
 		var dest = lvalue[array::len(lvalue) - 1] as :value;
 		move(dest, right, ref state);
 		move(destination, dest, ref state);
-		set_value_of_lvalue(lvalue, 0, ref state);
+		set_value_of_lvalue(lvalue, false, ref state);
 	} elsif (bin_op->op eq '[]=') {
 		print_fun_val({
 			name => 'array_push',
 			module => 'c_rt_lib',
 			args => [{val => bin_op->left, mod => :ref}, {val => bin_op->right, mod => :none}]},
 			destination, ref state);
-	} elsif (bin_op->op eq 'ARRAY_INDEX' || bin_op->op eq '->') {
+	} elsif (bin_op->op eq 'ARRAY_INDEX' || bin_op->op eq 'HASH_INDEX' || bin_op->op eq '->') {
 		var left_val = dest_val(bin_op->left, destination, ref state);
 		if (bin_op->op eq 'ARRAY_INDEX') {
 			var index_val = calc_val(bin_op->right, ref state);
 			print_get_from_index(destination, left_val, index_val, ref state);
+		} elsif (bin_op->op eq 'HASH_INDEX') {
+			var key_val = calc_val(bin_op->right, ref state);
+			print_call_base(destination, 'hash_get_value', [:val(left_val), :val(key_val)], ref state);
 		} else {
 			print_get_value(destination, left_val, bin_op->right as :hash_key, ref state);
 		}
 	} elsif (bin_op->op eq '+=' || bin_op->op eq '-=' || bin_op->op eq '/=' || bin_op->op eq '*=' || bin_op->op eq '.=') {
 		var right = calc_val(bin_op->right, ref state);
-		var lvalue = get_value_of_lvalue(bin_op->left, 1, ref state);
+		var lvalue = get_value_of_lvalue(bin_op->left, true, ref state);
 		var dest = lvalue[array::len(lvalue) - 1] as :value;
 		print_bin_op_operator_command(dest, dest, right, bin_op->op, ref state);
 		move(destination, dest, ref state);
-		set_value_of_lvalue(lvalue, 1, ref state);
+		set_value_of_lvalue(lvalue, true, ref state);
 	} elsif (bin_op->op eq '&&') {
 		var after = get_sim_label(ref state);
 		var new = new_register(ref state);
@@ -363,10 +367,10 @@ def print_try_ensure(try_ensure : @nast::try_ensure_t, is_try : @nast::bool_t, r
 	match (try_ensure) case :decl(var decl) {
 		print(ref state, :ov_as({dest => get_var_register(decl->name, ref state), src => arg, type => 'ok'}));
 	} case :lval(var lval) {
-		var lvalue = get_value_of_lvalue(lval->left, 0, ref state);
+		var lvalue = get_value_of_lvalue(lval->left, false, ref state);
 		var dest = lvalue[array::len(lvalue) - 1] as :value;
 		print(ref state, :ov_as({dest => dest, src => arg, type => 'ok'}));
-		set_value_of_lvalue(lvalue, 0, ref state);
+		set_value_of_lvalue(lvalue, false, ref state);
 	} case :expr(var expr) {
 	}
 	restore_registers(register_old, ref state);
@@ -726,14 +730,16 @@ def print_set_value(label : @nlasm::reg_t, key : ptd::sim(), value : @nlasm::reg
 	print(ref state, :set_val({src => label, key => key, val => value}));
 }
 
-def get_stuct_of_lvalue(ref left : @nast::value_t) : ptd::arr(ptd::var({index => @nast::value_t, key => ptd::sim()})) {
+def get_struct_of_lvalue(ref left : @nast::value_t) : ptd::arr(ptd::var({index => @nast::value_t, key => ptd::sim(), hashkey => @nast::value_t})) {
 	var ret = [];
 	while (left is :bin_op) {
 		var bin_op : @nast::bin_op_t = left as :bin_op;
-		die unless bin_op->op eq 'ARRAY_INDEX' || bin_op->op eq '->';
+		die unless bin_op->op eq 'ARRAY_INDEX' || bin_op->op eq 'HASH_INDEX' || bin_op->op eq '->';
 		var new_ret = [];
 		if (bin_op->op eq 'ARRAY_INDEX') {
 			new_ret = [:index(bin_op->right)];
+		} elsif (bin_op->op eq 'HASH_INDEX') {
+			new_ret = [:hashkey(bin_op->right)];
 		} else {
 			new_ret = [:key(bin_op->right as :hash_key)];
 		}
@@ -744,9 +750,9 @@ def get_stuct_of_lvalue(ref left : @nast::value_t) : ptd::arr(ptd::var({index =>
 	return ret;
 }
 
-def get_value_of_lvalue(left : @nast::value_t, get_value : ptd::sim(), ref state : @translator::state_t) : 
+def get_value_of_lvalue(left : @nast::value_t, get_value : @boolean_t::type, ref state : @translator::state_t) :
 	@translator::lvalue_values_t {
-	var ret = get_stuct_of_lvalue(ref left);
+	var ret = get_struct_of_lvalue(ref left);
 	var label : ptd::sim() = left as :var;
 	var temp_structures = [get_var_register(label, ref state)];
 	var lvalue_values = [];
@@ -755,11 +761,16 @@ def get_value_of_lvalue(left : @nast::value_t, get_value : ptd::sim(), ref state
 		match (ret[i]) case :index(var value) {
 			var arg = calc_val(value, ref state);
 			array::push(ref lvalue_values, :index({value => temp_structures[i], index => arg}));
-			break if (get_value == 0 && i == array::len(ret) - 1);
+			break if (!get_value && i == array::len(ret) - 1);
 			print_call_base(temp_structures[i + 1], 'get_ref_arr', [:val(temp_structures[i]), :val(arg)], ref state);
+		} case :hashkey(var value) {
+			var arg = calc_val(value, ref state);
+			array::push(ref lvalue_values, :hashkey({value => temp_structures[i], key => arg}));
+			break if (!get_value && i == array::len(ret) - 1);
+			print_call_base(temp_structures[i + 1], 'get_ref_hash', [:val(temp_structures[i]), :val(arg)], ref state);
 		} case :key(var value) {
 			array::push(ref lvalue_values, :key({value => temp_structures[i], key => value}));
-			break if (get_value == 0 && i == array::len(ret) - 1);
+			break if (!get_value && i == array::len(ret) - 1);
 			load_const(value, temp_structures[i + 1], ref state);
 			print_call_base(temp_structures[i + 1], 'get_ref_hash', [
 					:val(temp_structures[i]),
@@ -771,7 +782,7 @@ def get_value_of_lvalue(left : @nast::value_t, get_value : ptd::sim(), ref state
 	return lvalue_values;
 }
 
-def set_value_of_lvalue(lvalue_values : @translator::lvalue_values_t, get_value : ptd::sim(), ref state : 
+def set_value_of_lvalue(lvalue_values : @translator::lvalue_values_t, get_value : @boolean_t::type, ref state :
 	@translator::state_t) {
 	var register_old = save_registers(ref state);
 	var list_size = array::len(lvalue_values);
@@ -781,14 +792,22 @@ def set_value_of_lvalue(lvalue_values : @translator::lvalue_values_t, get_value 
 		match (lvalue_values[i]) case :value(var reg) {
 			die;
 		} case :index(var arr) {
-			if (get_value == 0 && i == list_size - 2) {
+			if (!get_value && i == list_size - 2) {
 				print_set_at_index(arr->value, arr->index, last_reg, ref state);
 			} else {
 				print_call_base('', 'set_ref_arr', [:ref(arr->value), :val(arr->index), :val(last_reg)], ref state);
 			}
 			last_reg = arr->value;
+		} case :hashkey(var hash) {
+			if (!get_value && i == list_size - 2) {
+				#print(ref state, :call({dest => '', mod => 'hash', fun_name => 'set_value', args => [:ref(hash->value), :val(hash->key), :val(last_reg)]}));
+				print_call_base('', 'hash_set_value', [:ref(hash->value), :val(hash->key), :val(last_reg)], ref state);
+			} else {
+				print_call_base('', 'set_ref_hash', [:ref(hash->value), :val(hash->key), :val(last_reg)], ref state);
+			}
+			last_reg = hash->value;
 		} case :key(var hash) {
-			if (get_value == 0 && i == list_size - 2) {
+			if (!get_value && i == list_size - 2) {
 				print_set_value(hash->value, hash->key, last_reg, ref state);
 			} else {
 				key_reg = new_register(ref state) if (key_reg eq '');
