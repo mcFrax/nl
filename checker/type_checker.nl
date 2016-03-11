@@ -1166,6 +1166,18 @@ def get_type_from_bin_op_and_check(bin_op : @nast::bin_op_t, ref modules : @tc_t
 		left_type2->type = left_type2->type as :tct_arr if left_type2->type is :tct_arr;
 		return left_type2;
 	}
+	if (op eq '[]=') {
+		if (!ptd_system::is_accepted(left_type2, tct::arr(tct::tct_im()), ref modules, ref errors)) {
+			add_error(ref errors, 'array operator ''[]='' can be applied only to array');
+			return ret_type;
+		}
+		right_type->type = tct::arr(right_type->type);
+		set_type_to_lval_spec(bin_op->left, left_type2, right_type, tct::arr(tct::empty()), ref 
+			modules, ref vars, ref errors);
+		left_type2->type = left_type2->type as :tct_arr if left_type2->type is :tct_arr;
+		return left_type2;
+
+	}
 	var op_def2 = tc_types::get_bin_op_def(op);
 	if (!ptd_system::is_accepted(left_type2, op_def2->arg1, ref modules, ref errors)) {
 		add_error(ref errors, 'incorrect type of the first argument operator ''' . op . '''');

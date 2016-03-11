@@ -274,6 +274,12 @@ def print_bin_op(bin_op : @nast::bin_op_t, destination : @nlasm::reg_t, ref stat
 		move(dest, right, ref state);
 		move(destination, dest, ref state);
 		set_value_of_lvalue(lvalue, 0, ref state);
+	} elsif (bin_op->op eq '[]=') {
+		print_fun_val({
+			name => 'array_push',
+			module => 'c_rt_lib',
+			args => [{val => bin_op->left, mod => :ref}, {val => bin_op->right, mod => :none}]},
+			destination, ref state);
 	} elsif (bin_op->op eq 'ARRAY_INDEX' || bin_op->op eq '->') {
 		var left_val = dest_val(bin_op->left, destination, ref state);
 		if (bin_op->op eq 'ARRAY_INDEX') {

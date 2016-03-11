@@ -260,10 +260,6 @@ def get_next_token(ref state : @ntokenizer::state_t) : ptd::void() {
 		state->type = :delimiter;
 		state->next_token = char . get_next_char(ref state);
 		state->pos += 2;
-	} elsif (string::index2(';:,[]{}()', char) >= 0) {
-		state->type = :delimiter;
-		state->next_token = char;
-		state->pos++;
 	} elsif (string::is_letter(char)) {
 		state->next_token = char;
 		state->pos++;
@@ -282,6 +278,10 @@ def get_next_token(ref state : @ntokenizer::state_t) : ptd::void() {
 		state->type = :operator;
 		state->next_token = char;
 		state->pos += string::length(char);
+	} elsif (string::index2(';:,[]{}()', char) >= 0) {
+		state->type = :delimiter;
+		state->next_token = char;
+		state->pos++;
 	} elsif (string::is_digit(char) || ((char eq '-' || char eq '+') && string::is_digit(get_next_char(ref state)))) {
 		state->next_token = char;
 		state->type = :number;

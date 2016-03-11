@@ -71,6 +71,7 @@ def nast::get_bin_ops() : @nast::op_struct_t {
 	op_def(ref ret, '*=', 870, :right);
 	op_def(ref ret, '.=', 870, :right);
 	op_def(ref ret, '-=', 870, :right);
+	op_def(ref ret, '[]=', 870, :right);
 	return singleton::sigleton_do_not_use_without_approval(ret);
 }
 

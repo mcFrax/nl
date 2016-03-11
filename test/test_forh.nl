@@ -8,6 +8,9 @@ use nassert;
 use array;
 
 def test_forh::test() {
+	var test = [];
+	test []= 'xx';
+
 	var h = {a => 'xx', b => 'yy', c => 'zz'};
 	var was = {};
 	forh var key, var value (h) {
