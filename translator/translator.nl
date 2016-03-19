@@ -800,7 +800,6 @@ def set_value_of_lvalue(lvalue_values : @translator::lvalue_values_t, get_value 
 			last_reg = arr->value;
 		} case :hashkey(var hash) {
 			if (!get_value && i == list_size - 2) {
-				#print(ref state, :call({dest => '', mod => 'hash', fun_name => 'set_value', args => [:ref(hash->value), :val(hash->key), :val(last_reg)]}));
 				print_call_base('', 'hash_set_value', [:ref(hash->value), :val(hash->key), :val(last_reg)], ref state);
 			} else {
 				print_call_base('', 'set_ref_hash', [:ref(hash->value), :val(hash->key), :val(last_reg)], ref state);
