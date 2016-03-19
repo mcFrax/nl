@@ -1182,6 +1182,7 @@ def get_type_from_bin_op_and_check(bin_op : @nast::bin_op_t, ref modules : @tc_t
 			add_error(ref errors, 'hash index should be string');
 		}
 		left_type2->type = left_type2->type as :tct_hash if left_type2->type is :tct_hash;
+		left_type2->type = tct::tct_im() if left_type2->type is :tct_rec;
 		return left_type2;
 	}
 	if (op eq '[]=') {
@@ -1194,7 +1195,6 @@ def get_type_from_bin_op_and_check(bin_op : @nast::bin_op_t, ref modules : @tc_t
 			modules, ref vars, ref errors);
 		left_type2->type = left_type2->type as :tct_arr if left_type2->type is :tct_arr;
 		return left_type2;
-
 	}
 	var op_def2 = tc_types::get_bin_op_def(op);
 	if (!ptd_system::is_accepted(left_type2, op_def2->arg1, ref modules, ref errors)) {
