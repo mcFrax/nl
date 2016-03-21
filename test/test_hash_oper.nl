@@ -6,6 +6,7 @@
 use hash;
 use nassert;
 use array;
+use ptd;
 
 def test_hash_oper::test() {
 	var h = {};
@@ -17,4 +18,9 @@ def test_hash_oper::test() {
 	nassert::a(h->foo{'bar'}, {baz => 'foobarbaz'});
 	nassert::a(h{'foo'}->bar, {baz => 'foobarbaz'});
 	nassert::a(h{'foo'}{'bar'}, {baz => 'foobarbaz'});
+}
+
+def test() {
+	var record = {a => 'a'};
+	ptd::ensure(ptd::sim(), record{'a'});
 }

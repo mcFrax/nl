@@ -1170,7 +1170,12 @@ def get_type_from_bin_op_and_check(bin_op : @nast::bin_op_t, ref modules : @tc_t
 		if (!ptd_system::is_accepted(right_type, tct::sim(), ref modules, ref errors)) {
 			add_error(ref errors, 'array index should be number');
 		}
-		left_type2->type = left_type2->type as :tct_arr if left_type2->type is :tct_arr;
+
+		if (left_type2->type is :tct_arr) {
+			left_type2->type = left_type2->type as :tct_arr;
+		} else {
+			die if !(left_type2->type is :tct_im || left_type2->type is :tct_empty);
+		}
 		return left_type2;
 	}
 	if (op eq 'HASH_INDEX') {
@@ -1181,8 +1186,15 @@ def get_type_from_bin_op_and_check(bin_op : @nast::bin_op_t, ref modules : @tc_t
 		if (!ptd_system::is_accepted(right_type, tct::sim(), ref modules, ref errors)) {
 			add_error(ref errors, 'hash index should be string');
 		}
-		left_type2->type = left_type2->type as :tct_hash if left_type2->type is :tct_hash;
-		left_type2->type = tct::tct_im() if left_type2->type is :tct_rec;
+
+		if (left_type2->type is :tct_hash) {
+			left_type2->type = left_type2->type as :tct_hash;
+		} elsif (left_type2->type is :tct_rec) {
+			var ref_inf = {level => 1, from => {}, to => {}, check => false, cast => false};
+			left_type2->type = ptd_system::rec_to_hash(left_type2->type, ref_inf, ref modules, ref errors);
+		} else {
+			die if !(left_type2->type is :tct_im || left_type2->type is :tct_empty);
+		}
 		return left_type2;
 	}
 	if (op eq '[]=') {
