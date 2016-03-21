@@ -125,12 +125,12 @@ def compiler::file_t() {
 	return ptd::var({ok => ptd::sim(), err => ptd::sim()});
 }
 
-def compiler::compile(cmd_args : ptd::arr(ptd::sim())) : ptd::void() {
+def compiler::compile(cmd_args : ptd::arr(ptd::sim())) : @boolean_t::type {
 	var opt_cli = parse_command_line_args(cmd_args);
 	c_fe_lib::mk_path(opt_cli->cache_path);
 	if (opt_cli->mode is :strict) {
 		c_fe_lib::print('strict mode processing...');
-		compile_strict_file(opt_cli);
+		return compile_strict_file(opt_cli);
 	} elsif (opt_cli->mode is :ide || opt_cli->mode is :idex) {
 		c_fe_lib::print('ide mode processing...');
 		compile_ide(opt_cli);
@@ -139,6 +139,7 @@ def compiler::compile(cmd_args : ptd::arr(ptd::sim())) : ptd::void() {
 	} else {
 		die;
 	}
+	return true;
 }
 
 def get_known_func() : ptd::hash(@interpreter::known_exec_func_t) {
@@ -364,7 +365,7 @@ def get_mathematical_func(opt_cli : @compiler::input_type) : ptd::hash(ptd::sim(
 	return hash;
 }
 
-def compile_ide(opt_cli : @compiler::input_type) : ptd::void() {
+def compile_ide(opt_cli : @compiler::input_type) {
 	var cache_time = {};
 	var asts = {};
 	var to_save = {};
@@ -473,7 +474,7 @@ def compile_ide(opt_cli : @compiler::input_type) : ptd::void() {
 	}
 }
 
-def compile_strict_file(opt_cli : @compiler::input_type) : ptd::void() {
+def compile_strict_file(opt_cli : @compiler::input_type) : @boolean_t::type {
 	var asts = {};
 	var errors : @compiler::errors_group_t = {
 			module_errors => {},
@@ -493,11 +494,11 @@ def compile_strict_file(opt_cli : @compiler::input_type) : ptd::void() {
 	}
 	if (error_file != 0) {
 		show_and_count_errors(errors, opt_cli);
-		return;
+		return false;
 	}
 	check_modules(asts, ref errors, opt_cli->deref);
 	if (show_and_count_errors(errors, opt_cli) > 0) {
-		return;
+		return false;
 	}
 	if (!(opt_cli->language is :ast || opt_cli->language is :nl)) {
 		var generator_state = get_generator_state(opt_cli->language);
@@ -510,10 +511,12 @@ def compile_strict_file(opt_cli : @compiler::input_type) : ptd::void() {
 			c_fe_lib::print('saving file: ' . module);
 			match (save_module_to_file(ast, hash::get_value(nianio_files, module)->dst)) case :err(var err) {
 				c_fe_lib::print('ERROR: ' . err);
+				return false;
 			} case :ok(var ok) {
 			}
 		}
 	}
+	return true;
 }
 
 def construct_error_message(error : @compiler_lib::error_t) : ptd::sim() {

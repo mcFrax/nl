@@ -2247,247 +2247,247 @@ goto label_5;
 #line 263
 label_14:
 #line 263
-$memory_3 = ";:,[]{}()";
-#line 263
-$memory_2 = string::index2($memory_3, $memory_1);
-#line 263
-undef($memory_3);
-#line 263
-$memory_3 = 0;
-#line 263
-$memory_2 = c_rt_lib::to_nl($memory_2 >= $memory_3);
-#line 263
-undef($memory_3);
+$memory_2 = string::is_letter($memory_1);
 #line 263
 $memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
 #line 263
 if (c_rt_lib::check_true($memory_2)) {goto label_16;}
 #line 264
-$memory_3 = c_rt_lib::ov_mk_none('delimiter');
-#line 264
-$memory_4 = $memory_3;
-#line 264
- if (c_rt_lib::get_hashcount($memory_0) > 1) {$memory_0 = {%{$memory_0}};}$memory_0->{'type'} = $memory_4;
-#line 264
-undef($memory_3);
-#line 264
-undef($memory_4);
-#line 265
 $memory_3 = $memory_1;
-#line 265
+#line 264
  if (c_rt_lib::get_hashcount($memory_0) > 1) {$memory_0 = {%{$memory_0}};}$memory_0->{'next_token'} = $memory_3;
+#line 264
+undef($memory_3);
+#line 265
+$memory_3 = "pos";
+#line 265
+$memory_3 = c_rt_lib::get_ref_hash($memory_0, $memory_3);
+#line 265
+$memory_4 = 1;
+#line 265
+$memory_3 = $memory_3 + $memory_4;
+#line 265
+$memory_5 = "pos";
+#line 265
+c_rt_lib::set_ref_hash($memory_0, $memory_5, $memory_3);
+#line 265
+undef($memory_5);
 #line 265
 undef($memory_3);
-#line 266
-$memory_3 = "pos";
-#line 266
-$memory_3 = c_rt_lib::get_ref_hash($memory_0, $memory_3);
-#line 266
-$memory_4 = 1;
-#line 266
-$memory_3 = $memory_3 + $memory_4;
-#line 266
-$memory_5 = "pos";
-#line 266
-c_rt_lib::set_ref_hash($memory_0, $memory_5, $memory_3);
-#line 266
-undef($memory_5);
-#line 266
-undef($memory_3);
-#line 266
+#line 265
 undef($memory_4);
-#line 267
-goto label_5;
-#line 267
-label_16:
-#line 267
-$memory_2 = string::is_letter($memory_1);
-#line 267
-$memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
-#line 267
-if (c_rt_lib::check_true($memory_2)) {goto label_17;}
-#line 268
-$memory_3 = $memory_1;
-#line 268
- if (c_rt_lib::get_hashcount($memory_0) > 1) {$memory_0 = {%{$memory_0}};}$memory_0->{'next_token'} = $memory_3;
-#line 268
-undef($memory_3);
-#line 269
-$memory_3 = "pos";
-#line 269
-$memory_3 = c_rt_lib::get_ref_hash($memory_0, $memory_3);
-#line 269
-$memory_4 = 1;
-#line 269
-$memory_3 = $memory_3 + $memory_4;
-#line 269
-$memory_5 = "pos";
-#line 269
-c_rt_lib::set_ref_hash($memory_0, $memory_5, $memory_3);
-#line 269
-undef($memory_5);
-#line 269
-undef($memory_3);
-#line 269
-undef($memory_4);
-#line 270
+#line 266
 $memory_3 = ntokenizer_priv::get_char($memory_0);
-#line 270
+#line 266
 $memory_1 = $memory_3;
-#line 270
+#line 266
 undef($memory_3);
-#line 271
-label_19:
-#line 271
-$memory_3 = "";
-#line 271
-$memory_3 = c_rt_lib::to_nl($memory_1 ne $memory_3);
-#line 271
-$memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
-#line 271
-if (c_rt_lib::check_true($memory_4)) {goto label_21;}
-#line 271
-$memory_3 = string::is_letter($memory_1);
-#line 271
-if (c_rt_lib::check_true($memory_3)) {goto label_22;}
-#line 271
-$memory_3 = string::is_digit($memory_1);
-#line 271
-label_22:
-#line 271
-if (c_rt_lib::check_true($memory_3)) {goto label_21;}
-#line 271
-$memory_3 = "_";
-#line 271
-$memory_3 = c_rt_lib::to_nl($memory_1 eq $memory_3);
-#line 271
-label_21:
-#line 271
-undef($memory_4);
-#line 271
-$memory_3 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
-#line 271
-if (c_rt_lib::check_true($memory_3)) {goto label_18;}
-#line 272
-$memory_4 = "next_token";
-#line 272
-$memory_4 = c_rt_lib::get_ref_hash($memory_0, $memory_4);
-#line 272
-$memory_4 = $memory_4 . $memory_1;
-#line 272
-$memory_5 = "next_token";
-#line 272
-c_rt_lib::set_ref_hash($memory_0, $memory_5, $memory_4);
-#line 272
-undef($memory_5);
-#line 272
-undef($memory_4);
-#line 273
-$memory_4 = "pos";
-#line 273
-$memory_4 = c_rt_lib::get_ref_hash($memory_0, $memory_4);
-#line 273
-$memory_5 = 1;
-#line 273
-$memory_4 = $memory_4 + $memory_5;
-#line 273
-$memory_6 = "pos";
-#line 273
-c_rt_lib::set_ref_hash($memory_0, $memory_6, $memory_4);
-#line 273
-undef($memory_6);
-#line 273
-undef($memory_4);
-#line 273
-undef($memory_5);
-#line 274
-$memory_4 = ntokenizer_priv::get_char($memory_0);
-#line 274
-$memory_1 = $memory_4;
-#line 274
-undef($memory_4);
-#line 275
-goto label_19;
-#line 275
+#line 267
 label_18:
-#line 275
-undef($memory_3);
-#line 276
-$memory_4 = ntokenizer_priv::get_lett_oper();
-#line 276
-$memory_5 = $memory_0->{'next_token'};
-#line 276
-$memory_3 = hash::has_key($memory_4, $memory_5);
-#line 276
-undef($memory_5);
-#line 276
+#line 267
+$memory_3 = "";
+#line 267
+$memory_3 = c_rt_lib::to_nl($memory_1 ne $memory_3);
+#line 267
+$memory_4 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
+#line 267
+if (c_rt_lib::check_true($memory_4)) {goto label_20;}
+#line 267
+$memory_3 = string::is_letter($memory_1);
+#line 267
+if (c_rt_lib::check_true($memory_3)) {goto label_21;}
+#line 267
+$memory_3 = string::is_digit($memory_1);
+#line 267
+label_21:
+#line 267
+if (c_rt_lib::check_true($memory_3)) {goto label_20;}
+#line 267
+$memory_3 = "_";
+#line 267
+$memory_3 = c_rt_lib::to_nl($memory_1 eq $memory_3);
+#line 267
+label_20:
+#line 267
 undef($memory_4);
-#line 276
+#line 267
 $memory_3 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
-#line 276
-if (c_rt_lib::check_true($memory_3)) {goto label_24;}
-#line 277
-$memory_4 = c_rt_lib::ov_mk_none('operator');
-#line 277
-$memory_5 = $memory_4;
-#line 277
- if (c_rt_lib::get_hashcount($memory_0) > 1) {$memory_0 = {%{$memory_0}};}$memory_0->{'type'} = $memory_5;
-#line 277
-undef($memory_4);
-#line 277
+#line 267
+if (c_rt_lib::check_true($memory_3)) {goto label_17;}
+#line 268
+$memory_4 = "next_token";
+#line 268
+$memory_4 = c_rt_lib::get_ref_hash($memory_0, $memory_4);
+#line 268
+$memory_4 = $memory_4 . $memory_1;
+#line 268
+$memory_5 = "next_token";
+#line 268
+c_rt_lib::set_ref_hash($memory_0, $memory_5, $memory_4);
+#line 268
 undef($memory_5);
-#line 278
-goto label_23;
-#line 278
-label_24:
-#line 279
-$memory_5 = ntokenizer_priv::get_keywords();
-#line 279
-$memory_6 = $memory_0->{'next_token'};
-#line 279
-$memory_4 = hash::has_key($memory_5, $memory_6);
-#line 279
+#line 268
+undef($memory_4);
+#line 269
+$memory_4 = "pos";
+#line 269
+$memory_4 = c_rt_lib::get_ref_hash($memory_0, $memory_4);
+#line 269
+$memory_5 = 1;
+#line 269
+$memory_4 = $memory_4 + $memory_5;
+#line 269
+$memory_6 = "pos";
+#line 269
+c_rt_lib::set_ref_hash($memory_0, $memory_6, $memory_4);
+#line 269
 undef($memory_6);
-#line 279
+#line 269
+undef($memory_4);
+#line 269
 undef($memory_5);
-#line 279
-if (c_rt_lib::check_true($memory_4)) {goto label_26;}
-#line 279
-$memory_4 = c_rt_lib::ov_mk_none('word');
-#line 279
-goto label_25;
-#line 279
-label_26:
-#line 279
-$memory_4 = c_rt_lib::ov_mk_none('keyword');
-#line 279
-label_25:
-#line 279
+#line 270
+$memory_4 = ntokenizer_priv::get_char($memory_0);
+#line 270
+$memory_1 = $memory_4;
+#line 270
+undef($memory_4);
+#line 271
+goto label_18;
+#line 271
+label_17:
+#line 271
+undef($memory_3);
+#line 272
+$memory_4 = ntokenizer_priv::get_lett_oper();
+#line 272
+$memory_5 = $memory_0->{'next_token'};
+#line 272
+$memory_3 = hash::has_key($memory_4, $memory_5);
+#line 272
+undef($memory_5);
+#line 272
+undef($memory_4);
+#line 272
+$memory_3 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_3));
+#line 272
+if (c_rt_lib::check_true($memory_3)) {goto label_23;}
+#line 273
+$memory_4 = c_rt_lib::ov_mk_none('operator');
+#line 273
 $memory_5 = $memory_4;
-#line 279
+#line 273
  if (c_rt_lib::get_hashcount($memory_0) > 1) {$memory_0 = {%{$memory_0}};}$memory_0->{'type'} = $memory_5;
-#line 279
+#line 273
+undef($memory_4);
+#line 273
+undef($memory_5);
+#line 274
+goto label_22;
+#line 274
+label_23:
+#line 275
+$memory_5 = ntokenizer_priv::get_keywords();
+#line 275
+$memory_6 = $memory_0->{'next_token'};
+#line 275
+$memory_4 = hash::has_key($memory_5, $memory_6);
+#line 275
+undef($memory_6);
+#line 275
+undef($memory_5);
+#line 275
+if (c_rt_lib::check_true($memory_4)) {goto label_25;}
+#line 275
+$memory_4 = c_rt_lib::ov_mk_none('word');
+#line 275
+goto label_24;
+#line 275
+label_25:
+#line 275
+$memory_4 = c_rt_lib::ov_mk_none('keyword');
+#line 275
+label_24:
+#line 275
+$memory_5 = $memory_4;
+#line 275
+ if (c_rt_lib::get_hashcount($memory_0) > 1) {$memory_0 = {%{$memory_0}};}$memory_0->{'type'} = $memory_5;
+#line 275
+undef($memory_4);
+#line 275
+undef($memory_5);
+#line 276
+goto label_22;
+#line 276
+label_22:
+#line 276
+undef($memory_3);
+#line 277
+goto label_5;
+#line 277
+label_16:
+#line 277
+$memory_2 = ntokenizer_priv::try_get_operator($memory_0, $memory_1);
+#line 277
+$memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
+#line 277
+if (c_rt_lib::check_true($memory_2)) {goto label_26;}
+#line 278
+$memory_3 = c_rt_lib::ov_mk_none('operator');
+#line 278
+$memory_4 = $memory_3;
+#line 278
+ if (c_rt_lib::get_hashcount($memory_0) > 1) {$memory_0 = {%{$memory_0}};}$memory_0->{'type'} = $memory_4;
+#line 278
+undef($memory_3);
+#line 278
 undef($memory_4);
 #line 279
+$memory_3 = $memory_1;
+#line 279
+ if (c_rt_lib::get_hashcount($memory_0) > 1) {$memory_0 = {%{$memory_0}};}$memory_0->{'next_token'} = $memory_3;
+#line 279
+undef($memory_3);
+#line 280
+$memory_3 = string::length($memory_1);
+#line 280
+$memory_4 = "pos";
+#line 280
+$memory_4 = c_rt_lib::get_ref_hash($memory_0, $memory_4);
+#line 280
+$memory_4 = $memory_4 + $memory_3;
+#line 280
+$memory_5 = "pos";
+#line 280
+c_rt_lib::set_ref_hash($memory_0, $memory_5, $memory_4);
+#line 280
 undef($memory_5);
-#line 280
-goto label_23;
-#line 280
-label_23:
 #line 280
 undef($memory_3);
+#line 280
+undef($memory_4);
 #line 281
 goto label_5;
 #line 281
-label_17:
+label_26:
 #line 281
-$memory_2 = ntokenizer_priv::try_get_operator($memory_0, $memory_1);
+$memory_3 = ";:,[]{}()";
+#line 281
+$memory_2 = string::index2($memory_3, $memory_1);
+#line 281
+undef($memory_3);
+#line 281
+$memory_3 = 0;
+#line 281
+$memory_2 = c_rt_lib::to_nl($memory_2 >= $memory_3);
+#line 281
+undef($memory_3);
 #line 281
 $memory_2 = c_rt_lib::to_nl(!c_rt_lib::check_true($memory_2));
 #line 281
 if (c_rt_lib::check_true($memory_2)) {goto label_27;}
 #line 282
-$memory_3 = c_rt_lib::ov_mk_none('operator');
+$memory_3 = c_rt_lib::ov_mk_none('delimiter');
 #line 282
 $memory_4 = $memory_3;
 #line 282
@@ -2503,17 +2503,17 @@ $memory_3 = $memory_1;
 #line 283
 undef($memory_3);
 #line 284
-$memory_3 = string::length($memory_1);
+$memory_3 = "pos";
 #line 284
-$memory_4 = "pos";
+$memory_3 = c_rt_lib::get_ref_hash($memory_0, $memory_3);
 #line 284
-$memory_4 = c_rt_lib::get_ref_hash($memory_0, $memory_4);
+$memory_4 = 1;
 #line 284
-$memory_4 = $memory_4 + $memory_3;
+$memory_3 = $memory_3 + $memory_4;
 #line 284
 $memory_5 = "pos";
 #line 284
-c_rt_lib::set_ref_hash($memory_0, $memory_5, $memory_4);
+c_rt_lib::set_ref_hash($memory_0, $memory_5, $memory_3);
 #line 284
 undef($memory_5);
 #line 284

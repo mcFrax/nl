@@ -185,484 +185,286 @@ undef($memory_2);
 #line 30
 undef($memory_1);
 #line 31
-$memory_1 = "<<";
-#line 31
-$memory_2 = tct::sim();
-#line 31
-$memory_3 = tct::sim();
-#line 31
-$memory_4 = tct::sim();
-#line 31
-tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 31
-undef($memory_4);
-#line 31
-undef($memory_3);
-#line 31
-undef($memory_2);
-#line 31
-undef($memory_1);
-#line 32
-$memory_1 = ">>";
-#line 32
-$memory_2 = tct::sim();
-#line 32
-$memory_3 = tct::sim();
-#line 32
-$memory_4 = tct::sim();
-#line 32
-tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 32
-undef($memory_4);
-#line 32
-undef($memory_3);
-#line 32
-undef($memory_2);
-#line 32
-undef($memory_1);
-#line 33
 $memory_1 = ">=";
-#line 33
+#line 31
 $memory_2 = tct::sim();
-#line 33
+#line 31
 $memory_3 = tct::sim();
-#line 33
+#line 31
 $memory_4 = tct::bool();
-#line 33
+#line 31
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 33
+#line 31
 undef($memory_4);
-#line 33
+#line 31
 undef($memory_3);
-#line 33
+#line 31
 undef($memory_2);
-#line 33
+#line 31
 undef($memory_1);
-#line 34
-$memory_1 = "lt";
-#line 34
-$memory_2 = tct::sim();
-#line 34
-$memory_3 = tct::sim();
-#line 34
-$memory_4 = tct::bool();
-#line 34
-tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 34
-undef($memory_4);
-#line 34
-undef($memory_3);
-#line 34
-undef($memory_2);
-#line 34
-undef($memory_1);
-#line 35
-$memory_1 = "gt";
-#line 35
-$memory_2 = tct::sim();
-#line 35
-$memory_3 = tct::sim();
-#line 35
-$memory_4 = tct::bool();
-#line 35
-tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 35
-undef($memory_4);
-#line 35
-undef($memory_3);
-#line 35
-undef($memory_2);
-#line 35
-undef($memory_1);
-#line 36
-$memory_1 = "le";
-#line 36
-$memory_2 = tct::sim();
-#line 36
-$memory_3 = tct::sim();
-#line 36
-$memory_4 = tct::bool();
-#line 36
-tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 36
-undef($memory_4);
-#line 36
-undef($memory_3);
-#line 36
-undef($memory_2);
-#line 36
-undef($memory_1);
-#line 37
-$memory_1 = "ge";
-#line 37
-$memory_2 = tct::sim();
-#line 37
-$memory_3 = tct::sim();
-#line 37
-$memory_4 = tct::bool();
-#line 37
-tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 37
-undef($memory_4);
-#line 37
-undef($memory_3);
-#line 37
-undef($memory_2);
-#line 37
-undef($memory_1);
-#line 38
+#line 32
 $memory_1 = "<=";
-#line 38
+#line 32
 $memory_2 = tct::sim();
-#line 38
+#line 32
 $memory_3 = tct::sim();
-#line 38
+#line 32
 $memory_4 = tct::bool();
-#line 38
+#line 32
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 38
+#line 32
 undef($memory_4);
-#line 38
+#line 32
 undef($memory_3);
-#line 38
+#line 32
 undef($memory_2);
-#line 38
+#line 32
 undef($memory_1);
-#line 39
+#line 33
 $memory_1 = "<";
-#line 39
+#line 33
 $memory_2 = tct::sim();
-#line 39
+#line 33
 $memory_3 = tct::sim();
-#line 39
+#line 33
 $memory_4 = tct::bool();
-#line 39
+#line 33
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 39
+#line 33
 undef($memory_4);
-#line 39
+#line 33
 undef($memory_3);
-#line 39
+#line 33
 undef($memory_2);
-#line 39
+#line 33
 undef($memory_1);
-#line 40
+#line 34
 $memory_1 = ">";
-#line 40
+#line 34
 $memory_2 = tct::sim();
-#line 40
+#line 34
 $memory_3 = tct::sim();
-#line 40
+#line 34
 $memory_4 = tct::bool();
-#line 40
+#line 34
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 40
+#line 34
 undef($memory_4);
-#line 40
+#line 34
 undef($memory_3);
-#line 40
+#line 34
 undef($memory_2);
-#line 40
+#line 34
 undef($memory_1);
-#line 41
+#line 35
 $memory_1 = "==";
-#line 41
+#line 35
 $memory_2 = tct::sim();
-#line 41
+#line 35
 $memory_3 = tct::sim();
-#line 41
+#line 35
 $memory_4 = tct::bool();
-#line 41
+#line 35
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 41
+#line 35
 undef($memory_4);
-#line 41
+#line 35
 undef($memory_3);
-#line 41
+#line 35
 undef($memory_2);
-#line 41
+#line 35
 undef($memory_1);
-#line 42
+#line 36
 $memory_1 = "!=";
-#line 42
+#line 36
 $memory_2 = tct::sim();
-#line 42
+#line 36
 $memory_3 = tct::sim();
-#line 42
+#line 36
 $memory_4 = tct::bool();
-#line 42
+#line 36
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 42
+#line 36
 undef($memory_4);
-#line 42
+#line 36
 undef($memory_3);
-#line 42
+#line 36
 undef($memory_2);
-#line 42
+#line 36
 undef($memory_1);
-#line 43
-$memory_1 = "<=>";
-#line 43
-$memory_2 = tct::sim();
-#line 43
-$memory_3 = tct::sim();
-#line 43
-$memory_4 = tct::bool();
-#line 43
-tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 43
-undef($memory_4);
-#line 43
-undef($memory_3);
-#line 43
-undef($memory_2);
-#line 43
-undef($memory_1);
-#line 44
+#line 37
 $memory_1 = "eq";
-#line 44
+#line 37
 $memory_2 = tct::sim();
-#line 44
+#line 37
 $memory_3 = tct::sim();
-#line 44
+#line 37
 $memory_4 = tct::bool();
-#line 44
+#line 37
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 44
+#line 37
 undef($memory_4);
-#line 44
+#line 37
 undef($memory_3);
-#line 44
+#line 37
 undef($memory_2);
-#line 44
+#line 37
 undef($memory_1);
-#line 45
+#line 38
 $memory_1 = "ne";
-#line 45
+#line 38
 $memory_2 = tct::sim();
-#line 45
+#line 38
 $memory_3 = tct::sim();
-#line 45
+#line 38
 $memory_4 = tct::bool();
-#line 45
+#line 38
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 45
+#line 38
 undef($memory_4);
-#line 45
+#line 38
 undef($memory_3);
-#line 45
+#line 38
 undef($memory_2);
-#line 45
+#line 38
 undef($memory_1);
-#line 46
-$memory_1 = "cmp";
-#line 46
-$memory_2 = tct::sim();
-#line 46
-$memory_3 = tct::sim();
-#line 46
-$memory_4 = tct::bool();
-#line 46
-tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 46
-undef($memory_4);
-#line 46
-undef($memory_3);
-#line 46
-undef($memory_2);
-#line 46
-undef($memory_1);
-#line 47
-$memory_1 = "&";
-#line 47
-$memory_2 = tct::sim();
-#line 47
-$memory_3 = tct::sim();
-#line 47
-$memory_4 = tct::sim();
-#line 47
-tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 47
-undef($memory_4);
-#line 47
-undef($memory_3);
-#line 47
-undef($memory_2);
-#line 47
-undef($memory_1);
-#line 48
-$memory_1 = "|";
-#line 48
-$memory_2 = tct::sim();
-#line 48
-$memory_3 = tct::sim();
-#line 48
-$memory_4 = tct::sim();
-#line 48
-tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 48
-undef($memory_4);
-#line 48
-undef($memory_3);
-#line 48
-undef($memory_2);
-#line 48
-undef($memory_1);
-#line 49
-$memory_1 = "^";
-#line 49
-$memory_2 = tct::sim();
-#line 49
-$memory_3 = tct::sim();
-#line 49
-$memory_4 = tct::sim();
-#line 49
-tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 49
-undef($memory_4);
-#line 49
-undef($memory_3);
-#line 49
-undef($memory_2);
-#line 49
-undef($memory_1);
-#line 50
+#line 39
 $memory_1 = "&&";
-#line 50
+#line 39
 $memory_2 = tct::bool();
-#line 50
+#line 39
 $memory_3 = tct::bool();
-#line 50
+#line 39
 $memory_4 = tct::bool();
-#line 50
+#line 39
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 50
+#line 39
 undef($memory_4);
-#line 50
+#line 39
 undef($memory_3);
-#line 50
+#line 39
 undef($memory_2);
-#line 50
+#line 39
 undef($memory_1);
-#line 51
+#line 40
 $memory_1 = "||";
-#line 51
+#line 40
 $memory_2 = tct::bool();
-#line 51
+#line 40
 $memory_3 = tct::bool();
-#line 51
+#line 40
 $memory_4 = tct::bool();
-#line 51
+#line 40
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 51
+#line 40
 undef($memory_4);
-#line 51
+#line 40
 undef($memory_3);
-#line 51
+#line 40
 undef($memory_2);
-#line 51
+#line 40
 undef($memory_1);
-#line 52
+#line 41
 $memory_1 = "+=";
-#line 52
+#line 41
 $memory_2 = tct::sim();
-#line 52
+#line 41
 $memory_3 = tct::sim();
-#line 52
+#line 41
 $memory_4 = tct::sim();
-#line 52
+#line 41
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 52
+#line 41
 undef($memory_4);
-#line 52
+#line 41
 undef($memory_3);
-#line 52
+#line 41
 undef($memory_2);
-#line 52
+#line 41
 undef($memory_1);
-#line 53
+#line 42
 $memory_1 = "/=";
-#line 53
+#line 42
 $memory_2 = tct::sim();
-#line 53
+#line 42
 $memory_3 = tct::sim();
-#line 53
+#line 42
 $memory_4 = tct::sim();
-#line 53
+#line 42
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 53
+#line 42
 undef($memory_4);
-#line 53
+#line 42
 undef($memory_3);
-#line 53
+#line 42
 undef($memory_2);
-#line 53
+#line 42
 undef($memory_1);
-#line 54
+#line 43
 $memory_1 = "*=";
-#line 54
+#line 43
 $memory_2 = tct::sim();
-#line 54
+#line 43
 $memory_3 = tct::sim();
-#line 54
+#line 43
 $memory_4 = tct::sim();
-#line 54
+#line 43
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 54
+#line 43
 undef($memory_4);
-#line 54
+#line 43
 undef($memory_3);
-#line 54
+#line 43
 undef($memory_2);
-#line 54
+#line 43
 undef($memory_1);
-#line 55
+#line 44
 $memory_1 = ".=";
-#line 55
+#line 44
 $memory_2 = tct::sim();
-#line 55
+#line 44
 $memory_3 = tct::sim();
-#line 55
+#line 44
 $memory_4 = tct::sim();
-#line 55
+#line 44
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 55
+#line 44
 undef($memory_4);
-#line 55
+#line 44
 undef($memory_3);
-#line 55
+#line 44
 undef($memory_2);
-#line 55
+#line 44
 undef($memory_1);
-#line 56
+#line 45
 $memory_1 = "-=";
-#line 56
+#line 45
 $memory_2 = tct::sim();
-#line 56
+#line 45
 $memory_3 = tct::sim();
-#line 56
+#line 45
 $memory_4 = tct::sim();
-#line 56
+#line 45
 tc_types_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3, $memory_4);
-#line 56
+#line 45
 undef($memory_4);
-#line 56
+#line 45
 undef($memory_3);
-#line 56
+#line 45
 undef($memory_2);
-#line 56
+#line 45
 undef($memory_1);
-#line 57
+#line 46
 $memory_1 = singleton::sigleton_do_not_use_without_approval($memory_0);
-#line 57
+#line 46
 undef($memory_0);
-#line 57
+#line 46
 return $memory_1;
-#line 57
+#line 46
 undef($memory_1);
-#line 57
+#line 46
 undef($memory_0);
-#line 57
+#line 46
 return;
 }
 
@@ -674,43 +476,43 @@ sub tc_types_priv::get_binary_ops() {
 
 sub tc_types::__errors_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;
-#line 61
+#line 50
 $memory_2 = ptd::sim();
-#line 61
+#line 50
 $memory_3 = ptd::sim();
-#line 61
+#line 50
 $memory_4 = {
 	module => "compiler_lib",
 	name => "errors_t",
 };
-#line 61
+#line 50
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 61
+#line 50
 $memory_5 = {
 	module => "compiler_lib",
 	name => "errors_t",
 };
-#line 61
+#line 50
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 61
+#line 50
 $memory_1 = {current_line => $memory_2,module => $memory_3,warnings => $memory_4,errors => $memory_5,};
-#line 61
+#line 50
 undef($memory_2);
-#line 61
+#line 50
 undef($memory_3);
-#line 61
+#line 50
 undef($memory_4);
-#line 61
+#line 50
 undef($memory_5);
-#line 61
+#line 50
 $memory_0 = ptd::rec($memory_1);
-#line 61
+#line 50
 undef($memory_1);
-#line 61
+#line 50
 return $memory_0;
-#line 61
+#line 50
 undef($memory_0);
-#line 61
+#line 50
 return;
 }
 
@@ -722,44 +524,44 @@ sub tc_types::errors_t() {
 
 sub tc_types::__bin_op_type() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 70
+#line 59
 $memory_2 = {
 	module => "tct",
 	name => "meta_type",
 };
-#line 70
+#line 59
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 70
+#line 59
 $memory_3 = {
 	module => "tct",
 	name => "meta_type",
 };
-#line 70
+#line 59
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 70
+#line 59
 $memory_4 = {
 	module => "tct",
 	name => "meta_type",
 };
-#line 70
+#line 59
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 70
+#line 59
 $memory_1 = {arg1 => $memory_2,arg2 => $memory_3,ret => $memory_4,};
-#line 70
+#line 59
 undef($memory_2);
-#line 70
+#line 59
 undef($memory_3);
-#line 70
+#line 59
 undef($memory_4);
-#line 70
+#line 59
 $memory_0 = ptd::rec($memory_1);
-#line 70
+#line 59
 undef($memory_1);
-#line 70
+#line 59
 return $memory_0;
-#line 70
+#line 59
 undef($memory_0);
-#line 70
+#line 59
 return;
 }
 
@@ -771,26 +573,26 @@ sub tc_types::bin_op_type() {
 
 sub tc_types::__defs_funs_t() {
 my $memory_0;my $memory_1;my $memory_2;
-#line 74
+#line 63
 $memory_2 = {
 	module => "tc_types",
 	name => "def_fun_t",
 };
-#line 74
+#line 63
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 74
+#line 63
 $memory_1 = ptd::hash($memory_2);
-#line 74
+#line 63
 undef($memory_2);
-#line 74
+#line 63
 $memory_0 = ptd::hash($memory_1);
-#line 74
+#line 63
 undef($memory_1);
-#line 74
+#line 63
 return $memory_0;
-#line 74
+#line 63
 undef($memory_0);
-#line 74
+#line 63
 return;
 }
 
@@ -802,44 +604,44 @@ sub tc_types::defs_funs_t() {
 
 sub tc_types::__return_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 78
+#line 67
 $memory_2 = {
 	module => "compiler_lib",
 	name => "errors_t",
 };
-#line 78
+#line 67
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 78
+#line 67
 $memory_3 = {
 	module => "compiler_lib",
 	name => "errors_t",
 };
-#line 78
+#line 67
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 78
+#line 67
 $memory_4 = {
 	module => "tc_types",
 	name => "deref_types",
 };
-#line 78
+#line 67
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 78
+#line 67
 $memory_1 = {errors => $memory_2,warnings => $memory_3,deref => $memory_4,};
-#line 78
+#line 67
 undef($memory_2);
-#line 78
+#line 67
 undef($memory_3);
-#line 78
+#line 67
 undef($memory_4);
-#line 78
+#line 67
 $memory_0 = ptd::rec($memory_1);
-#line 78
+#line 67
 undef($memory_1);
-#line 78
+#line 67
 return $memory_0;
-#line 78
+#line 67
 undef($memory_0);
-#line 78
+#line 67
 return;
 }
 
@@ -851,48 +653,48 @@ sub tc_types::return_t() {
 
 sub tc_types::__modules_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 86
+#line 75
 $memory_3 = {
 	module => "boolean_t",
 	name => "type",
 };
-#line 86
+#line 75
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 86
+#line 75
 $memory_2 = ptd::hash($memory_3);
-#line 86
+#line 75
 undef($memory_3);
-#line 86
+#line 75
 $memory_3 = {
 	module => "tc_types",
 	name => "env",
 };
-#line 86
+#line 75
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 86
+#line 75
 $memory_4 = {
 	module => "tc_types",
 	name => "defs_funs_t",
 };
-#line 86
+#line 75
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 86
+#line 75
 $memory_1 = {imports => $memory_2,env => $memory_3,funs => $memory_4,};
-#line 86
+#line 75
 undef($memory_2);
-#line 86
+#line 75
 undef($memory_3);
-#line 86
+#line 75
 undef($memory_4);
-#line 86
+#line 75
 $memory_0 = ptd::rec($memory_1);
-#line 86
+#line 75
 undef($memory_1);
-#line 86
+#line 75
 return $memory_0;
-#line 86
+#line 75
 undef($memory_0);
-#line 86
+#line 75
 return;
 }
 
@@ -904,29 +706,29 @@ sub tc_types::modules_t() {
 
 sub tc_types::__deref_type() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 90
+#line 79
 $memory_2 = ptd::sim();
-#line 90
+#line 79
 $memory_3 = ptd::sim();
-#line 90
+#line 79
 $memory_4 = ptd::sim();
-#line 90
+#line 79
 $memory_1 = {line => $memory_2,module => $memory_3,type_name => $memory_4,};
-#line 90
+#line 79
 undef($memory_2);
-#line 90
+#line 79
 undef($memory_3);
-#line 90
+#line 79
 undef($memory_4);
-#line 90
+#line 79
 $memory_0 = ptd::rec($memory_1);
-#line 90
+#line 79
 undef($memory_1);
-#line 90
+#line 79
 return $memory_0;
-#line 90
+#line 79
 undef($memory_0);
-#line 90
+#line 79
 return;
 }
 
@@ -938,43 +740,43 @@ sub tc_types::deref_type() {
 
 sub tc_types::__deref_types() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 94
+#line 83
 $memory_3 = {
 	module => "tc_types",
 	name => "deref_type",
 };
-#line 94
+#line 83
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 94
+#line 83
 $memory_2 = ptd::arr($memory_3);
-#line 94
+#line 83
 undef($memory_3);
-#line 94
+#line 83
 $memory_4 = {
 	module => "tc_types",
 	name => "deref_type",
 };
-#line 94
+#line 83
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 94
+#line 83
 $memory_3 = ptd::arr($memory_4);
-#line 94
+#line 83
 undef($memory_4);
-#line 94
+#line 83
 $memory_1 = {delete => $memory_2,create => $memory_3,};
-#line 94
+#line 83
 undef($memory_2);
-#line 94
+#line 83
 undef($memory_3);
-#line 94
+#line 83
 $memory_0 = ptd::rec($memory_1);
-#line 94
+#line 83
 undef($memory_1);
-#line 94
+#line 83
 return $memory_0;
-#line 94
+#line 83
 undef($memory_0);
-#line 94
+#line 83
 return;
 }
 
@@ -986,65 +788,65 @@ sub tc_types::deref_types() {
 
 sub tc_types::__env() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;
-#line 98
+#line 87
 $memory_2 = ptd::sim();
-#line 98
+#line 87
 $memory_5 = {
 	module => "tc_types",
 	name => "vars_t",
 };
-#line 98
+#line 87
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 98
+#line 87
 $memory_6 = {
 	module => "boolean_t",
 	name => "type",
 };
-#line 98
+#line 87
 $memory_6 = c_rt_lib::ov_mk_arg('ref', $memory_6);
-#line 98
+#line 87
 $memory_4 = {vars => $memory_5,is => $memory_6,};
-#line 98
+#line 87
 undef($memory_5);
-#line 98
+#line 87
 undef($memory_6);
-#line 98
+#line 87
 $memory_3 = ptd::rec($memory_4);
-#line 98
+#line 87
 undef($memory_4);
-#line 98
+#line 87
 $memory_4 = {
 	module => "tct",
 	name => "meta_type",
 };
-#line 98
+#line 87
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 98
+#line 87
 $memory_5 = {
 	module => "tc_types",
 	name => "deref_types",
 };
-#line 98
+#line 87
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 98
+#line 87
 $memory_1 = {current_module => $memory_2,breaks => $memory_3,ret_type => $memory_4,deref => $memory_5,};
-#line 98
+#line 87
 undef($memory_2);
-#line 98
+#line 87
 undef($memory_3);
-#line 98
+#line 87
 undef($memory_4);
-#line 98
+#line 87
 undef($memory_5);
-#line 98
+#line 87
 $memory_0 = ptd::rec($memory_1);
-#line 98
+#line 87
 undef($memory_1);
-#line 98
+#line 87
 return $memory_0;
-#line 98
+#line 87
 undef($memory_0);
-#line 98
+#line 87
 return;
 }
 
@@ -1056,42 +858,42 @@ sub tc_types::env() {
 
 sub tc_types::__var_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;
-#line 107
+#line 96
 $memory_4 = ptd::none();
-#line 107
+#line 96
 $memory_5 = ptd::none();
-#line 107
+#line 96
 $memory_3 = {yes => $memory_4,no => $memory_5,};
-#line 107
+#line 96
 undef($memory_4);
-#line 107
+#line 96
 undef($memory_5);
-#line 107
+#line 96
 $memory_2 = ptd::var($memory_3);
-#line 107
+#line 96
 undef($memory_3);
-#line 107
+#line 96
 $memory_3 = {
 	module => "tct",
 	name => "meta_type",
 };
-#line 107
+#line 96
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 107
+#line 96
 $memory_1 = {overwrited => $memory_2,type => $memory_3,};
-#line 107
+#line 96
 undef($memory_2);
-#line 107
+#line 96
 undef($memory_3);
-#line 107
+#line 96
 $memory_0 = ptd::rec($memory_1);
-#line 107
+#line 96
 undef($memory_1);
-#line 107
+#line 96
 return $memory_0;
-#line 107
+#line 96
 undef($memory_0);
-#line 107
+#line 96
 return;
 }
 
@@ -1103,46 +905,46 @@ sub tc_types::var_t() {
 
 sub tc_types::__fun_arg_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;
-#line 111
+#line 100
 $memory_2 = ptd::sim();
-#line 111
+#line 100
 $memory_3 = {
 	module => "tct",
 	name => "meta_type",
 };
-#line 111
+#line 100
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 111
+#line 100
 $memory_6 = ptd::none();
-#line 111
+#line 100
 $memory_7 = ptd::none();
-#line 111
+#line 100
 $memory_5 = {none => $memory_6,ref => $memory_7,};
-#line 111
+#line 100
 undef($memory_6);
-#line 111
+#line 100
 undef($memory_7);
-#line 111
+#line 100
 $memory_4 = ptd::var($memory_5);
-#line 111
+#line 100
 undef($memory_5);
-#line 111
+#line 100
 $memory_1 = {name => $memory_2,type => $memory_3,mod => $memory_4,};
-#line 111
+#line 100
 undef($memory_2);
-#line 111
+#line 100
 undef($memory_3);
-#line 111
+#line 100
 undef($memory_4);
-#line 111
+#line 100
 $memory_0 = ptd::rec($memory_1);
-#line 111
+#line 100
 undef($memory_1);
-#line 111
+#line 100
 return $memory_0;
-#line 111
+#line 100
 undef($memory_0);
-#line 111
+#line 100
 return;
 }
 
@@ -1154,113 +956,113 @@ sub tc_types::fun_arg_t() {
 
 sub tc_types::__def_fun_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;my $memory_9;my $memory_10;
-#line 119
+#line 108
 $memory_2 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 119
+#line 108
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 119
+#line 108
 $memory_5 = ptd::none();
-#line 119
+#line 108
 $memory_6 = {
 	module => "tct",
 	name => "meta_type",
 };
-#line 119
+#line 108
 $memory_6 = c_rt_lib::ov_mk_arg('ref', $memory_6);
-#line 119
+#line 108
 $memory_4 = {no => $memory_5,yes => $memory_6,};
-#line 119
+#line 108
 undef($memory_5);
-#line 119
+#line 108
 undef($memory_6);
-#line 119
+#line 108
 $memory_3 = ptd::var($memory_4);
-#line 119
+#line 108
 undef($memory_4);
-#line 119
+#line 108
 $memory_6 = ptd::none();
-#line 119
+#line 108
 $memory_8 = ptd::sim();
-#line 119
+#line 108
 $memory_7 = ptd::arr($memory_8);
-#line 119
+#line 108
 undef($memory_8);
-#line 119
+#line 108
 $memory_5 = {no => $memory_6,yes => $memory_7,};
-#line 119
+#line 108
 undef($memory_6);
-#line 119
+#line 108
 undef($memory_7);
-#line 119
+#line 108
 $memory_4 = ptd::var($memory_5);
-#line 119
+#line 108
 undef($memory_5);
-#line 119
+#line 108
 $memory_5 = ptd::sim();
-#line 119
+#line 108
 $memory_6 = ptd::sim();
-#line 119
+#line 108
 $memory_9 = ptd::none();
-#line 119
+#line 108
 $memory_10 = ptd::none();
-#line 119
+#line 108
 $memory_8 = {priv => $memory_9,pub => $memory_10,};
-#line 119
+#line 108
 undef($memory_9);
-#line 119
+#line 108
 undef($memory_10);
-#line 119
+#line 108
 $memory_7 = ptd::var($memory_8);
-#line 119
+#line 108
 undef($memory_8);
-#line 119
+#line 108
 $memory_9 = {
 	module => "tc_types",
 	name => "fun_arg_t",
 };
-#line 119
+#line 108
 $memory_9 = c_rt_lib::ov_mk_arg('ref', $memory_9);
-#line 119
+#line 108
 $memory_8 = ptd::arr($memory_9);
-#line 119
+#line 108
 undef($memory_9);
-#line 119
+#line 108
 $memory_9 = {
 	module => "tct",
 	name => "meta_type",
 };
-#line 119
+#line 108
 $memory_9 = c_rt_lib::ov_mk_arg('ref', $memory_9);
-#line 119
+#line 108
 $memory_1 = {cmd => $memory_2,is_type => $memory_3,ref_types => $memory_4,name => $memory_5,module => $memory_6,access => $memory_7,args => $memory_8,ret_type => $memory_9,};
-#line 119
+#line 108
 undef($memory_2);
-#line 119
+#line 108
 undef($memory_3);
-#line 119
+#line 108
 undef($memory_4);
-#line 119
+#line 108
 undef($memory_5);
-#line 119
+#line 108
 undef($memory_6);
-#line 119
+#line 108
 undef($memory_7);
-#line 119
+#line 108
 undef($memory_8);
-#line 119
+#line 108
 undef($memory_9);
-#line 119
+#line 108
 $memory_0 = ptd::rec($memory_1);
-#line 119
+#line 108
 undef($memory_1);
-#line 119
+#line 108
 return $memory_0;
-#line 119
+#line 108
 undef($memory_0);
-#line 119
+#line 108
 return;
 }
 
@@ -1272,22 +1074,22 @@ sub tc_types::def_fun_t() {
 
 sub tc_types::__vars_t() {
 my $memory_0;my $memory_1;
-#line 132
+#line 121
 $memory_1 = {
 	module => "tc_types",
 	name => "var_t",
 };
-#line 132
+#line 121
 $memory_1 = c_rt_lib::ov_mk_arg('ref', $memory_1);
-#line 132
+#line 121
 $memory_0 = ptd::hash($memory_1);
-#line 132
+#line 121
 undef($memory_1);
-#line 132
+#line 121
 return $memory_0;
-#line 132
+#line 121
 undef($memory_0);
-#line 132
+#line 121
 return;
 }
 
@@ -1299,35 +1101,35 @@ sub tc_types::vars_t() {
 
 sub tc_types::__type() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;
-#line 136
+#line 125
 $memory_2 = {
 	module => "tc_types",
 	name => "value_src",
 };
-#line 136
+#line 125
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 136
+#line 125
 $memory_3 = {
 	module => "tct",
 	name => "meta_type",
 };
-#line 136
+#line 125
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 136
+#line 125
 $memory_1 = {src => $memory_2,type => $memory_3,};
-#line 136
+#line 125
 undef($memory_2);
-#line 136
+#line 125
 undef($memory_3);
-#line 136
+#line 125
 $memory_0 = ptd::rec($memory_1);
-#line 136
+#line 125
 undef($memory_1);
-#line 136
+#line 125
 return $memory_0;
-#line 136
+#line 125
 undef($memory_0);
-#line 136
+#line 125
 return;
 }
 
@@ -1339,29 +1141,29 @@ sub tc_types::type() {
 
 sub tc_types::__value_src() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 140
+#line 129
 $memory_2 = ptd::none();
-#line 140
+#line 129
 $memory_3 = ptd::none();
-#line 140
+#line 129
 $memory_4 = ptd::none();
-#line 140
+#line 129
 $memory_1 = {known => $memory_2,knownhash => $memory_3,speculation => $memory_4,};
-#line 140
+#line 129
 undef($memory_2);
-#line 140
+#line 129
 undef($memory_3);
-#line 140
+#line 129
 undef($memory_4);
-#line 140
+#line 129
 $memory_0 = ptd::var($memory_1);
-#line 140
+#line 129
 undef($memory_1);
-#line 140
+#line 129
 return $memory_0;
-#line 140
+#line 129
 undef($memory_0);
-#line 140
+#line 129
 return;
 }
 
@@ -1372,34 +1174,38 @@ sub tc_types::value_src() {
 }
 
 sub tc_types::__lval_path() {
-my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;
-#line 144
+my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;
+#line 133
 $memory_3 = ptd::sim();
-#line 144
+#line 133
 $memory_4 = ptd::none();
-#line 144
+#line 133
 $memory_5 = ptd::sim();
-#line 144
-$memory_2 = {var => $memory_3,arr => $memory_4,rec => $memory_5,};
-#line 144
+#line 133
+$memory_6 = ptd::none();
+#line 133
+$memory_2 = {var => $memory_3,arr => $memory_4,rec => $memory_5,hashkey => $memory_6,};
+#line 133
 undef($memory_3);
-#line 144
+#line 133
 undef($memory_4);
-#line 144
+#line 133
 undef($memory_5);
-#line 144
+#line 133
+undef($memory_6);
+#line 133
 $memory_1 = ptd::var($memory_2);
-#line 144
+#line 133
 undef($memory_2);
-#line 144
+#line 133
 $memory_0 = ptd::arr($memory_1);
-#line 144
+#line 133
 undef($memory_1);
-#line 144
+#line 133
 return $memory_0;
-#line 144
+#line 133
 undef($memory_0);
-#line 144
+#line 133
 return;
 }
 
@@ -1411,47 +1217,47 @@ sub tc_types::lval_path() {
 
 sub tc_types::__walk_arg() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 148
+#line 137
 $memory_4 = ptd::sim();
-#line 148
+#line 137
 $memory_3 = ptd::arr($memory_4);
-#line 148
+#line 137
 undef($memory_4);
-#line 148
+#line 137
 $memory_2 = ptd::hash($memory_3);
-#line 148
+#line 137
 undef($memory_3);
-#line 148
+#line 137
 $memory_3 = {
 	module => "tc_types",
 	name => "errors_t",
 };
-#line 148
+#line 137
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 148
+#line 137
 $memory_4 = {
 	module => "tc_types",
 	name => "modules_t",
 };
-#line 148
+#line 137
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 148
+#line 137
 $memory_1 = {ref_inf => $memory_2,errors => $memory_3,modules => $memory_4,};
-#line 148
+#line 137
 undef($memory_2);
-#line 148
+#line 137
 undef($memory_3);
-#line 148
+#line 137
 undef($memory_4);
-#line 148
+#line 137
 $memory_0 = ptd::rec($memory_1);
-#line 148
+#line 137
 undef($memory_1);
-#line 148
+#line 137
 return $memory_0;
-#line 148
+#line 137
 undef($memory_0);
-#line 148
+#line 137
 return;
 }
 
@@ -1463,63 +1269,63 @@ sub tc_types::walk_arg() {
 
 sub tc_types::__ref_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;
-#line 156
+#line 145
 $memory_2 = ptd::sim();
-#line 156
+#line 145
 $memory_5 = ptd::sim();
-#line 156
+#line 145
 $memory_4 = ptd::arr($memory_5);
-#line 156
+#line 145
 undef($memory_5);
-#line 156
+#line 145
 $memory_3 = ptd::hash($memory_4);
-#line 156
+#line 145
 undef($memory_4);
-#line 156
+#line 145
 $memory_6 = ptd::sim();
-#line 156
+#line 145
 $memory_5 = ptd::arr($memory_6);
-#line 156
+#line 145
 undef($memory_6);
-#line 156
+#line 145
 $memory_4 = ptd::hash($memory_5);
-#line 156
+#line 145
 undef($memory_5);
-#line 156
+#line 145
 $memory_5 = {
 	module => "boolean_t",
 	name => "type",
 };
-#line 156
+#line 145
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 156
+#line 145
 $memory_6 = {
 	module => "boolean_t",
 	name => "type",
 };
-#line 156
+#line 145
 $memory_6 = c_rt_lib::ov_mk_arg('ref', $memory_6);
-#line 156
+#line 145
 $memory_1 = {level => $memory_2,from => $memory_3,to => $memory_4,check => $memory_5,cast => $memory_6,};
-#line 156
+#line 145
 undef($memory_2);
-#line 156
+#line 145
 undef($memory_3);
-#line 156
+#line 145
 undef($memory_4);
-#line 156
+#line 145
 undef($memory_5);
-#line 156
+#line 145
 undef($memory_6);
-#line 156
+#line 145
 $memory_0 = ptd::rec($memory_1);
-#line 156
+#line 145
 undef($memory_1);
-#line 156
+#line 145
 return $memory_0;
-#line 156
+#line 145
 undef($memory_0);
-#line 156
+#line 145
 return;
 }
 
@@ -1531,33 +1337,33 @@ sub tc_types::ref_t() {
 
 sub tc_types::__stack_info_type() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;
-#line 166
+#line 155
 $memory_2 = ptd::none();
-#line 166
+#line 155
 $memory_3 = ptd::none();
-#line 166
+#line 155
 $memory_4 = ptd::sim();
-#line 166
+#line 155
 $memory_5 = ptd::sim();
-#line 166
+#line 155
 $memory_1 = {ptd_hash => $memory_2,ptd_arr => $memory_3,ptd_rec => $memory_4,ptd_var => $memory_5,};
-#line 166
+#line 155
 undef($memory_2);
-#line 166
+#line 155
 undef($memory_3);
-#line 166
+#line 155
 undef($memory_4);
-#line 166
+#line 155
 undef($memory_5);
-#line 166
+#line 155
 $memory_0 = ptd::var($memory_1);
-#line 166
+#line 155
 undef($memory_1);
-#line 166
+#line 155
 return $memory_0;
-#line 166
+#line 155
 undef($memory_0);
-#line 166
+#line 155
 return;
 }
 
@@ -1569,60 +1375,60 @@ sub tc_types::stack_info_type() {
 
 sub tc_types::__check_info() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;
-#line 170
+#line 159
 $memory_2 = ptd::none();
-#line 170
+#line 159
 $memory_5 = {
 	module => "tct",
 	name => "meta_type",
 };
-#line 170
+#line 159
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 170
+#line 159
 $memory_6 = {
 	module => "tct",
 	name => "meta_type",
 };
-#line 170
+#line 159
 $memory_6 = c_rt_lib::ov_mk_arg('ref', $memory_6);
-#line 170
+#line 159
 $memory_8 = {
 	module => "tc_types",
 	name => "stack_info_type",
 };
-#line 170
+#line 159
 $memory_8 = c_rt_lib::ov_mk_arg('ref', $memory_8);
-#line 170
+#line 159
 $memory_7 = ptd::arr($memory_8);
-#line 170
+#line 159
 undef($memory_8);
-#line 170
+#line 159
 $memory_4 = {from => $memory_5,to => $memory_6,stack => $memory_7,};
-#line 170
+#line 159
 undef($memory_5);
-#line 170
+#line 159
 undef($memory_6);
-#line 170
+#line 159
 undef($memory_7);
-#line 170
+#line 159
 $memory_3 = ptd::rec($memory_4);
-#line 170
+#line 159
 undef($memory_4);
-#line 170
+#line 159
 $memory_1 = {ok => $memory_2,err => $memory_3,};
-#line 170
+#line 159
 undef($memory_2);
-#line 170
+#line 159
 undef($memory_3);
-#line 170
+#line 159
 $memory_0 = ptd::var($memory_1);
-#line 170
+#line 159
 undef($memory_1);
-#line 170
+#line 159
 return $memory_0;
-#line 170
+#line 159
 undef($memory_0);
-#line 170
+#line 159
 return;
 }
 
@@ -1634,43 +1440,43 @@ sub tc_types::check_info() {
 
 sub tc_types::__special_functions() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;
-#line 181
+#line 170
 $memory_3 = {
 	module => "tct",
 	name => "meta_type",
 };
-#line 181
+#line 170
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 181
+#line 170
 $memory_5 = {
 	module => "tc_types",
 	name => "fun_arg_t",
 };
-#line 181
+#line 170
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 181
+#line 170
 $memory_4 = ptd::arr($memory_5);
-#line 181
+#line 170
 undef($memory_5);
-#line 181
+#line 170
 $memory_2 = {r => $memory_3,a => $memory_4,};
-#line 181
+#line 170
 undef($memory_3);
-#line 181
+#line 170
 undef($memory_4);
-#line 181
+#line 170
 $memory_1 = ptd::rec($memory_2);
-#line 181
+#line 170
 undef($memory_2);
-#line 181
+#line 170
 $memory_0 = ptd::hash($memory_1);
-#line 181
+#line 170
 undef($memory_1);
-#line 181
+#line 170
 return $memory_0;
-#line 181
+#line 170
 undef($memory_0);
-#line 181
+#line 170
 return;
 }
 

@@ -689,16 +689,30 @@ undef($memory_2);
 #line 73
 undef($memory_1);
 #line 74
-$memory_1 = singleton::sigleton_do_not_use_without_approval($memory_0);
+$memory_1 = "[]=";
 #line 74
-undef($memory_0);
+$memory_2 = 870;
 #line 74
-return $memory_1;
+$memory_3 = c_rt_lib::ov_mk_none('right');
+#line 74
+nast_priv::op_def($memory_0, $memory_1, $memory_2, $memory_3);
+#line 74
+undef($memory_3);
+#line 74
+undef($memory_2);
 #line 74
 undef($memory_1);
-#line 74
+#line 75
+$memory_1 = singleton::sigleton_do_not_use_without_approval($memory_0);
+#line 75
 undef($memory_0);
-#line 74
+#line 75
+return $memory_1;
+#line 75
+undef($memory_1);
+#line 75
+undef($memory_0);
+#line 75
 return;
 }
 
@@ -710,13 +724,13 @@ sub nast::get_bin_ops() {
 
 sub nast::__get_max_precedence() {
 my $memory_0;
-#line 78
+#line 79
 $memory_0 = 2000;
-#line 78
+#line 79
 return $memory_0;
-#line 78
+#line 79
 undef($memory_0);
-#line 78
+#line 79
 return;
 }
 
@@ -728,30 +742,30 @@ sub nast::get_max_precedence() {
 
 sub nast::__variant_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;
-#line 82
+#line 83
 $memory_2 = ptd::sim();
-#line 82
+#line 83
 $memory_3 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 82
+#line 83
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 82
+#line 83
 $memory_1 = {name => $memory_2,var => $memory_3,};
-#line 82
+#line 83
 undef($memory_2);
-#line 82
+#line 83
 undef($memory_3);
-#line 82
+#line 83
 $memory_0 = ptd::rec($memory_1);
-#line 82
+#line 83
 undef($memory_1);
-#line 82
+#line 83
 return $memory_0;
-#line 82
+#line 83
 undef($memory_0);
-#line 82
+#line 83
 return;
 }
 
@@ -763,72 +777,72 @@ sub nast::variant_t() {
 
 sub nast::__fun_def_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;my $memory_9;
-#line 86
+#line 87
 $memory_2 = {
 	module => "nast",
 	name => "variable_type_t",
 };
-#line 86
+#line 87
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 86
+#line 87
 $memory_3 = ptd::sim();
-#line 86
+#line 87
 $memory_4 = ptd::sim();
-#line 86
+#line 87
 $memory_5 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 86
+#line 87
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 86
+#line 87
 $memory_8 = ptd::none();
-#line 86
+#line 87
 $memory_9 = ptd::none();
-#line 86
+#line 87
 $memory_7 = {priv => $memory_8,pub => $memory_9,};
-#line 86
+#line 87
 undef($memory_8);
-#line 86
+#line 87
 undef($memory_9);
-#line 86
+#line 87
 $memory_6 = ptd::var($memory_7);
-#line 86
+#line 87
 undef($memory_7);
-#line 86
+#line 87
 $memory_8 = {
 	module => "nast",
 	name => "fun_def_arg_t",
 };
-#line 86
+#line 87
 $memory_8 = c_rt_lib::ov_mk_arg('ref', $memory_8);
-#line 86
+#line 87
 $memory_7 = ptd::arr($memory_8);
-#line 86
+#line 87
 undef($memory_8);
-#line 86
+#line 87
 $memory_1 = {ret_type => $memory_2,line => $memory_3,name => $memory_4,cmd => $memory_5,access => $memory_6,args => $memory_7,};
-#line 86
+#line 87
 undef($memory_2);
-#line 86
+#line 87
 undef($memory_3);
-#line 86
+#line 87
 undef($memory_4);
-#line 86
+#line 87
 undef($memory_5);
-#line 86
+#line 87
 undef($memory_6);
-#line 86
+#line 87
 undef($memory_7);
-#line 86
+#line 87
 $memory_0 = ptd::rec($memory_1);
-#line 86
+#line 87
 undef($memory_1);
-#line 86
+#line 87
 return $memory_0;
-#line 86
+#line 87
 undef($memory_0);
-#line 86
+#line 87
 return;
 }
 
@@ -840,46 +854,46 @@ sub nast::fun_def_t() {
 
 sub nast::__fun_def_arg_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;
-#line 97
+#line 98
 $memory_2 = {
 	module => "nast",
 	name => "variable_type_t",
 };
-#line 97
+#line 98
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 97
+#line 98
 $memory_3 = ptd::sim();
-#line 97
+#line 98
 $memory_6 = ptd::none();
-#line 97
+#line 98
 $memory_7 = ptd::none();
-#line 97
+#line 98
 $memory_5 = {none => $memory_6,ref => $memory_7,};
-#line 97
+#line 98
 undef($memory_6);
-#line 97
+#line 98
 undef($memory_7);
-#line 97
+#line 98
 $memory_4 = ptd::var($memory_5);
-#line 97
+#line 98
 undef($memory_5);
-#line 97
+#line 98
 $memory_1 = {type => $memory_2,name => $memory_3,mod => $memory_4,};
-#line 97
+#line 98
 undef($memory_2);
-#line 97
+#line 98
 undef($memory_3);
-#line 97
+#line 98
 undef($memory_4);
-#line 97
+#line 98
 $memory_0 = ptd::rec($memory_1);
-#line 97
+#line 98
 undef($memory_1);
-#line 97
+#line 98
 return $memory_0;
-#line 97
+#line 98
 undef($memory_0);
-#line 97
+#line 98
 return;
 }
 
@@ -891,54 +905,54 @@ sub nast::fun_def_arg_t() {
 
 sub nast::__module_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;
-#line 105
+#line 106
 $memory_2 = ptd::sim();
-#line 105
+#line 106
 $memory_6 = ptd::sim();
-#line 105
+#line 106
 $memory_7 = ptd::sim();
-#line 105
+#line 106
 $memory_5 = {name => $memory_6,line => $memory_7,};
-#line 105
+#line 106
 undef($memory_6);
-#line 105
+#line 106
 undef($memory_7);
-#line 105
+#line 106
 $memory_4 = ptd::rec($memory_5);
-#line 105
+#line 106
 undef($memory_5);
-#line 105
+#line 106
 $memory_3 = ptd::arr($memory_4);
-#line 105
+#line 106
 undef($memory_4);
-#line 105
+#line 106
 $memory_5 = {
 	module => "nast",
 	name => "fun_def_t",
 };
-#line 105
+#line 106
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 105
+#line 106
 $memory_4 = ptd::arr($memory_5);
-#line 105
+#line 106
 undef($memory_5);
-#line 105
+#line 106
 $memory_1 = {name => $memory_2,import => $memory_3,fun_def => $memory_4,};
-#line 105
+#line 106
 undef($memory_2);
-#line 105
+#line 106
 undef($memory_3);
-#line 105
+#line 106
 undef($memory_4);
-#line 105
+#line 106
 $memory_0 = ptd::rec($memory_1);
-#line 105
+#line 106
 undef($memory_1);
-#line 105
+#line 106
 return $memory_0;
-#line 105
+#line 106
 undef($memory_0);
-#line 105
+#line 106
 return;
 }
 
@@ -950,30 +964,30 @@ sub nast::module_t() {
 
 sub nast::__variable_type_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;
-#line 113
+#line 114
 $memory_2 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 113
+#line 114
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 113
+#line 114
 $memory_3 = ptd::none();
-#line 113
+#line 114
 $memory_1 = {type => $memory_2,none => $memory_3,};
-#line 113
+#line 114
 undef($memory_2);
-#line 113
+#line 114
 undef($memory_3);
-#line 113
+#line 114
 $memory_0 = ptd::var($memory_1);
-#line 113
+#line 114
 undef($memory_1);
-#line 113
+#line 114
 return $memory_0;
-#line 113
+#line 114
 undef($memory_0);
-#line 113
+#line 114
 return;
 }
 
@@ -985,51 +999,51 @@ sub nast::variable_type_t() {
 
 sub nast::__variable_declaration_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;
-#line 117
+#line 118
 $memory_2 = ptd::sim();
-#line 117
+#line 118
 $memory_3 = {
 	module => "nast",
 	name => "variable_type_t",
 };
-#line 117
+#line 118
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 117
+#line 118
 $memory_6 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 117
+#line 118
 $memory_6 = c_rt_lib::ov_mk_arg('ref', $memory_6);
-#line 117
+#line 118
 $memory_7 = ptd::none();
-#line 117
+#line 118
 $memory_5 = {value => $memory_6,none => $memory_7,};
-#line 117
+#line 118
 undef($memory_6);
-#line 117
+#line 118
 undef($memory_7);
-#line 117
+#line 118
 $memory_4 = ptd::var($memory_5);
-#line 117
+#line 118
 undef($memory_5);
-#line 117
+#line 118
 $memory_1 = {name => $memory_2,type => $memory_3,value => $memory_4,};
-#line 117
+#line 118
 undef($memory_2);
-#line 117
+#line 118
 undef($memory_3);
-#line 117
+#line 118
 undef($memory_4);
-#line 117
+#line 118
 $memory_0 = ptd::rec($memory_1);
-#line 117
+#line 118
 undef($memory_1);
-#line 117
+#line 118
 return $memory_0;
-#line 117
+#line 118
 undef($memory_0);
-#line 117
+#line 118
 return;
 }
 
@@ -1041,42 +1055,42 @@ sub nast::variable_declaration_t() {
 
 sub nast::__fun_val_arg_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;
-#line 125
+#line 126
 $memory_2 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 125
+#line 126
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 125
+#line 126
 $memory_5 = ptd::none();
-#line 125
+#line 126
 $memory_6 = ptd::none();
-#line 125
+#line 126
 $memory_4 = {none => $memory_5,ref => $memory_6,};
-#line 125
+#line 126
 undef($memory_5);
-#line 125
+#line 126
 undef($memory_6);
-#line 125
+#line 126
 $memory_3 = ptd::var($memory_4);
-#line 125
+#line 126
 undef($memory_4);
-#line 125
+#line 126
 $memory_1 = {val => $memory_2,mod => $memory_3,};
-#line 125
+#line 126
 undef($memory_2);
-#line 125
+#line 126
 undef($memory_3);
-#line 125
+#line 126
 $memory_0 = ptd::rec($memory_1);
-#line 125
+#line 126
 undef($memory_1);
-#line 125
+#line 126
 return $memory_0;
-#line 125
+#line 126
 undef($memory_0);
-#line 125
+#line 126
 return;
 }
 
@@ -1088,38 +1102,38 @@ sub nast::fun_val_arg_t() {
 
 sub nast::__fun_val_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;
-#line 129
+#line 130
 $memory_2 = ptd::sim();
-#line 129
+#line 130
 $memory_3 = ptd::sim();
-#line 129
+#line 130
 $memory_5 = {
 	module => "nast",
 	name => "fun_val_arg_t",
 };
-#line 129
+#line 130
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 129
+#line 130
 $memory_4 = ptd::arr($memory_5);
-#line 129
+#line 130
 undef($memory_5);
-#line 129
+#line 130
 $memory_1 = {name => $memory_2,module => $memory_3,args => $memory_4,};
-#line 129
+#line 130
 undef($memory_2);
-#line 129
+#line 130
 undef($memory_3);
-#line 129
+#line 130
 undef($memory_4);
-#line 129
+#line 130
 $memory_0 = ptd::rec($memory_1);
-#line 129
+#line 130
 undef($memory_1);
-#line 129
+#line 130
 return $memory_0;
-#line 129
+#line 130
 undef($memory_0);
-#line 129
+#line 130
 return;
 }
 
@@ -1131,35 +1145,35 @@ sub nast::fun_val_t() {
 
 sub nast::__hash_elem_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;
-#line 133
+#line 134
 $memory_2 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 133
+#line 134
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 133
+#line 134
 $memory_3 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 133
+#line 134
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 133
+#line 134
 $memory_1 = {key => $memory_2,val => $memory_3,};
-#line 133
+#line 134
 undef($memory_2);
-#line 133
+#line 134
 undef($memory_3);
-#line 133
+#line 134
 $memory_0 = ptd::rec($memory_1);
-#line 133
+#line 134
 undef($memory_1);
-#line 133
+#line 134
 return $memory_0;
-#line 133
+#line 134
 undef($memory_0);
-#line 133
+#line 134
 return;
 }
 
@@ -1171,22 +1185,22 @@ sub nast::hash_elem_t() {
 
 sub nast::__hash_decl_t() {
 my $memory_0;my $memory_1;
-#line 137
+#line 138
 $memory_1 = {
 	module => "nast",
 	name => "hash_elem_t",
 };
-#line 137
+#line 138
 $memory_1 = c_rt_lib::ov_mk_arg('ref', $memory_1);
-#line 137
+#line 138
 $memory_0 = ptd::arr($memory_1);
-#line 137
+#line 138
 undef($memory_1);
-#line 137
+#line 138
 return $memory_0;
-#line 137
+#line 138
 undef($memory_0);
-#line 137
+#line 138
 return;
 }
 
@@ -1198,39 +1212,39 @@ sub nast::hash_decl_t() {
 
 sub nast::__bin_op_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 141
+#line 142
 $memory_2 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 141
+#line 142
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 141
+#line 142
 $memory_3 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 141
+#line 142
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 141
+#line 142
 $memory_4 = ptd::sim();
-#line 141
+#line 142
 $memory_1 = {left => $memory_2,right => $memory_3,op => $memory_4,};
-#line 141
+#line 142
 undef($memory_2);
-#line 141
+#line 142
 undef($memory_3);
-#line 141
+#line 142
 undef($memory_4);
-#line 141
+#line 142
 $memory_0 = ptd::rec($memory_1);
-#line 141
+#line 142
 undef($memory_1);
-#line 141
+#line 142
 return $memory_0;
-#line 141
+#line 142
 undef($memory_0);
-#line 141
+#line 142
 return;
 }
 
@@ -1242,46 +1256,46 @@ sub nast::bin_op_t() {
 
 sub nast::__var_op_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;
-#line 145
+#line 146
 $memory_2 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 145
+#line 146
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 145
+#line 146
 $memory_5 = ptd::none();
-#line 145
+#line 146
 $memory_6 = ptd::none();
-#line 145
+#line 146
 $memory_4 = {ov_is => $memory_5,ov_as => $memory_6,};
-#line 145
+#line 146
 undef($memory_5);
-#line 145
+#line 146
 undef($memory_6);
-#line 145
+#line 146
 $memory_3 = ptd::var($memory_4);
-#line 145
+#line 146
 undef($memory_4);
-#line 145
+#line 146
 $memory_4 = ptd::sim();
-#line 145
+#line 146
 $memory_1 = {left => $memory_2,op => $memory_3,case => $memory_4,};
-#line 145
+#line 146
 undef($memory_2);
-#line 145
+#line 146
 undef($memory_3);
-#line 145
+#line 146
 undef($memory_4);
-#line 145
+#line 146
 $memory_0 = ptd::rec($memory_1);
-#line 145
+#line 146
 undef($memory_1);
-#line 145
+#line 146
 return $memory_0;
-#line 145
+#line 146
 undef($memory_0);
-#line 145
+#line 146
 return;
 }
 
@@ -1293,25 +1307,25 @@ sub nast::var_op_t() {
 
 sub nast::__fun_label_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;
-#line 153
+#line 154
 $memory_2 = ptd::sim();
-#line 153
+#line 154
 $memory_3 = ptd::sim();
-#line 153
+#line 154
 $memory_1 = {module => $memory_2,name => $memory_3,};
-#line 153
+#line 154
 undef($memory_2);
-#line 153
+#line 154
 undef($memory_3);
-#line 153
+#line 154
 $memory_0 = ptd::rec($memory_1);
-#line 153
+#line 154
 undef($memory_1);
-#line 153
+#line 154
 return $memory_0;
-#line 153
+#line 154
 undef($memory_0);
-#line 153
+#line 154
 return;
 }
 
@@ -1323,30 +1337,30 @@ sub nast::fun_label_t() {
 
 sub nast::__unary_op_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;
-#line 157
+#line 158
 $memory_2 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 157
+#line 158
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 157
+#line 158
 $memory_3 = ptd::sim();
-#line 157
+#line 158
 $memory_1 = {val => $memory_2,op => $memory_3,};
-#line 157
+#line 158
 undef($memory_2);
-#line 157
+#line 158
 undef($memory_3);
-#line 157
+#line 158
 $memory_0 = ptd::rec($memory_1);
-#line 157
+#line 158
 undef($memory_1);
-#line 157
+#line 158
 return $memory_0;
-#line 157
+#line 158
 undef($memory_0);
-#line 157
+#line 158
 return;
 }
 
@@ -1358,48 +1372,48 @@ sub nast::unary_op_t() {
 
 sub nast::__ternary_op_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;
-#line 161
+#line 162
 $memory_2 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 161
+#line 162
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 161
+#line 162
 $memory_3 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 161
+#line 162
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 161
+#line 162
 $memory_4 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 161
+#line 162
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 161
+#line 162
 $memory_5 = ptd::sim();
-#line 161
+#line 162
 $memory_1 = {fst => $memory_2,snd => $memory_3,thrd => $memory_4,op => $memory_5,};
-#line 161
+#line 162
 undef($memory_2);
-#line 161
+#line 162
 undef($memory_3);
-#line 161
+#line 162
 undef($memory_4);
-#line 161
+#line 162
 undef($memory_5);
-#line 161
+#line 162
 $memory_0 = ptd::rec($memory_1);
-#line 161
+#line 162
 undef($memory_1);
-#line 161
+#line 162
 return $memory_0;
-#line 161
+#line 162
 undef($memory_0);
-#line 161
+#line 162
 return;
 }
 
@@ -1411,177 +1425,177 @@ sub nast::ternary_op_t() {
 
 sub nast::__value_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;my $memory_9;my $memory_10;my $memory_11;my $memory_12;my $memory_13;my $memory_14;my $memory_15;my $memory_16;my $memory_17;my $memory_18;
-#line 165
+#line 166
 $memory_2 = {
 	module => "nast",
 	name => "ternary_op_t",
 };
-#line 165
+#line 166
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 165
+#line 166
 $memory_3 = ptd::sim();
-#line 165
+#line 166
 $memory_4 = ptd::none();
-#line 165
+#line 166
 $memory_5 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 165
+#line 166
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 165
+#line 166
 $memory_6 = {
 	module => "nast",
 	name => "variant_t",
 };
-#line 165
+#line 166
 $memory_6 = c_rt_lib::ov_mk_arg('ref', $memory_6);
-#line 165
+#line 166
 $memory_7 = ptd::sim();
-#line 165
+#line 166
 $memory_11 = ptd::sim();
-#line 165
+#line 166
 $memory_10 = ptd::arr($memory_11);
-#line 165
+#line 166
 undef($memory_11);
-#line 165
+#line 166
 $memory_13 = ptd::none();
-#line 165
+#line 166
 $memory_14 = ptd::none();
-#line 165
+#line 166
 $memory_12 = {end => $memory_13,new_line => $memory_14,};
-#line 165
+#line 166
 undef($memory_13);
-#line 165
+#line 166
 undef($memory_14);
-#line 165
+#line 166
 $memory_11 = ptd::var($memory_12);
-#line 165
+#line 166
 undef($memory_12);
-#line 165
+#line 166
 $memory_9 = {arr => $memory_10,last => $memory_11,};
-#line 165
+#line 166
 undef($memory_10);
-#line 165
+#line 166
 undef($memory_11);
-#line 165
+#line 166
 $memory_8 = ptd::rec($memory_9);
-#line 165
+#line 166
 undef($memory_9);
-#line 165
+#line 166
 $memory_10 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 165
+#line 166
 $memory_10 = c_rt_lib::ov_mk_arg('ref', $memory_10);
-#line 165
+#line 166
 $memory_9 = ptd::arr($memory_10);
-#line 165
+#line 166
 undef($memory_10);
-#line 165
+#line 166
 $memory_10 = {
 	module => "nast",
 	name => "hash_decl_t",
 };
-#line 165
+#line 166
 $memory_10 = c_rt_lib::ov_mk_arg('ref', $memory_10);
-#line 165
+#line 166
 $memory_11 = ptd::sim();
-#line 165
+#line 166
 $memory_12 = {
 	module => "nast",
 	name => "bin_op_t",
 };
-#line 165
+#line 166
 $memory_12 = c_rt_lib::ov_mk_arg('ref', $memory_12);
-#line 165
+#line 166
 $memory_13 = {
 	module => "nast",
 	name => "var_op_t",
 };
-#line 165
+#line 166
 $memory_13 = c_rt_lib::ov_mk_arg('ref', $memory_13);
-#line 165
+#line 166
 $memory_14 = {
 	module => "nast",
 	name => "unary_op_t",
 };
-#line 165
+#line 166
 $memory_14 = c_rt_lib::ov_mk_arg('ref', $memory_14);
-#line 165
+#line 166
 $memory_15 = {
 	module => "nast",
 	name => "fun_label_t",
 };
-#line 165
+#line 166
 $memory_15 = c_rt_lib::ov_mk_arg('ref', $memory_15);
-#line 165
+#line 166
 $memory_16 = {
 	module => "nast",
 	name => "fun_val_t",
 };
-#line 165
+#line 166
 $memory_16 = c_rt_lib::ov_mk_arg('ref', $memory_16);
-#line 165
+#line 166
 $memory_17 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 165
+#line 166
 $memory_17 = c_rt_lib::ov_mk_arg('ref', $memory_17);
-#line 165
+#line 166
 $memory_18 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 165
+#line 166
 $memory_18 = c_rt_lib::ov_mk_arg('ref', $memory_18);
-#line 165
+#line 166
 $memory_1 = {ternary_op => $memory_2,hash_key => $memory_3,nop => $memory_4,parenthesis => $memory_5,variant => $memory_6,const => $memory_7,string => $memory_8,arr_decl => $memory_9,hash_decl => $memory_10,var => $memory_11,bin_op => $memory_12,var_op => $memory_13,unary_op => $memory_14,fun_label => $memory_15,fun_val => $memory_16,post_inc => $memory_17,post_dec => $memory_18,};
-#line 165
+#line 166
 undef($memory_2);
-#line 165
+#line 166
 undef($memory_3);
-#line 165
+#line 166
 undef($memory_4);
-#line 165
+#line 166
 undef($memory_5);
-#line 165
+#line 166
 undef($memory_6);
-#line 165
+#line 166
 undef($memory_7);
-#line 165
+#line 166
 undef($memory_8);
-#line 165
+#line 166
 undef($memory_9);
-#line 165
+#line 166
 undef($memory_10);
-#line 165
+#line 166
 undef($memory_11);
-#line 165
+#line 166
 undef($memory_12);
-#line 165
+#line 166
 undef($memory_13);
-#line 165
+#line 166
 undef($memory_14);
-#line 165
+#line 166
 undef($memory_15);
-#line 165
+#line 166
 undef($memory_16);
-#line 165
+#line 166
 undef($memory_17);
-#line 165
+#line 166
 undef($memory_18);
-#line 165
+#line 166
 $memory_0 = ptd::var($memory_1);
-#line 165
+#line 166
 undef($memory_1);
-#line 165
+#line 166
 return $memory_0;
-#line 165
+#line 166
 undef($memory_0);
-#line 165
+#line 166
 return;
 }
 
@@ -1593,39 +1607,39 @@ sub nast::value_t() {
 
 sub nast::__match_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 190
+#line 191
 $memory_2 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 190
+#line 191
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 190
+#line 191
 $memory_4 = {
 	module => "nast",
 	name => "match_branch_t",
 };
-#line 190
+#line 191
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 190
+#line 191
 $memory_3 = ptd::arr($memory_4);
-#line 190
+#line 191
 undef($memory_4);
-#line 190
+#line 191
 $memory_1 = {val => $memory_2,branch_list => $memory_3,};
-#line 190
+#line 191
 undef($memory_2);
-#line 190
+#line 191
 undef($memory_3);
-#line 190
+#line 191
 $memory_0 = ptd::rec($memory_1);
-#line 190
+#line 191
 undef($memory_1);
-#line 190
+#line 191
 return $memory_0;
-#line 190
+#line 191
 undef($memory_0);
-#line 190
+#line 191
 return;
 }
 
@@ -1637,42 +1651,42 @@ sub nast::match_t() {
 
 sub nast::__variant_decl_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;
-#line 194
+#line 195
 $memory_2 = ptd::sim();
-#line 194
+#line 195
 $memory_5 = {
 	module => "nast",
 	name => "variable_declaration_t",
 };
-#line 194
+#line 195
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 194
+#line 195
 $memory_6 = ptd::none();
-#line 194
+#line 195
 $memory_4 = {value => $memory_5,none => $memory_6,};
-#line 194
+#line 195
 undef($memory_5);
-#line 194
+#line 195
 undef($memory_6);
-#line 194
+#line 195
 $memory_3 = ptd::var($memory_4);
-#line 194
+#line 195
 undef($memory_4);
-#line 194
+#line 195
 $memory_1 = {name => $memory_2,value => $memory_3,};
-#line 194
+#line 195
 undef($memory_2);
-#line 194
+#line 195
 undef($memory_3);
-#line 194
+#line 195
 $memory_0 = ptd::rec($memory_1);
-#line 194
+#line 195
 undef($memory_1);
-#line 194
+#line 195
 return $memory_0;
-#line 194
+#line 195
 undef($memory_0);
-#line 194
+#line 195
 return;
 }
 
@@ -1684,44 +1698,44 @@ sub nast::variant_decl_t() {
 
 sub nast::__match_branch_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 201
+#line 202
 $memory_2 = {
 	module => "nast",
 	name => "variant_decl_t",
 };
-#line 201
+#line 202
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 201
+#line 202
 $memory_3 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 201
+#line 202
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 201
+#line 202
 $memory_4 = {
 	module => "nast",
 	name => "debug_t",
 };
-#line 201
+#line 202
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 201
+#line 202
 $memory_1 = {variant => $memory_2,cmd => $memory_3,debug => $memory_4,};
-#line 201
+#line 202
 undef($memory_2);
-#line 201
+#line 202
 undef($memory_3);
-#line 201
+#line 202
 undef($memory_4);
-#line 201
+#line 202
 $memory_0 = ptd::rec($memory_1);
-#line 201
+#line 202
 undef($memory_1);
-#line 201
+#line 202
 return $memory_0;
-#line 201
+#line 202
 undef($memory_0);
-#line 201
+#line 202
 return;
 }
 
@@ -1733,53 +1747,53 @@ sub nast::match_branch_t() {
 
 sub nast::__fora_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;
-#line 205
+#line 206
 $memory_2 = {
 	module => "nast",
 	name => "variable_declaration_t",
 };
-#line 205
+#line 206
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 205
+#line 206
 $memory_3 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 205
+#line 206
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 205
+#line 206
 $memory_4 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 205
+#line 206
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 205
+#line 206
 $memory_5 = {
 	module => "nast",
 	name => "bool_t",
 };
-#line 205
+#line 206
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 205
+#line 206
 $memory_1 = {iter => $memory_2,cmd => $memory_3,array => $memory_4,short => $memory_5,};
-#line 205
+#line 206
 undef($memory_2);
-#line 205
+#line 206
 undef($memory_3);
-#line 205
+#line 206
 undef($memory_4);
-#line 205
+#line 206
 undef($memory_5);
-#line 205
+#line 206
 $memory_0 = ptd::rec($memory_1);
-#line 205
+#line 206
 undef($memory_1);
-#line 205
+#line 206
 return $memory_0;
-#line 205
+#line 206
 undef($memory_0);
-#line 205
+#line 206
 return;
 }
 
@@ -1791,62 +1805,62 @@ sub nast::fora_t() {
 
 sub nast::__forh_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;
-#line 214
+#line 215
 $memory_2 = {
 	module => "nast",
 	name => "variable_declaration_t",
 };
-#line 214
+#line 215
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 214
+#line 215
 $memory_3 = {
 	module => "nast",
 	name => "variable_declaration_t",
 };
-#line 214
+#line 215
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 214
+#line 215
 $memory_4 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 214
+#line 215
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 214
+#line 215
 $memory_5 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 214
+#line 215
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 214
+#line 215
 $memory_6 = {
 	module => "nast",
 	name => "bool_t",
 };
-#line 214
+#line 215
 $memory_6 = c_rt_lib::ov_mk_arg('ref', $memory_6);
-#line 214
+#line 215
 $memory_1 = {key => $memory_2,val => $memory_3,hash => $memory_4,cmd => $memory_5,short => $memory_6,};
-#line 214
+#line 215
 undef($memory_2);
-#line 214
+#line 215
 undef($memory_3);
-#line 214
+#line 215
 undef($memory_4);
-#line 214
+#line 215
 undef($memory_5);
-#line 214
+#line 215
 undef($memory_6);
-#line 214
+#line 215
 $memory_0 = ptd::rec($memory_1);
-#line 214
+#line 215
 undef($memory_1);
-#line 214
+#line 215
 return $memory_0;
-#line 214
+#line 215
 undef($memory_0);
-#line 214
+#line 215
 return;
 }
 
@@ -1858,53 +1872,53 @@ sub nast::forh_t() {
 
 sub nast::__rep_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;
-#line 224
+#line 225
 $memory_2 = {
 	module => "nast",
 	name => "variable_declaration_t",
 };
-#line 224
+#line 225
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 224
+#line 225
 $memory_3 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 224
+#line 225
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 224
+#line 225
 $memory_4 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 224
+#line 225
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 224
+#line 225
 $memory_5 = {
 	module => "nast",
 	name => "bool_t",
 };
-#line 224
+#line 225
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 224
+#line 225
 $memory_1 = {iter => $memory_2,cmd => $memory_3,count => $memory_4,short => $memory_5,};
-#line 224
+#line 225
 undef($memory_2);
-#line 224
+#line 225
 undef($memory_3);
-#line 224
+#line 225
 undef($memory_4);
-#line 224
+#line 225
 undef($memory_5);
-#line 224
+#line 225
 $memory_0 = ptd::rec($memory_1);
-#line 224
+#line 225
 undef($memory_1);
-#line 224
+#line 225
 return $memory_0;
-#line 224
+#line 225
 undef($memory_0);
-#line 224
+#line 225
 return;
 }
 
@@ -1916,44 +1930,44 @@ sub nast::rep_t() {
 
 sub nast::__while_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 233
+#line 234
 $memory_2 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 233
+#line 234
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 233
+#line 234
 $memory_3 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 233
+#line 234
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 233
+#line 234
 $memory_4 = {
 	module => "nast",
 	name => "bool_t",
 };
-#line 233
+#line 234
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 233
+#line 234
 $memory_1 = {cond => $memory_2,cmd => $memory_3,short => $memory_4,};
-#line 233
+#line 234
 undef($memory_2);
-#line 233
+#line 234
 undef($memory_3);
-#line 233
+#line 234
 undef($memory_4);
-#line 233
+#line 234
 $memory_0 = ptd::rec($memory_1);
-#line 233
+#line 234
 undef($memory_1);
-#line 233
+#line 234
 return $memory_0;
-#line 233
+#line 234
 undef($memory_0);
-#line 233
+#line 234
 return;
 }
 
@@ -1965,44 +1979,44 @@ sub nast::while_t() {
 
 sub nast::__try_ensure_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 237
+#line 238
 $memory_2 = {
 	module => "nast",
 	name => "variable_declaration_t",
 };
-#line 237
+#line 238
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 237
+#line 238
 $memory_3 = {
 	module => "nast",
 	name => "bin_op_t",
 };
-#line 237
+#line 238
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 237
+#line 238
 $memory_4 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 237
+#line 238
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 237
+#line 238
 $memory_1 = {decl => $memory_2,lval => $memory_3,expr => $memory_4,};
-#line 237
+#line 238
 undef($memory_2);
-#line 237
+#line 238
 undef($memory_3);
-#line 237
+#line 238
 undef($memory_4);
-#line 237
+#line 238
 $memory_0 = ptd::var($memory_1);
-#line 237
+#line 238
 undef($memory_1);
-#line 237
+#line 238
 return $memory_0;
-#line 237
+#line 238
 undef($memory_0);
-#line 237
+#line 238
 return;
 }
 
@@ -2014,83 +2028,83 @@ sub nast::try_ensure_t() {
 
 sub nast::__if_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;my $memory_9;
-#line 241
+#line 242
 $memory_2 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 241
+#line 242
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 241
+#line 242
 $memory_3 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 241
+#line 242
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 241
+#line 242
 $memory_7 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 241
+#line 242
 $memory_7 = c_rt_lib::ov_mk_arg('ref', $memory_7);
-#line 241
+#line 242
 $memory_8 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 241
+#line 242
 $memory_8 = c_rt_lib::ov_mk_arg('ref', $memory_8);
-#line 241
+#line 242
 $memory_9 = {
 	module => "nast",
 	name => "debug_t",
 };
-#line 241
+#line 242
 $memory_9 = c_rt_lib::ov_mk_arg('ref', $memory_9);
-#line 241
+#line 242
 $memory_6 = {cond => $memory_7,cmd => $memory_8,debug => $memory_9,};
-#line 241
+#line 242
 undef($memory_7);
-#line 241
+#line 242
 undef($memory_8);
-#line 241
+#line 242
 undef($memory_9);
-#line 241
+#line 242
 $memory_5 = ptd::rec($memory_6);
-#line 241
+#line 242
 undef($memory_6);
-#line 241
+#line 242
 $memory_4 = ptd::arr($memory_5);
-#line 241
+#line 242
 undef($memory_5);
-#line 241
+#line 242
 $memory_5 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 241
+#line 242
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 241
+#line 242
 $memory_1 = {cond => $memory_2,if => $memory_3,elsif => $memory_4,else => $memory_5,};
-#line 241
+#line 242
 undef($memory_2);
-#line 241
+#line 242
 undef($memory_3);
-#line 241
+#line 242
 undef($memory_4);
-#line 241
+#line 242
 undef($memory_5);
-#line 241
+#line 242
 $memory_0 = ptd::rec($memory_1);
-#line 241
+#line 242
 undef($memory_1);
-#line 241
+#line 242
 return $memory_0;
-#line 241
+#line 242
 undef($memory_0);
-#line 241
+#line 242
 return;
 }
 
@@ -2102,70 +2116,70 @@ sub nast::if_t() {
 
 sub nast::__for_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;
-#line 250
+#line 251
 $memory_4 = {
 	module => "nast",
 	name => "variable_declaration_t",
 };
-#line 250
+#line 251
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 250
+#line 251
 $memory_5 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 250
+#line 251
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 250
+#line 251
 $memory_3 = {var_decl => $memory_4,value => $memory_5,};
-#line 250
+#line 251
 undef($memory_4);
-#line 250
+#line 251
 undef($memory_5);
-#line 250
+#line 251
 $memory_2 = ptd::var($memory_3);
-#line 250
+#line 251
 undef($memory_3);
-#line 250
+#line 251
 $memory_3 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 250
+#line 251
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 250
+#line 251
 $memory_4 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 250
+#line 251
 $memory_4 = c_rt_lib::ov_mk_arg('ref', $memory_4);
-#line 250
+#line 251
 $memory_5 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 250
+#line 251
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 250
+#line 251
 $memory_1 = {start => $memory_2,iter => $memory_3,cond => $memory_4,cmd => $memory_5,};
-#line 250
+#line 251
 undef($memory_2);
-#line 250
+#line 251
 undef($memory_3);
-#line 250
+#line 251
 undef($memory_4);
-#line 250
+#line 251
 undef($memory_5);
-#line 250
+#line 251
 $memory_0 = ptd::rec($memory_1);
-#line 250
+#line 251
 undef($memory_1);
-#line 250
+#line 251
 return $memory_0;
-#line 250
+#line 251
 undef($memory_0);
-#line 250
+#line 251
 return;
 }
 
@@ -2177,25 +2191,25 @@ sub nast::for_t() {
 
 sub nast::__place_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;
-#line 259
+#line 260
 $memory_2 = ptd::sim();
-#line 259
+#line 260
 $memory_3 = ptd::sim();
-#line 259
+#line 260
 $memory_1 = {line => $memory_2,position => $memory_3,};
-#line 259
+#line 260
 undef($memory_2);
-#line 259
+#line 260
 undef($memory_3);
-#line 259
+#line 260
 $memory_0 = ptd::rec($memory_1);
-#line 259
+#line 260
 undef($memory_1);
-#line 259
+#line 260
 return $memory_0;
-#line 259
+#line 260
 undef($memory_0);
-#line 259
+#line 260
 return;
 }
 
@@ -2207,35 +2221,35 @@ sub nast::place_t() {
 
 sub nast::__debug_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;
-#line 263
+#line 264
 $memory_2 = {
 	module => "nast",
 	name => "place_t",
 };
-#line 263
+#line 264
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 263
+#line 264
 $memory_3 = {
 	module => "nast",
 	name => "place_t",
 };
-#line 263
+#line 264
 $memory_3 = c_rt_lib::ov_mk_arg('ref', $memory_3);
-#line 263
+#line 264
 $memory_1 = {begin => $memory_2,end => $memory_3,};
-#line 263
+#line 264
 undef($memory_2);
-#line 263
+#line 264
 undef($memory_3);
-#line 263
+#line 264
 $memory_0 = ptd::rec($memory_1);
-#line 263
+#line 264
 undef($memory_1);
-#line 263
+#line 264
 return $memory_0;
-#line 263
+#line 264
 undef($memory_0);
-#line 263
+#line 264
 return;
 }
 
@@ -2247,41 +2261,41 @@ sub nast::debug_t() {
 
 sub nast::__empty_debug() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;
-#line 267
+#line 268
 $memory_2 = 1;
-#line 267
+#line 268
 $memory_3 = 1;
-#line 267
+#line 268
 $memory_3 = -$memory_3;
-#line 267
+#line 268
 $memory_1 = {line => $memory_2,position => $memory_3,};
-#line 267
+#line 268
 undef($memory_2);
-#line 267
+#line 268
 undef($memory_3);
-#line 267
+#line 268
 $memory_3 = 1;
-#line 267
+#line 268
 $memory_4 = 1;
-#line 267
+#line 268
 $memory_4 = -$memory_4;
-#line 267
+#line 268
 $memory_2 = {line => $memory_3,position => $memory_4,};
-#line 267
+#line 268
 undef($memory_3);
-#line 267
+#line 268
 undef($memory_4);
-#line 267
+#line 268
 $memory_0 = {begin => $memory_1,end => $memory_2,};
-#line 267
+#line 268
 undef($memory_1);
-#line 267
+#line 268
 undef($memory_2);
-#line 267
+#line 268
 return $memory_0;
-#line 267
+#line 268
 undef($memory_0);
-#line 267
+#line 268
 return;
 }
 
@@ -2293,241 +2307,241 @@ sub nast::empty_debug() {
 
 sub nast::__cmd_t() {
 my $memory_0;my $memory_1;my $memory_2;my $memory_3;my $memory_4;my $memory_5;my $memory_6;my $memory_7;my $memory_8;my $memory_9;my $memory_10;my $memory_11;my $memory_12;my $memory_13;my $memory_14;my $memory_15;my $memory_16;my $memory_17;my $memory_18;my $memory_19;my $memory_20;my $memory_21;my $memory_22;my $memory_23;my $memory_24;
-#line 271
+#line 272
 $memory_2 = {
 	module => "nast",
 	name => "debug_t",
 };
-#line 271
+#line 272
 $memory_2 = c_rt_lib::ov_mk_arg('ref', $memory_2);
-#line 271
+#line 272
 $memory_5 = {
 	module => "nast",
 	name => "if_t",
 };
-#line 271
+#line 272
 $memory_5 = c_rt_lib::ov_mk_arg('ref', $memory_5);
-#line 271
+#line 272
 $memory_6 = {
 	module => "nast",
 	name => "for_t",
 };
-#line 271
+#line 272
 $memory_6 = c_rt_lib::ov_mk_arg('ref', $memory_6);
-#line 271
+#line 272
 $memory_7 = {
 	module => "nast",
 	name => "fora_t",
 };
-#line 271
+#line 272
 $memory_7 = c_rt_lib::ov_mk_arg('ref', $memory_7);
-#line 271
+#line 272
 $memory_8 = {
 	module => "nast",
 	name => "forh_t",
 };
-#line 271
+#line 272
 $memory_8 = c_rt_lib::ov_mk_arg('ref', $memory_8);
-#line 271
+#line 272
 $memory_9 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 271
+#line 272
 $memory_9 = c_rt_lib::ov_mk_arg('ref', $memory_9);
-#line 271
+#line 272
 $memory_10 = {
 	module => "nast",
 	name => "rep_t",
 };
-#line 271
+#line 272
 $memory_10 = c_rt_lib::ov_mk_arg('ref', $memory_10);
-#line 271
+#line 272
 $memory_11 = {
 	module => "nast",
 	name => "while_t",
 };
-#line 271
+#line 272
 $memory_11 = c_rt_lib::ov_mk_arg('ref', $memory_11);
-#line 271
+#line 272
 $memory_14 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 271
+#line 272
 $memory_14 = c_rt_lib::ov_mk_arg('ref', $memory_14);
-#line 271
+#line 272
 $memory_15 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 271
+#line 272
 $memory_15 = c_rt_lib::ov_mk_arg('ref', $memory_15);
-#line 271
+#line 272
 $memory_13 = {cond => $memory_14,cmd => $memory_15,};
-#line 271
+#line 272
 undef($memory_14);
-#line 271
+#line 272
 undef($memory_15);
-#line 271
+#line 272
 $memory_12 = ptd::rec($memory_13);
-#line 271
+#line 272
 undef($memory_13);
-#line 271
+#line 272
 $memory_15 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 271
+#line 272
 $memory_15 = c_rt_lib::ov_mk_arg('ref', $memory_15);
-#line 271
+#line 272
 $memory_16 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 271
+#line 272
 $memory_16 = c_rt_lib::ov_mk_arg('ref', $memory_16);
-#line 271
+#line 272
 $memory_14 = {cond => $memory_15,cmd => $memory_16,};
-#line 271
+#line 272
 undef($memory_15);
-#line 271
+#line 272
 undef($memory_16);
-#line 271
+#line 272
 $memory_13 = ptd::rec($memory_14);
-#line 271
+#line 272
 undef($memory_14);
-#line 271
+#line 272
 $memory_14 = ptd::none();
-#line 271
+#line 272
 $memory_15 = ptd::none();
-#line 271
+#line 272
 $memory_16 = {
 	module => "nast",
 	name => "match_t",
 };
-#line 271
+#line 272
 $memory_16 = c_rt_lib::ov_mk_arg('ref', $memory_16);
-#line 271
+#line 272
 $memory_17 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 271
+#line 272
 $memory_17 = c_rt_lib::ov_mk_arg('ref', $memory_17);
-#line 271
+#line 272
 $memory_18 = {
 	module => "nast",
 	name => "try_ensure_t",
 };
-#line 271
+#line 272
 $memory_18 = c_rt_lib::ov_mk_arg('ref', $memory_18);
-#line 271
+#line 272
 $memory_19 = {
 	module => "nast",
 	name => "try_ensure_t",
 };
-#line 271
+#line 272
 $memory_19 = c_rt_lib::ov_mk_arg('ref', $memory_19);
-#line 271
+#line 272
 $memory_20 = {
 	module => "nast",
 	name => "variable_declaration_t",
 };
-#line 271
+#line 272
 $memory_20 = c_rt_lib::ov_mk_arg('ref', $memory_20);
-#line 271
+#line 272
 $memory_21 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 271
+#line 272
 $memory_21 = c_rt_lib::ov_mk_arg('ref', $memory_21);
-#line 271
+#line 272
 $memory_23 = {
 	module => "nast",
 	name => "cmd_t",
 };
-#line 271
+#line 272
 $memory_23 = c_rt_lib::ov_mk_arg('ref', $memory_23);
-#line 271
+#line 272
 $memory_22 = ptd::arr($memory_23);
-#line 271
+#line 272
 undef($memory_23);
-#line 271
+#line 272
 $memory_24 = {
 	module => "nast",
 	name => "value_t",
 };
-#line 271
+#line 272
 $memory_24 = c_rt_lib::ov_mk_arg('ref', $memory_24);
-#line 271
+#line 272
 $memory_23 = ptd::arr($memory_24);
-#line 271
+#line 272
 undef($memory_24);
-#line 271
+#line 272
 $memory_24 = ptd::none();
-#line 271
+#line 272
 $memory_4 = {if => $memory_5,for => $memory_6,fora => $memory_7,forh => $memory_8,loop => $memory_9,rep => $memory_10,while => $memory_11,if_mod => $memory_12,unless_mod => $memory_13,break => $memory_14,continue => $memory_15,match => $memory_16,value => $memory_17,try => $memory_18,ensure => $memory_19,var_decl => $memory_20,return => $memory_21,block => $memory_22,die => $memory_23,nop => $memory_24,};
-#line 271
+#line 272
 undef($memory_5);
-#line 271
+#line 272
 undef($memory_6);
-#line 271
+#line 272
 undef($memory_7);
-#line 271
+#line 272
 undef($memory_8);
-#line 271
+#line 272
 undef($memory_9);
-#line 271
+#line 272
 undef($memory_10);
-#line 271
+#line 272
 undef($memory_11);
-#line 271
+#line 272
 undef($memory_12);
-#line 271
+#line 272
 undef($memory_13);
-#line 271
+#line 272
 undef($memory_14);
-#line 271
+#line 272
 undef($memory_15);
-#line 271
+#line 272
 undef($memory_16);
-#line 271
+#line 272
 undef($memory_17);
-#line 271
+#line 272
 undef($memory_18);
-#line 271
+#line 272
 undef($memory_19);
-#line 271
+#line 272
 undef($memory_20);
-#line 271
+#line 272
 undef($memory_21);
-#line 271
+#line 272
 undef($memory_22);
-#line 271
+#line 272
 undef($memory_23);
-#line 271
+#line 272
 undef($memory_24);
-#line 271
+#line 272
 $memory_3 = ptd::var($memory_4);
-#line 271
+#line 272
 undef($memory_4);
-#line 271
+#line 272
 $memory_1 = {debug => $memory_2,cmd => $memory_3,};
-#line 271
+#line 272
 undef($memory_2);
-#line 271
+#line 272
 undef($memory_3);
-#line 271
+#line 272
 $memory_0 = ptd::rec($memory_1);
-#line 271
+#line 272
 undef($memory_1);
-#line 271
+#line 272
 return $memory_0;
-#line 271
+#line 272
 undef($memory_0);
-#line 271
+#line 272
 return;
 }
 

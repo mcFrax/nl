@@ -104,8 +104,8 @@ ImmT c_rt_lib0hash_mk_dec(int nargs, ...);
 ImmT c_rt_lib0hash_size(ImmT hashI);
 ImmT c_rt_lib0hash_get_value_dec(ImmT hash, ImmT key);
 ImmT c_rt_lib0hash_get_value(ImmT hash, ImmT key);
-void c_rt_lib0hash_set_value_dec(ImmT *hash, ImmT key, ImmT val);
-void c_rt_lib0hash_set_value(ImmT *hash, ImmT key, ImmT val);
+ImmT c_rt_lib0hash_set_value_dec(ImmT *hash, ImmT key, ImmT val);
+ImmT c_rt_lib0hash_set_value(ImmT *hash, ImmT key, ImmT val);
 ImmT c_rt_lib0hash_delete(ImmT *hash, ImmT key);
 ImmT c_rt_lib0hash_has_key(ImmT hash, ImmT key);
 

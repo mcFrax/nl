@@ -4859,11 +4859,23 @@ $memory_4 = c_rt_lib::to_nl($memory_4 eq $memory_5);
 #line 476
 undef($memory_5);
 #line 476
-if (c_rt_lib::check_true($memory_4)) {goto label_6;}
+if (c_rt_lib::check_true($memory_4)) {goto label_7;}
 #line 476
 $memory_4 = $memory_3->{'op'};
 #line 476
 $memory_5 = "ARRAY_INDEX";
+#line 476
+$memory_4 = c_rt_lib::to_nl($memory_4 eq $memory_5);
+#line 476
+undef($memory_5);
+#line 476
+label_7:
+#line 476
+if (c_rt_lib::check_true($memory_4)) {goto label_6;}
+#line 476
+$memory_4 = $memory_3->{'op'};
+#line 476
+$memory_5 = "HASH_INDEX";
 #line 476
 $memory_4 = c_rt_lib::to_nl($memory_4 eq $memory_5);
 #line 476
