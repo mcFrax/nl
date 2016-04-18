@@ -91,6 +91,7 @@ ImmT c_rt_lib0print_shallow(ImmT arg);
 
 ImmT nl_die();
 ImmT nl_die_arg(ImmT arg);
+ImmT nl_die_internal(const char *format, ...);
 
 //func
 ImmT c_rt_lib0func_new(ImmT (*f)(int, ImmT*), ImmT module, ImmT name);
