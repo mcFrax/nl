@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language SYSTEM "language.dtd">
+<language name="Nianiolang" section="Sources"
+          version="3.1" kateversion="3.4"
+          extensions="*.nl"
+          mimetype="text/x-nianiolang"
+          author="Franciszek Boehlke (franio.kropka.b@gmail.com)"
+          license="LGPL"
+          priority="5">
+  <highlighting>
+  <list name="keywords">
+    <item> def </item>
+    <item> var </item>
+    <item> return </item>
+    <item> eq </item>
+    <item> ne </item>
+    <item> cmp </item>
+    <item> ref </item>
+    <item> fun </item>
+    <item> die </item>
+    <item> try </item>
+    <item> ensure </item>
+  </list>
+  <list name="loop keywords">
+    <item> while </item>
+    <item> rep </item>
+    <item> loop </item>
+    <item> for </item>
+    <item> fora </item>
+    <item> forh </item>
+    <item> continue </item>
+    <item> break </item>
+  </list>
+  <list name="conditional keywords">
+    <item> if </item>
+    <item> elsif </item>
+    <item> else </item>
+    <item> unless </item>
+    <item> match </item>
+  </list>
+  <list name="label keywords">
+    <item> case </item>
+  </list>
+  <list name="predefined">
+    <item> true </item>
+    <item> false </item>
+  </list>
+  <list name="comment alerts">
+    <item> TODO </item>
+    <item> WARN </item>
+    <item> FIXME </item>
+    <item> XXX </item>
+  </list>
+  <contexts>
+    <context attribute="Normal" lineEndContext="#stay" name="code">
+      <DetectChar attribute="Comment" context="comment" char="#" />
+
+      <WordDetect attribute="Keyword" context="import" String="use"/>
+
+      <keyword attribute="Keyword" context="#stay" String="keywords" />
+      <keyword attribute="ControlFlow" context="#stay" String="loop keywords" />
+      <keyword attribute="ControlFlow" context="#stay" String="conditional keywords" />
+      <keyword attribute="Keyword" context="#stay" String="label keywords" />
+      <keyword attribute="BuiltIn" context="#stay" String="predefined" />
+
+      <DetectChar attribute="Bracket" context="#stay" char="{" beginRegion="Brace1" />
+      <DetectChar attribute="Bracket" context="#stay" char="}" endRegion="Brace1" />
+
+      <Float attribute="Float"   context="#stay" />
+      <Int   attribute="Decimal" context="#stay" />
+      <RangeDetect attribute="String" context="#stay" char="'"  char1="'" />
+
+      <RegExpr attribute="PtdType"      context="#stay" String="ptd::[a-zA-Z_][a-zA-Z0-9_]*" />
+      <RegExpr attribute="StdFunction"  context="#stay" String="(array|boolean_t|csv|dfile|enum|func|hash|nl|nsystem|ov|profile|ptd|singleton|string|string_utils)::[a-zA-Z_][a-zA-Z0-9_]*" />
+      <RegExpr attribute="ModulePrefix" context="#stay" String="[a-zA-Z_][a-zA-Z0-9_]*::" />
+      <RegExpr attribute="Variant"      context="#stay" String=":[a-zA-Z_][a-zA-Z0-9_]*" />
+      <RegExpr attribute="TypeRef"      context="#stay" String="@[a-zA-Z_]+::[a-zA-Z_][a-zA-Z0-9_]*" />
+      <RegExpr attribute="Operator"     context="#stay" String="[&lt;&gt;!+-*.%]=?|[:?=]|->|\|\||&amp;&amp;" />
+      <RegExpr attribute="Ident"        context="#stay" String="[a-zA-Z_][a-zA-Z0-9_]*" />
+    </context>
+    <context attribute="Comment" lineEndContext="#pop" name="comment">
+        <keyword attribute="Alert" context="#stay" String="comment alerts" />
+        <WordDetect attribute="Info" context="#stay" String="NOTE" />
+    </context>
+    <context attribute="Import" lineEndContext="#stay" name="import" >
+        <DetectChar attribute="Normal" context="#pop" char=";" />
+    </context>
+  </contexts>
+  <itemDatas>
+    <itemData name="Normal"       defStyleNum="dsNormal"  spellChecking="false" />
+    <itemData name="Comment"      defStyleNum="dsComment" />
+    <itemData name="Alert"        defStyleNum="dsAlert" />
+    <itemData name="Info"         defStyleNum="dsInfo" />
+
+    <itemData name="Keyword"      defStyleNum="dsKeyword"  spellChecking="false" />
+    <itemData name="ControlFlow"  defStyleNum="dsKeyword"  spellChecking="false" />
+    <itemData name="Bracket"      defStyleNum="dsNormal"  spellChecking="false" />
+
+    <itemData name="Import"       defStyleNum="dsImport"  spellChecking="false" />
+    <itemData name="BuiltIn"      defStyleNum="dsBuiltIn"  spellChecking="false" />
+    <itemData name="StdFunction"  defStyleNum="dsFunction"  spellChecking="false" />
+
+    <itemData name="ModulePrefix" defStyleNum="dsComment"  spellChecking="false" />
+    <itemData name="Ident"        defStyleNum="dsNormal"    spellChecking="false" />
+    <itemData name="PtdType"      defStyleNum="dsDataType"  spellChecking="false" />
+    <itemData name="TypeRef"      defStyleNum="dsDataType"  spellChecking="false" />
+    <itemData name="Variant"      defStyleNum="dsDataType"  spellChecking="false" />
+    <itemData name="Operator"     defStyleNum="dsOperator"  spellChecking="false" />
+
+    <itemData name="Decimal"       defStyleNum="dsDecVal"   spellChecking="false" />
+    <itemData name="Float"         defStyleNum="dsFloat"    spellChecking="false" />
+    <itemData name="String"        defStyleNum="dsString"   spellChecking="false" />
+  </itemDatas>
+  </highlighting>
+  <general>
+    <comments>
+      <comment name="singleLine" start="#" />
+    </comments>
+    <keywords casesensitive="1" />
+</general>
+</language>

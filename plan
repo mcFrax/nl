@@ -1,0 +1,154 @@
+0. Jak do cholery skleić informacje z kodu pośredniego różnych modułów?
+    To jest chyba główny problem.
+    Wygląda na to, że zamiast generować sam asm, trzeba wygenerować parę
+    (asm, header).
+
+    ## czemu tak mi wyszło? To jakieś głupie.
+2. sprawdzanie tylko zmiennych z jawnie zadeklarowanym typem, tylko pełne przypisania, tylko z literałów(?)
+    var x : @ptd::sim = {};
+# NIE PODOBA MI SIĘ TO PODEJŚCIE. ZNACZNIE BARDZIEJ PODOBA MI SIĘ TAKI WARIANT, ŻE PATRZYMY CO SIĘ DZIEJE,
+# A DOPIERO POTEM, CZY TO SIĘ ZGADZA Z ADNOTACJAMI.
+3. sprawdzanie tylko zmiennych z jawnie zadeklarowanym typem, również rekonstrukcje
+    var x : ptd::rec({a => @ptd::sim}) = {a => ''};
+    x.a <- {};
+4. sprawdzanie również argumentów
+    def foo(bar: @ptd::sim) {
+        ...
+    }
+    ...
+        foo({});
+5. wykorzystanie informacji o wyniku funkcji
+    def foo(): ptd::rec({}) {
+        ...
+    }
+    ...
+        var x: @ptd::sim = foo();
+6. Wnioskowanie o niezadeklarowanych typach
+    // przykład pozytywny 1:
+    var x = {a => 1};
+    var y: ptd::rec({a => ptd::sim()}) = x;
+    // przykład pozytywny 2:
+    var x = {}
+    x.a <- 1
+    var y: ptd::rec({a => ptd::sim()}) = x;
+7. obsługa ref (a może to samo wyjdzie?)
+    Tak naprawdę, to ref: w przypadku funkcji z zadeklarowanym typem refa wiadomo co daje,
+    a w innym przypadku daje ima - to się sprawdza tak samo, jak każde głupie przypisanie.
+8. Bardzo byłoby jednak wskazane, żeby umieć deklarować funkcje extern. I żeby
+    z tego się produkował nagłówek C. I chyba powinno się wtedy obyć bez nagłówka pisanego ręcznie,
+    ale to nie jest całkiem pewne, jeżeli biblioteka rt zrobi się odpowiednio duża.
+    Alternatywnie można spróbować parsować nagłówki C w jakiś mało inteligentny sposób
+    - nic się nie wydedukuje o typach, ale przynajmniej o istnieniu funkcji i liczbie
+    argumentów.
+    Propozycja: specjalne komentarze do nagłówków, zawierające typ. Np. coś takiego:
+        ImmT/*: @foo::bar */ makeBar(ImmT/*: @ptd::sim()*/, ImmT/*: ptd::rec({a => @ptd::sim})*/)
+9. Naprawdę wykorzystać informację o typach z innych modułów.
+
+10. Own -> unique. Myślę, że to lepsza nazwa.
+11. Bardzo możliwe, że lepiej jest oznaczać te argumenty funkcji, które
+    _nie_ akceptują unique-ów, niż te, które je akceptują (ale nie wymagają).
+    W takim wypadku sensowną nazwą byłoby "sharable", co można by oznaczać przez $
+    (S jak sharable, przy okazji może da się z tego zrobić nawiązanie do
+    PHP i/lub Perla, albo może Rubiego), albo przez & (referencja, w domyśle -
+    taka normalna, a nie unique).
+
+    Gdyby jednak miały być oznaczane te argumenty, które akceptują unique...
+    to naturalną nazwą byłoby "uniqable" :D, ale można by też pójść jakoś w kierunku,
+    ja wiem... unlinked? free? Ewentualnie użyć jakiegoś znaczka, który w miarę
+    możliwości nie budzi żadnych konkretnych skojarzeń, np. ^, ewentualnie % bądź *.
+
+    O, albo można użyć + i -, w kontekście typów są wolne, a mogą być w miarę
+    intuicyjne - `+` znaczy "można dodawać referencje", a `-` znaczy, że nie można.
+
+    Pytanie jeszcze, czy jest jakiś w miarę dobry znaczek na unique - może coś by się znalazło?
+    To jest niestety boleśnie dłuższe niż own, ale pasuje mi dużo bardziej.
+
+    Jest jeszcze kwestia dzielenia się obiektem, który do pewnego momentu był
+    unique. Można by to zrobić przez specjalną funkcję share(obiekt).
+
+    I jest jeszcze ciekawsza kwestia - przekazywanie własności obiektu. Tutaj
+    w sumie jest prosto, chociaż może nie do końca intuicyjnie: wygląda na to, że
+    jeżeli funkcja ma argument `unique` który nie jest ref, to znaczy, że chce
+    ten obiekt dostać na własność - w przeciwnym wypadku nie miałaby tego oznaczenia.
+
+    W takim wypadku okazuje się, że przekazanie obiektu do funkcji może zablokować
+    dostęp do niego z obecnego kontekstu:
+
+        def foo (unique x) {...}
+        def bar () {
+            unique var x = ...;
+            foo(x);
+            # tutaj jakiekolwiek użycie x, poza ewentualnie pełnym przypisaniem,
+            # daje błąd "variable x used after its ownership was passed/ceded to function foo"
+        }
+
+    Pytanie, czy powinno być dozwolone przenoszenie własności z jednej zmiennej
+    na drugą:
+        unique var x = ...;
+        unique var y = x;
+
+    Jestem raczej na nie: wydaje się to zbędną komplikacją, a w razie czego może
+    być łatwo osiągnięte przez prostą funkcję:
+        def transfer_ownership(unique x) : unique ptd::ptd_im() { return x; }
+
+    (która to funkcja niestety bezsensownie psuje nam typy :/).
+
+    Ewentualnie funkcja share() mogłaby mieć sygnaturę (unique x: T): T, dzięki
+    czemu dla typeczekera byłaby po prostu zwykłą funkcją, a kompilator by ją
+    tylko wycinał - ale takie rzeczy byłyby trochę brzydkie (ale może nie
+    jest aż tak źle):
+        unique var x = ...;
+        ...
+        var shared_x = share(x);
+        foo(shared_x);
+        bar(shared_x);
+
+    Alternatywą są kompleksowe typy dla argumentów ref, coś w rodzaju
+
+        foo(unique->shared ref x) {...}
+        foo(unique->void ref x) {...}
+
+    lub
+
+        foo(dropunique ref x) {...}
+        foo(stolen ref x) {...} :D
+
+    (to zdecydowanie jest nieprzekonujące).
+
+    Istotne pytanie - jak przekazanie własności powinno być oznaczone przy wywołaniu.
+    Patrząc na składnię refa przypuszczam, że pożądane byłoby jawne zaznaczanie,
+    że zmienna jest przekazywana. Przy czym może tak być, że użycie słówka ref
+    jest adekwatne.
+
+    Podobnie jak w Typed Lua ewaluacja każdego (prawie) wyrażenia może potencjalnie
+    zmieniać typy zmiennych w środowisku - przy czym możliwe, że to w nianiolangu
+    już do pewnego stopnia było.
+
+12. Pytanie za sto punktów: czy uniqness ma być częścią typu? Wydaje mi się,
+    że nie, powinien być własnością pola/argumentu/zmiennej.
+
+    Zasadniczy problem polega na tym, że na typach mamy uczciwy porządek, a dołożenie
+    tam praw własności może go rozwalić. Przy czym ta intuicja może być błędna, trzeba
+    to sobie po prostu na palcach policzyć, i sprawdzić, co wyjdzie. Trzeba uwzględnić
+    to, że te same modyfikatory dla tych trzech kontekstów mogą, być może, oznaczać
+    różne rzeczy.
+
+    Z drugiej strony - użycie uniqueness powinno być przezroczyste dla semantyki,
+    i z tego powodu bardzo dobrze pasuje do typów (w przeciwieństwie do refa).
+
+    Czy mogą być jeszcze jakieś stany pozy tymi?
+    unique
+    any/unknown (suma ograniczeń dla unique i immutable/shared)
+    immutable/shared
+
+    Sęk w tym, że zależnie od kontekstu, możemy mieć różny default. Dla argumentów
+    funkcji defaultem może być any, default dla zmiennej to shared (optymalizowalne),
+    natomiast dla pola musi to być shared, tak, żeby rekonstrukcja nieotypowanych
+    wartości była sensowna. Notabene, użycie pola unique wewnątrz struktury, która
+    nie jest unique, jest bez sensu.
+
+    Prawdopodobnie trzeba wziąć rzeczywisty kawałek kodu, dopisać mu adnotacje
+    na różne sposoby, i zobaczyć, który wygląda sensownie.
+
+13. Żeby zrobić z tego pracę magisterską, prawdopodobnie trzeba będzie przeprowadzić
+    jakieś badania i statystyki na większej próbce kodu.
