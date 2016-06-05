@@ -20,6 +20,8 @@
     <item> die </item>
     <item> try </item>
     <item> ensure </item>
+    <item> is </item>
+    <item> as </item>
   </list>
   <list name="loop keywords">
     <item> while </item>
@@ -71,6 +73,7 @@
       <RangeDetect attribute="String" context="#stay" char="'"  char1="'" />
 
       <RegExpr attribute="PtdType"      context="#stay" String="ptd::[a-zA-Z_][a-zA-Z0-9_]*" />
+      <RegExpr attribute="NativeFunction" context="#stay" String="(c_fe_lib|c_rt_lib|c_std_lib)::[a-zA-Z_][a-zA-Z0-9_]*" 
       <RegExpr attribute="StdFunction"  context="#stay" String="(array|boolean_t|csv|dfile|enum|func|hash|nl|nsystem|ov|profile|ptd|singleton|string|string_utils)::[a-zA-Z_][a-zA-Z0-9_]*" />
       <RegExpr attribute="ModulePrefix" context="#stay" String="[a-zA-Z_][a-zA-Z0-9_]*::" />
       <RegExpr attribute="Variant"      context="#stay" String=":[a-zA-Z_][a-zA-Z0-9_]*" />
@@ -98,6 +101,7 @@
 
     <itemData name="Import"       defStyleNum="dsImport"  spellChecking="false" />
     <itemData name="BuiltIn"      defStyleNum="dsBuiltIn"  spellChecking="false" />
+    <itemData name="NativeFunction" defStyleNum="dsBuiltIn"  spellChecking="false" />
     <itemData name="StdFunction"  defStyleNum="dsFunction"  spellChecking="false" />
 
     <itemData name="ModulePrefix" defStyleNum="dsComment"  spellChecking="false" />
