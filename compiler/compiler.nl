@@ -26,6 +26,7 @@ use module_checker;
 use interpreter;
 use nl;
 use compiler_lib;
+use newtc;
 
 def get_dir_cache_name() : ptd::sim() {
 	return 'cache_nl';
@@ -335,7 +336,7 @@ def parse_module(module : ptd::sim(), src : ptd::sim(), ref errors : @compiler::
 		var ret = module_checker::check_module(ast);
 		hash::set_value(ref errors->module_warnings, module, ret->warnings);
 		hash::set_value(ref errors->module_errors, module, ret->errors);
-		return :err('') unless array::len(ret->errors) == 0;
+ 		return :err('') unless array::len(ret->errors) == 0;
 		return :ok(ast);
 	} case :error(var err) {
 		hash::set_value(ref errors->module_warnings, module, []);
@@ -497,14 +498,17 @@ def compile_strict_file(opt_cli : @compiler::input_type) : @boolean_t::type {
 		return false;
 	}
 	check_modules(asts, ref errors, opt_cli->deref);
-	if (show_and_count_errors(errors, opt_cli) > 0) {
-		return false;
+	var old_typechecker_error_count = show_and_count_errors(errors, opt_cli);
+	if (old_typechecker_error_count > 0) {
+		c_fe_lib::print('WARNING: ' . old_typechecker_error_count . ' old type checker errors ignored');
+#		return false;
 	}
 	if (!(opt_cli->language is :ast || opt_cli->language is :nl)) {
 		var generator_state = get_generator_state(opt_cli->language);
 		c_fe_lib::print('search constants...');
 		var const_state = post_processing::init(get_mathematical_func(opt_cli), opt_cli->optimization);
 		var modules = translate(asts, ref const_state);
+		newtc::check_modules(modules);
 		generate_modules_to_files(modules, nianio_files, opt_cli->cache_path, ref generator_state, opt_cli->language);
 	} else {
 		forh var module, var ast (asts) {
