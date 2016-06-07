@@ -510,7 +510,11 @@ def compile_strict_file(opt_cli : @compiler::input_type) : @boolean_t::type {
 		var const_state = post_processing::init(get_mathematical_func(opt_cli), opt_cli->optimization);
 		var modules = translate(asts, ref const_state);
 		print_graphs::print_graphs(modules);
-		ensure newtc::check_modules(modules);
+		var typechecker_result = newtc::check_modules(modules);
+		if (typechecker_result is :err) {
+			nl::print(typechecker_result as :err);
+			die;
+		}
 		generate_modules_to_files(modules, nianio_files, opt_cli->cache_path, ref generator_state, opt_cli->language);
 	} else {
 		forh var module, var ast (asts) {

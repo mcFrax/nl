@@ -654,7 +654,7 @@ ImmT c_rt_lib0ov_mk_none(ImmT ___nl__name) {
 
 ImmT c_rt_lib0ov_is(ImmT ___nl__variant, ImmT ___nl__is_val) {
 	if(!IS_OV(___nl__variant) && !IS_OV_NONE(___nl__variant))
-		nl_die_internal("expected variant: %s", NAME(___nl__variant));
+		nl_die_internal("c_rt_lib0ov_is: expected variant, found %s", NAME(___nl__variant));
 	return priv_to_nl_native(nl_compare_internal(((NlOvNone *)___nl__variant)->name, ___nl__is_val));
 }
 ImmT c_rt_lib0ov_as(ImmT ___nl__variant, ImmT ___nl__as_val) {
@@ -690,7 +690,7 @@ ImmT c_rt_lib0ov_get_value(ImmT ___nl__variant) {
 
 ImmT c_rt_lib0ov_get_element(ImmT ___nl__variant) {
 	if(!IS_OV(___nl__variant) && !IS_OV_NONE(___nl__variant))
-		nl_die_internal("expected variant: %s", NAME(___nl__variant));
+		nl_die_internal("c_rt_lib0ov_get_element: expected variant, found %s", NAME(___nl__variant));
 	ImmT ret = ((NlOvNone *)___nl__variant)->name;
 	inc_ref(ret);
 	return ret;
@@ -698,7 +698,7 @@ ImmT c_rt_lib0ov_get_element(ImmT ___nl__variant) {
 
 ImmT c_rt_lib0ov_has_value(ImmT ___nl__variant) {
 	if(!IS_OV(___nl__variant) && !IS_OV_NONE(___nl__variant))
-		nl_die_internal("expected variant: %s", NAME(___nl__variant));
+		nl_die_internal("c_rt_lib0ov_has_value: expected variant, found %s", NAME(___nl__variant));
 	return priv_to_nl_native(IS_OV(___nl__variant));
 }
 

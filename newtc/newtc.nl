@@ -1,47 +1,16 @@
-use c_fe_lib;
 use ptd;
 use nlasm;
 use flow_graph;
 use array;
 use ov;
 use nl;
+use string;
+use hash;
 use boolean_t;
-
-def newtc::mbool_t() {
-	return ptd::var({
-		ok => @boolean_t::type,
-		err => ptd::sim()
-	});
-}
-
-def newtc::type() {
-	return ptd::var({
-		unknown => ptd::none(),
-		invalid => ptd::none(),
-		any => ptd::none(),
-		sim => ptd::none(),
-		variant => ptd::none(),
-		array => ptd::none(),
-		hash => ptd::none(),
-	});
-}
-
-def newtc::env() {
-	return ptd::arr(@newtc::type);
-}
-
-def newtc::typed_block() {
-	return ptd::rec({
-		cmds => ptd::arr(@nlasm::cmd_t),
-		next => ptd::arr(@ptd::sim),
-		entry_env => @newtc::env,
-		exit_env => @newtc::env
-	});
-}
+use singleton;
+use dfile;
 
 def newtc::check_modules(modules : ptd::hash(@nlasm::result_t)) : @newtc::mbool_t {
-	c_fe_lib::print('>>newtc::check_modules()<<');
-
 	forh var modname, var module (modules) {
 		fora var function (module->functions) {
 			try check_function(modname, function);
@@ -52,6 +21,7 @@ def newtc::check_modules(modules : ptd::hash(@nlasm::result_t)) : @newtc::mbool_
 
 def check_function(modname : ptd::sim(), function : @nlasm::function_t) : @newtc::mbool_t {
 	var blocks = flow_graph::make_blocks(function->commands, function->args_type);
+	return :ok(true) if (array::len(blocks) == 0);
 	var unknown_env : @newtc::env = [];
 	
 	rep var i (function->reg_size) {
@@ -68,139 +38,185 @@ def check_function(modname : ptd::sim(), function : @nlasm::function_t) : @newtc
 	
 	var typed_blocks : ptd::arr(@newtc::typed_block) = [];
 	rep var i (array::len(blocks)) {
-		var dupa = {
+		typed_blocks []= {
 			cmds => blocks[i]->cmds,
 			next => blocks[i]->next,
 			entry_env => unknown_env,
 			exit_env => unknown_env
 		};
-		array::push(ref typed_blocks, dupa);
 	}
 	typed_blocks[0]->entry_env = entry_env;
 	
 	var changed = true;
+	var functionname = {module => modname, function => function->name};
 	while (changed) {
-		try propagate_entries(ref typed_blocks);
+		try propagate_entries(functionname, ref typed_blocks);
 		try changed = propagate_exits(ref typed_blocks);
 	}
 	return :ok(true);
 }
 
-def propagate_entries(ref blocks : ptd::arr(@newtc::typed_block)) : @newtc::mbool_t {
+def propagate_entries(function : @newtc::functionname, ref blocks : ptd::arr(@newtc::typed_block)) : @newtc::mbool_t {
 	rep var i (array::len(blocks)) {
 		var env : @newtc::env = blocks[i]->entry_env;
 		fora var cmd (blocks[i]->cmds) {
-			try propagate_cmd(cmd, ref env);
+			try propagate_cmd(function, cmd, ref env);
 		}
 		blocks[i]->exit_env = env;
 	}
 	return :ok(true);
 }
 
-def propagate_cmd(cmd, ref env : @newtc::env) : @newtc::mbool_t {
-	match (cmd) case :arr_cmddata(var cmddata) {
+def propagate_cmd(function : @newtc::functionname, cmd : @nlasm::cmd_t, ref env : @newtc::env) : @newtc::mbool_t {
+	var result = propagate_cmd1(cmd->cmd, ref env);
+	return result if result is :ok;
+	return :err(print_place(function, cmd->debug).': ERROR'.string::lf().(result as :err).string::lf().dfile::ssave(cmd->cmd).string::lf());
+}
+
+def print_place(function : @newtc::functionname, debug : @nlasm::debug_t, ) : ptd::sim() {
+	var begin = debug->nast_debug->begin;
+	var end = debug->nast_debug->end;
+	return function->module.':'.begin->line.':'.begin->position.'-'.end->line.':'.end->position.' (in function '.function->function.')';
+}
+
+def get_sim_result_bin_ops() {
+	return singleton::sigleton_do_not_use_without_approval(gen_sim_result_bin_ops());
+}
+
+def get_bool_result_bin_ops() {
+	return singleton::sigleton_do_not_use_without_approval(gen_bool_result_bin_ops());
+}
+
+def gen_sim_result_bin_ops() {
+	var sim_result_ops = {};
+	fora var op (['+', '-', '*', '/', '%', '.']) {
+		sim_result_ops{op} = true;
+	};
+	return sim_result_ops;
+}
+
+def gen_bool_result_bin_ops() {
+	var bool_result_ops = {};
+	fora var op (['eq', 'ne', '<=', '<', '==', '!=', '>', '>=']) {
+		bool_result_ops{op} = true;
+	};
+	return bool_result_ops;
+}
+
+def propagate_cmd1(cmd : @nlasm::order_t, ref env : @newtc::env) : @newtc::mbool_t {
+	match (cmd) case :arr_decl(var cmddata) {
 		return :ok(true) if cmddata->dest eq '';
-		env[cmddata->dest] = :array;
-	} case :hash_cmddata(var cmddata) {
+		set_register_type(ref env, cmddata->dest, :array);
+	} case :hash_decl(var cmddata) {
 		return :ok(true) if cmddata->dest eq '';
-		env[cmddata->dest] = :hash;
+		set_register_type(ref env, cmddata->dest, :hash);
 	} case :func(var cmddata) {
 		return :ok(true) if cmddata->dest eq '';
-		env[cmddata->dest] = :hash;  # ???
+		set_register_type(ref env, cmddata->dest, :hash);  # ???
 	} case :call(var cmddata) {
 		# TODO: whooomp
-		env[cmddata->dest] = :any;
+		set_register_type(ref env, cmddata->dest, :any);
 	} case :una_op(var cmddata) {
 		if (cmddata->op eq '!') {
-			try ensure_consitency(:variant , env[cmddata->src]); #bool
-			env[cmddata->src] = :variant; #bool
-			env[cmddata->dest] = :variant;  # bool
+			try check_register_type(env, cmddata->src, :variant ); #bool
+			set_register_type(ref env, cmddata->src, :variant); #bool
+			set_register_type(ref env, cmddata->dest, :variant);  # bool
 		} else {
-			try ensure_consitency(:sim, env[cmddata->src]);
-			env[cmddata->src] = :sim;
-			env[cmddata->dest] = :sim;
+			try check_register_type(env, cmddata->src, :sim);
+			set_register_type(ref env, cmddata->src, :sim);
+			set_register_type(ref env, cmddata->dest, :sim);
 		}
 	} case :bin_op(var cmddata) {
-		try ensure_consitency(:sim, env[cmddata->left]);
-		env[cmddata->left] = :sim;
-		try ensure_consitency(:sim, env[cmddata->right]);
-		env[cmddata->right] = :sim;
-		env[cmddata->dest] = :sim;
+		try check_register_type(env, cmddata->left, :sim);
+		set_register_type(ref env, cmddata->left, :sim);
+		try check_register_type(env, cmddata->right, :sim);
+		set_register_type(ref env, cmddata->right, :sim);
+		if (hash::has_key(get_sim_result_bin_ops(), cmddata->op)) {
+			set_register_type(ref env, cmddata->dest, :sim);
+		} elsif (hash::has_key(get_bool_result_bin_ops(), cmddata->op)) {
+			set_register_type(ref env, cmddata->dest, :variant);
+		} else {
+			die;
+		}
 	} case :ov_is(var cmddata) {
-		try ensure_consitency(:variant, env[cmddata->src]);
-		env[cmddata->src] = :variant;
-		env[cmddata->dest] = :variant;  # bool
+		try check_register_type(env, cmddata->src, :variant);
+		set_register_type(ref env, cmddata->src, :variant);
+		set_register_type(ref env, cmddata->dest, :variant);  # bool
 	} case :ov_as(var cmddata) {
-		try ensure_consitency(:variant, env[cmddata->src]);
-		env[cmddata->src] = :variant;
-		env[cmddata->dest] = :any;
+		try check_register_type(env, cmddata->src, :variant);
+		set_register_type(ref env, cmddata->src, :variant);
+		set_register_type(ref env, cmddata->dest, :any);
 	} case :return(var cmddata) {
-		# TODO: check returned type
-		#try ensure_consitency(:sim, cmddata);
+		match (cmddata) case :val(var reg) {
+			try check_register_type(env, reg, :any);  # TODO
+		} case :emp {
+		}
 	} case :die(var reg) {
-		try ensure_consitency(:sim, env[reg]);
+		try check_register_type(env, reg, :any);  # TODO: na pewno :any?
 	} case :move(var cmddata) {
-		env[cmddata->dest] = env[cmddata->src];
+		set_register_type(ref env, cmddata->dest, env[cmddata->src]);
 	} case :load_const(var cmddata) {
 		if (nl::is_sim(cmddata->val)) {
-			env[cmddata->dest] = :sim;
+			set_register_type(ref env, cmddata->dest, :sim);
 		} elsif (nl::is_variant(cmddata->val)) {
-			env[cmddata->dest] = :variant;
+			set_register_type(ref env, cmddata->dest, :variant);
 		} elsif (nl::is_array(cmddata->val)) {
-			env[cmddata->dest] = :array;
+			set_register_type(ref env, cmddata->dest, :array);
 		} elsif (nl::is_hash(cmddata->val)) {
-			env[cmddata->dest] = :hash;
+			set_register_type(ref env, cmddata->dest, :hash);
 		} else {
 			die;
 		}
 	} case :get_frm_idx(var cmddata) {
-		try ensure_consitency(:array, env[cmddata->src]);
-		env[cmddata->src] = :array;
-		try ensure_consitency(:sim, env[cmddata->idx]);
-		env[cmddata->idx] = :sim;
-		env[cmddata->dest] = :any;  # TODO
+		try check_register_type(env, cmddata->src, :array);
+		set_register_type(ref env, cmddata->src, :array);
+		try check_register_type(env, cmddata->idx, :sim);
+		set_register_type(ref env, cmddata->idx, :sim);
+		set_register_type(ref env, cmddata->dest, :any);  # TODO
 	} case :set_at_idx(var cmddata) {
-		try ensure_consitency(:array, env[cmddata->src]);
-		env[cmddata->src] = :array;  # TODO: merge with :array(env[cmddata->val])
-		try ensure_consitency(:sim, env[cmddata->idx]);
-		env[cmddata->idx] = :sim;
-		try ensure_consitency(:any, env[cmddata->val]);  # ensure not :invalid
+		try check_register_type(env, cmddata->src, :array);
+		set_register_type(ref env, cmddata->src, :array);  # TODO: merge with :array(env[cmddata->val])
+		try check_register_type(env, cmddata->idx, :sim);
+		set_register_type(ref env, cmddata->idx, :sim);
+		try check_register_type(env, cmddata->val, :any);  # ensure not :invalid
 	} case :get_val(var cmddata) {
-		try ensure_consitency(:hash, env[cmddata->src]);
-		env[cmddata->src] = :hash;
-		try ensure_consitency(:sim, env[cmddata->key]);
-		env[cmddata->key] = :sim;
-		env[cmddata->dest] = :any;  # TODO
+		try check_register_type(env, cmddata->src, :hash);  # TODO: check that the key may be present
+		set_register_type(ref env, cmddata->src, :hash);  # TODO: inform that the key _is_ present
+		set_register_type(ref env, cmddata->dest, :any);  # TODO
 	} case :set_val(var cmddata) {
-		try ensure_consitency(:hash, env[cmddata->src]);
-		env[cmddata->src] = :hash;  # TODO: merge with :hash(env[cmddata->val])
-		try ensure_consitency(:sim, env[cmddata->key]);
-		env[cmddata->key] = :sim;
-		try ensure_consitency(:any, env[cmddata->val]);  # ensure not :invalid
+		try check_register_type(env, cmddata->src, :hash);
+		set_register_type(ref env, cmddata->src, :hash);  # TODO: merge with :hash(env[cmddata->val])
+		try check_register_type(env, cmddata->val, :any);  # ensure not :invalid
 	} case :ov_mk(var cmddata) {
 		if (cmddata->src is :arg) {
-			try ensure_consitency(:any, env[cmddata->src as :arg]);
+			try check_register_type(env, cmddata->src as :arg, :any);
 		}
-		env[cmddata->dest] = :variant;  # TODO: use cmddata->name
+		set_register_type(ref env, cmddata->dest, :variant);  # TODO: use cmddata->name
 	} case :prt_lbl(var lbl) {
 	} case :if_goto(var cmddata) {
-		try ensure_consitency(:variant , env[cmddata->src]); #bool
-		env[cmddata->src] = :variant; #bool
+		try check_register_type(env, cmddata->src, :variant); #bool
+		set_register_type(ref env, cmddata->src, :variant); #bool
 	} case :clear(var reg) {
-		env[reg] = :invalid;
+		set_register_type(ref env, reg, :invalid);
+	} case :goto(var lbl) {
 	}
 	return :ok(true);
 }
 
-def ensure_consitency(t1, t2) : @newtc::mbool_t {
-	return :err(':invalid used') if (t1 is :invalid || t2 is :invalid);
-	return :ok(true) if (t1 is :unknown || t2 is :unknown);
-	return inconsistency_err(t1, t2) if (t1 ne t2);
+def check_register_type(env : @newtc::env, reg : ptd::sim(), type : @newtc::type) : @newtc::mbool_t {
+	var reg_type = env[reg];
+	return :err(':invalid used') if (reg_type is :invalid || type is :invalid);
+	return :ok(true) if (reg_type is :unknown || type is :unknown || reg_type is :any || type is :any);
+	return inconsistency_err(reg_type, type) if (ov::get_element(reg_type) ne ov::get_element(type));
 	return :ok(true);
 }
 
-def inconsistency_err(t1, t2) : @newtc::mbool_t {
-	return :err('types inconsistent: '.ov::get_element(t1).' and '.ov::get_element(t2));
+def inconsistency_err(reg_type : @newtc::type, type : @newtc::type) : @newtc::mbool_t {
+	return :err('types inconsistent: FOUND:    '.ov::get_element(reg_type).string::lf().'                    EXPECTED: '.ov::get_element(type));
+}
+
+def set_register_type(ref env : @newtc::env, reg : ptd::sim(), type : @newtc::type) {
+	env[reg] = type unless reg eq '';
 }
 
 def propagate_exits(ref blocks : ptd::arr(@newtc::typed_block)) : @newtc::mbool_t {
@@ -236,4 +252,40 @@ def merge_type(ref t1 : @newtc::type, t2 : @newtc::type) : @boolean_t::type {
 	} else {        # TODO
 		return false;  # TODO
 	}
+}
+
+def newtc::functionname() {
+	return ptd::rec({module => ptd::sim(), function => ptd::sim()});
+}
+
+def newtc::mbool_t() {
+	return ptd::var({
+		ok => @boolean_t::type,
+		err => ptd::sim()
+	});
+}
+
+def newtc::type() {
+	return ptd::var({
+		unknown => ptd::none(),
+		invalid => ptd::none(),
+		any => ptd::none(),
+		sim => ptd::none(),
+		variant => ptd::none(),
+		array => ptd::none(),
+		hash => ptd::none(),
+	});
+}
+
+def newtc::env() {
+	return ptd::arr(@newtc::type);
+}
+
+def newtc::typed_block() {
+	return ptd::rec({
+		cmds => ptd::arr(@nlasm::cmd_t),
+		next => ptd::arr(ptd::sim()),
+		entry_env => @newtc::env,
+		exit_env => @newtc::env
+	});
 }

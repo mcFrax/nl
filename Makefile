@@ -40,7 +40,9 @@ ${OBJDIR}/%.o: %.c
 ${OUT}: ${SRC_O} ./mk_cache.c
 	@gcc ${CFLAGS} -o ${OUT} ./mk_cache.c ${SRC_O} ${ICDIR} ${LINKS}
 
-old:
+old: bin/mk_cache.exe
+
+bin/mk_cache.exe: mk_cache.c $(wildcard bin/native_lib_c/*.{c,h}) $(wildcard bin/nianio_lang_c/*.{c,h})
 	gcc ${CFLAGS} -o bin/mk_cache.exe mk_cache.c bin/native_lib_c/*.c bin/nianio_lang_c/*.c -Ibin/native_lib_c -Ibin/nianio_lang_c ${LINKS}
 
 compiler_nl:
