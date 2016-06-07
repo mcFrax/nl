@@ -73,11 +73,12 @@
       <RangeDetect attribute="String" context="#stay" char="'"  char1="'" />
 
       <RegExpr attribute="PtdType"      context="#stay" String="ptd::[a-zA-Z_][a-zA-Z0-9_]*" />
-      <RegExpr attribute="NativeFunction" context="#stay" String="(c_fe_lib|c_rt_lib|c_std_lib)::[a-zA-Z_][a-zA-Z0-9_]*" 
+      <RegExpr attribute="NativeFunction" context="#stay" String="(c_fe_lib|c_rt_lib|c_std_lib)::[a-zA-Z_][a-zA-Z0-9_]*" />
       <RegExpr attribute="StdFunction"  context="#stay" String="(array|boolean_t|csv|dfile|enum|func|hash|nl|nsystem|ov|profile|ptd|singleton|string|string_utils)::[a-zA-Z_][a-zA-Z0-9_]*" />
       <RegExpr attribute="ModulePrefix" context="#stay" String="[a-zA-Z_][a-zA-Z0-9_]*::" />
       <RegExpr attribute="Variant"      context="#stay" String=":[a-zA-Z_][a-zA-Z0-9_]*" />
-      <RegExpr attribute="TypeRef"      context="#stay" String="@[a-zA-Z_]+::[a-zA-Z_][a-zA-Z0-9_]*" />
+      <RegExpr attribute="TypeRef"      context="#stay" String="@[a-zA-Z_][a-zA-Z0-9_]*::[a-zA-Z_][a-zA-Z0-9_]*" />
+      <RegExpr attribute="Incomplete"   context="#stay" String="@[^\s]*" />
       <RegExpr attribute="Operator"     context="#stay" String="[&lt;&gt;!+-*.%]=?|[:?=]|->|\|\||&amp;&amp;" />
       <RegExpr attribute="Ident"        context="#stay" String="[a-zA-Z_][a-zA-Z0-9_]*" />
     </context>
@@ -94,6 +95,7 @@
     <itemData name="Comment"      defStyleNum="dsComment" />
     <itemData name="Alert"        defStyleNum="dsAlert" />
     <itemData name="Info"         defStyleNum="dsInfo" />
+    <itemData name="Incomplete"   defStyleNum="dsError" />
 
     <itemData name="Keyword"      defStyleNum="dsKeyword"  spellChecking="false" />
     <itemData name="ControlFlow"  defStyleNum="dsKeyword"  spellChecking="false" />

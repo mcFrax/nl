@@ -27,6 +27,7 @@ use interpreter;
 use nl;
 use compiler_lib;
 use newtc;
+use print_graphs;
 
 def get_dir_cache_name() : ptd::sim() {
 	return 'cache_nl';
@@ -508,7 +509,8 @@ def compile_strict_file(opt_cli : @compiler::input_type) : @boolean_t::type {
 		c_fe_lib::print('search constants...');
 		var const_state = post_processing::init(get_mathematical_func(opt_cli), opt_cli->optimization);
 		var modules = translate(asts, ref const_state);
-		newtc::check_modules(modules);
+		print_graphs::print_graphs(modules);
+		ensure newtc::check_modules(modules);
 		generate_modules_to_files(modules, nianio_files, opt_cli->cache_path, ref generator_state, opt_cli->language);
 	} else {
 		forh var module, var ast (asts) {
