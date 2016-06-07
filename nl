@@ -43,14 +43,14 @@ int main(int argc, char **argv) {{
         c_rt_lib0array_push(&args, el);
         c_rt_lib0clear(&el);
     }}
-    ImmT imexitcode = {0}0main(args);
+    ImmT imexitcode = {1}0main(args);
     int exitcode = getIntFromImm(imexitcode);
     c_rt_lib0clear(&imexitcode);
     c_rt_lib0clear(&args);
     c_rt_lib0finish();
     return exitcode;
 }}
-""".format(mainmodule))
+""".format(mainmodule, mainmodule.replace('0', '00')))
 
 subprocess.check_call([mk_cache, nianio_lib] + sources + ['--o', cache_dir, '--math', math, '--c', '--strict', '--O2'])
 

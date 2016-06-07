@@ -10,13 +10,17 @@ use boolean_t;
 use singleton;
 use dfile;
 
-def newtc::check_modules(modules : ptd::hash(@nlasm::result_t)) : @newtc::mbool_t {
+def newtc::check_modules(modules : ptd::hash(@nlasm::result_t)) : ptd::arr(ptd::sim()) {
+	var errors = [];
 	forh var modname, var module (modules) {
 		fora var function (module->functions) {
-			try check_function(modname, function);
+			var funresult = check_function(modname, function);
+			if (funresult is :err) {
+				errors []= funresult as :err;
+			}
 		}
 	}
-	return :ok(true);
+	return errors;
 }
 
 def check_function(modname : ptd::sim(), function : @nlasm::function_t) : @newtc::mbool_t {
@@ -70,13 +74,13 @@ def propagate_entries(function : @newtc::functionname, ref blocks : ptd::arr(@ne
 def propagate_cmd(function : @newtc::functionname, cmd : @nlasm::cmd_t, ref env : @newtc::env) : @newtc::mbool_t {
 	var result = propagate_cmd1(cmd->cmd, ref env);
 	return result if result is :ok;
-	return :err(print_place(function, cmd->debug).': ERROR'.string::lf().(result as :err).string::lf().dfile::ssave(cmd->cmd).string::lf());
+	return :err(print_place(function, cmd->debug).': ERROR'.string::lf().(result as :err).string::lf());
 }
 
 def print_place(function : @newtc::functionname, debug : @nlasm::debug_t, ) : ptd::sim() {
 	var begin = debug->nast_debug->begin;
 	var end = debug->nast_debug->end;
-	return function->module.':'.begin->line.':'.begin->position.'-'.end->line.':'.end->position.' (in function '.function->function.')';
+	return function->module.':'.begin->line.':'.begin->position.'-'.end->line.':'.end->position;
 }
 
 def get_sim_result_bin_ops() {
@@ -118,18 +122,18 @@ def propagate_cmd1(cmd : @nlasm::order_t, ref env : @newtc::env) : @newtc::mbool
 		set_register_type(ref env, cmddata->dest, :any);
 	} case :una_op(var cmddata) {
 		if (cmddata->op eq '!') {
-			try check_register_type(env, cmddata->src, :variant ); #bool
+			try check_register_type(cmd, env, cmddata->src, :variant); #bool
 			set_register_type(ref env, cmddata->src, :variant); #bool
 			set_register_type(ref env, cmddata->dest, :variant);  # bool
 		} else {
-			try check_register_type(env, cmddata->src, :sim);
+			try check_register_type(cmd, env, cmddata->src, :sim);
 			set_register_type(ref env, cmddata->src, :sim);
 			set_register_type(ref env, cmddata->dest, :sim);
 		}
 	} case :bin_op(var cmddata) {
-		try check_register_type(env, cmddata->left, :sim);
+		try check_register_type(cmd, env, cmddata->left, :sim);
 		set_register_type(ref env, cmddata->left, :sim);
-		try check_register_type(env, cmddata->right, :sim);
+		try check_register_type(cmd, env, cmddata->right, :sim);
 		set_register_type(ref env, cmddata->right, :sim);
 		if (hash::has_key(get_sim_result_bin_ops(), cmddata->op)) {
 			set_register_type(ref env, cmddata->dest, :sim);
@@ -139,20 +143,20 @@ def propagate_cmd1(cmd : @nlasm::order_t, ref env : @newtc::env) : @newtc::mbool
 			die;
 		}
 	} case :ov_is(var cmddata) {
-		try check_register_type(env, cmddata->src, :variant);
+		try check_register_type(cmd, env, cmddata->src, :variant);
 		set_register_type(ref env, cmddata->src, :variant);
 		set_register_type(ref env, cmddata->dest, :variant);  # bool
 	} case :ov_as(var cmddata) {
-		try check_register_type(env, cmddata->src, :variant);
+		try check_register_type(cmd, env, cmddata->src, :variant);
 		set_register_type(ref env, cmddata->src, :variant);
 		set_register_type(ref env, cmddata->dest, :any);
 	} case :return(var cmddata) {
 		match (cmddata) case :val(var reg) {
-			try check_register_type(env, reg, :any);  # TODO
+			try check_register_type(cmd, env, reg, :any);  # TODO
 		} case :emp {
 		}
 	} case :die(var reg) {
-		try check_register_type(env, reg, :any);  # TODO: na pewno :any?
+		try check_register_type(cmd, env, reg, :any);  # TODO: na pewno :any?
 	} case :move(var cmddata) {
 		set_register_type(ref env, cmddata->dest, env[cmddata->src]);
 	} case :load_const(var cmddata) {
@@ -168,33 +172,33 @@ def propagate_cmd1(cmd : @nlasm::order_t, ref env : @newtc::env) : @newtc::mbool
 			die;
 		}
 	} case :get_frm_idx(var cmddata) {
-		try check_register_type(env, cmddata->src, :array);
+		try check_register_type(cmd, env, cmddata->src, :array);
 		set_register_type(ref env, cmddata->src, :array);
-		try check_register_type(env, cmddata->idx, :sim);
+		try check_register_type(cmd, env, cmddata->idx, :sim);
 		set_register_type(ref env, cmddata->idx, :sim);
 		set_register_type(ref env, cmddata->dest, :any);  # TODO
 	} case :set_at_idx(var cmddata) {
-		try check_register_type(env, cmddata->src, :array);
+		try check_register_type(cmd, env, cmddata->src, :array);
 		set_register_type(ref env, cmddata->src, :array);  # TODO: merge with :array(env[cmddata->val])
-		try check_register_type(env, cmddata->idx, :sim);
+		try check_register_type(cmd, env, cmddata->idx, :sim);
 		set_register_type(ref env, cmddata->idx, :sim);
-		try check_register_type(env, cmddata->val, :any);  # ensure not :invalid
+		try check_register_type(cmd, env, cmddata->val, :any);  # ensure not :invalid
 	} case :get_val(var cmddata) {
-		try check_register_type(env, cmddata->src, :hash);  # TODO: check that the key may be present
+		try check_register_type(cmd, env, cmddata->src, :hash);  # TODO: check that the key may be present
 		set_register_type(ref env, cmddata->src, :hash);  # TODO: inform that the key _is_ present
 		set_register_type(ref env, cmddata->dest, :any);  # TODO
 	} case :set_val(var cmddata) {
-		try check_register_type(env, cmddata->src, :hash);
+		try check_register_type(cmd, env, cmddata->src, :hash);
 		set_register_type(ref env, cmddata->src, :hash);  # TODO: merge with :hash(env[cmddata->val])
-		try check_register_type(env, cmddata->val, :any);  # ensure not :invalid
+		try check_register_type(cmd, env, cmddata->val, :any);  # ensure not :invalid
 	} case :ov_mk(var cmddata) {
 		if (cmddata->src is :arg) {
-			try check_register_type(env, cmddata->src as :arg, :any);
+			try check_register_type(cmd, env, cmddata->src as :arg, :any);
 		}
 		set_register_type(ref env, cmddata->dest, :variant);  # TODO: use cmddata->name
 	} case :prt_lbl(var lbl) {
 	} case :if_goto(var cmddata) {
-		try check_register_type(env, cmddata->src, :variant); #bool
+		try check_register_type(cmd, env, cmddata->src, :variant); #bool
 		set_register_type(ref env, cmddata->src, :variant); #bool
 	} case :clear(var reg) {
 		set_register_type(ref env, reg, :invalid);
@@ -203,16 +207,20 @@ def propagate_cmd1(cmd : @nlasm::order_t, ref env : @newtc::env) : @newtc::mbool
 	return :ok(true);
 }
 
-def check_register_type(env : @newtc::env, reg : ptd::sim(), type : @newtc::type) : @newtc::mbool_t {
+def check_register_type(cmd : @nlasm::order_t, env : @newtc::env, reg : ptd::sim(), type : @newtc::type) : @newtc::mbool_t {
 	var reg_type = env[reg];
 	return :err(':invalid used') if (reg_type is :invalid || type is :invalid);
 	return :ok(true) if (reg_type is :unknown || type is :unknown || reg_type is :any || type is :any);
-	return inconsistency_err(reg_type, type) if (ov::get_element(reg_type) ne ov::get_element(type));
+	return inconsistency_err(cmd, reg_type, type) if (ov::get_element(reg_type) ne ov::get_element(type));
 	return :ok(true);
 }
 
-def inconsistency_err(reg_type : @newtc::type, type : @newtc::type) : @newtc::mbool_t {
-	return :err('types inconsistent: FOUND:    '.ov::get_element(reg_type).string::lf().'                    EXPECTED: '.ov::get_element(type));
+def inconsistency_err(cmd : @nlasm::order_t, reg_type : @newtc::type, type : @newtc::type) : @newtc::mbool_t {
+	return :err(
+		'Types inconsistent in `'.ov::get_element(cmd).'`:'.string::lf().
+		'  expected: '.ov::get_element(type).string::lf().
+		'  found:    '.ov::get_element(reg_type).string::lf()
+	);
 }
 
 def set_register_type(ref env : @newtc::env, reg : ptd::sim(), type : @newtc::type) {
