@@ -18,3 +18,17 @@ def error04() {
 def error05() {
 	return if :foo;
 }
+
+def error06(x) {
+	x->a = x[1];
+}
+
+def error07(x) {
+	var y = x->a;
+	return x[1];
+}
+
+def error08(x) {
+	var y = x->a;
+	return x is :x;
+}

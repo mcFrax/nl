@@ -8,7 +8,7 @@ use string;
 use hash;
 use boolean_t;
 use singleton;
-use dfile;
+use newtct;
 
 def newtc::check_modules(modules : ptd::hash(@nlasm::result_t)) : ptd::arr(ptd::sim()) {
 	var errors = [];
@@ -23,7 +23,7 @@ def newtc::check_modules(modules : ptd::hash(@nlasm::result_t)) : ptd::arr(ptd::
 	return errors;
 }
 
-def check_function(modname : ptd::sim(), function : @nlasm::function_t) : @newtc::mbool_t {
+def check_function(modname : ptd::sim(), function : @nlasm::function_t) : @newtc::ok_or_error {
 	var blocks = flow_graph::make_blocks(function->commands, function->args_type);
 	return :ok(true) if (array::len(blocks) == 0);
 	var unknown_env : @newtc::env = [];
@@ -55,12 +55,12 @@ def check_function(modname : ptd::sim(), function : @nlasm::function_t) : @newtc
 	var functionname = {module => modname, function => function->name};
 	while (changed) {
 		try propagate_entries(functionname, ref typed_blocks);
-		try changed = propagate_exits(ref typed_blocks);
+		changed = propagate_exits(ref typed_blocks);
 	}
 	return :ok(true);
 }
 
-def propagate_entries(function : @newtc::functionname, ref blocks : ptd::arr(@newtc::typed_block)) : @newtc::mbool_t {
+def propagate_entries(function : @newtc::functionname, ref blocks : ptd::arr(@newtc::typed_block)) : @newtc::ok_or_error {
 	rep var i (array::len(blocks)) {
 		var env : @newtc::env = blocks[i]->entry_env;
 		fora var cmd (blocks[i]->cmds) {
@@ -71,55 +71,56 @@ def propagate_entries(function : @newtc::functionname, ref blocks : ptd::arr(@ne
 	return :ok(true);
 }
 
-def propagate_cmd(function : @newtc::functionname, cmd : @nlasm::cmd_t, ref env : @newtc::env) : @newtc::mbool_t {
+def propagate_cmd(function : @newtc::functionname, cmd : @nlasm::cmd_t, ref env : @newtc::env) : @newtc::ok_or_error {
 	var result = propagate_cmd1(cmd->cmd, ref env);
 	return result if result is :ok;
 	return :err(print_place(function, cmd->debug).': ERROR'.string::lf().(result as :err).string::lf());
 }
 
-def print_place(function : @newtc::functionname, debug : @nlasm::debug_t, ) : ptd::sim() {
-	var begin = debug->nast_debug->begin;
-	var end = debug->nast_debug->end;
-	return function->module.':'.begin->line.':'.begin->position.'-'.end->line.':'.end->position;
-}
-
-def get_sim_result_bin_ops() {
-	return singleton::sigleton_do_not_use_without_approval(gen_sim_result_bin_ops());
-}
-
-def get_bool_result_bin_ops() {
-	return singleton::sigleton_do_not_use_without_approval(gen_bool_result_bin_ops());
-}
-
-def gen_sim_result_bin_ops() {
-	var sim_result_ops = {};
-	fora var op (['+', '-', '*', '/', '%', '.']) {
-		sim_result_ops{op} = true;
-	};
-	return sim_result_ops;
-}
-
-def gen_bool_result_bin_ops() {
-	var bool_result_ops = {};
-	fora var op (['eq', 'ne', '<=', '<', '==', '!=', '>', '>=']) {
-		bool_result_ops{op} = true;
-	};
-	return bool_result_ops;
-}
-
-def propagate_cmd1(cmd : @nlasm::order_t, ref env : @newtc::env) : @newtc::mbool_t {
+def propagate_cmd1(cmd : @nlasm::order_t, ref env : @newtc::env) : @newtc::ok_or_error {
 	match (cmd) case :arr_decl(var cmddata) {
-		return :ok(true) if cmddata->dest eq '';
-		set_register_type(ref env, cmddata->dest, :array);
+		var content_type = :unknown;
+		fora var reg (cmddata->src) {
+			try check_register_type(cmd, env, reg, :any);
+			merge_type(ref content_type, env[reg]);
+		}
+		set_register_type(ref env, cmddata->dest, :array(content_type));
 	} case :hash_decl(var cmddata) {
-		return :ok(true) if cmddata->dest eq '';
-		set_register_type(ref env, cmddata->dest, :hash);
+		var field_types = {};
+		fora var kv (cmddata->src) {
+			try check_register_type(cmd, env, kv->val, :any);
+			field_types{kv->key} = env[kv->val];
+		}
+		set_register_type(ref env, cmddata->dest, :record(field_types));
 	} case :func(var cmddata) {
-		return :ok(true) if cmddata->dest eq '';
-		set_register_type(ref env, cmddata->dest, :hash);  # ???
+		set_register_type(ref env, cmddata->dest, :any);  # ???
 	} case :call(var cmddata) {
 		# TODO: whooomp
-		set_register_type(ref env, cmddata->dest, :any);
+		if (cmddata->mod eq 'ov' && cmddata->fun_name eq 'mk') {
+			try check_register_type(cmd, env, cmddata->src, :sim);
+			propagate_ov_mk(cmd, {
+				src => :emp,
+				dest => cmddata->dest,
+				name_reg => cmddata->args[0] as :val
+			});
+		} elsif (cmddata->mod eq 'ov' && cmddata->fun_name eq 'mk_val') {
+			try check_register_type(cmd, env, cmddata->src, :sim);
+			propagate_ov_mk(cmd, {
+				src => :arg(cmddata->args[1] as :val),
+				dest => cmddata->dest,
+				name_reg => cmddata->args[0] as :val
+			});
+		} else {
+			fora var arg (cmddata->args) {
+				match (arg) case :val(var reg) {
+					try check_register_type(cmd, env, reg, :any);  # TODO
+				} case :ref(var reg) {
+					try check_register_type(cmd, env, reg, :any);  # TODO
+					#set_register_type(ref env, cmddata->dest, TODO???); # TODO
+				}
+			}
+			set_register_type(ref env, cmddata->dest, :any);
+		}
 	} case :una_op(var cmddata) {
 		if (cmddata->op eq '!') {
 			try check_register_type(cmd, env, cmddata->src, :variant); #bool
@@ -156,9 +157,9 @@ def propagate_cmd1(cmd : @nlasm::order_t, ref env : @newtc::env) : @newtc::mbool
 		} case :emp {
 		}
 	} case :die(var reg) {
-		try check_register_type(cmd, env, reg, :any);  # TODO: na pewno :any?
+		try check_register_type(cmd, env, reg, :any);
 	} case :move(var cmddata) {
-		set_register_type(ref env, cmddata->dest, env[cmddata->src]);
+		env[cmddata->dest] = [cmddata->src];
 	} case :load_const(var cmddata) {
 		if (nl::is_sim(cmddata->val)) {
 			set_register_type(ref env, cmddata->dest, :sim);
@@ -192,10 +193,7 @@ def propagate_cmd1(cmd : @nlasm::order_t, ref env : @newtc::env) : @newtc::mbool
 		set_register_type(ref env, cmddata->src, :hash);  # TODO: merge with :hash(env[cmddata->val])
 		try check_register_type(cmd, env, cmddata->val, :any);  # ensure not :invalid
 	} case :ov_mk(var cmddata) {
-		if (cmddata->src is :arg) {
-			try check_register_type(cmd, env, cmddata->src as :arg, :any);
-		}
-		set_register_type(ref env, cmddata->dest, :variant);  # TODO: use cmddata->name
+		try propagate_ov_mk(cmd, cmddata, ref env);
 	} case :prt_lbl(var lbl) {
 	} case :if_goto(var cmddata) {
 		try check_register_type(cmd, env, cmddata->src, :variant); #bool
@@ -207,7 +205,18 @@ def propagate_cmd1(cmd : @nlasm::order_t, ref env : @newtc::env) : @newtc::mbool
 	return :ok(true);
 }
 
-def check_register_type(cmd : @nlasm::order_t, env : @newtc::env, reg : ptd::sim(), type : @newtc::type) : @newtc::mbool_t {
+def propagate_ov_mk(cmd, cmddata, ref env : @newtc::env) : @newtc::ok_or_error {
+	if (cmddata->src is :arg) {
+		try check_register_type(cmd, env, cmddata->src as :arg, :any);
+	}
+	if (hash::has('name_reg')) {
+		try check_register_type(cmd, env, cmddata->name_reg, :sim);
+	}
+	set_register_type(ref env, cmddata->dest, :variant);  # TODO: use cmddata->name if its available
+	return :ok(true);
+}
+
+def check_register_type(cmd : @nlasm::order_t, env : @newtc::env, reg : ptd::sim(), type : @newtct::type) : @newtc::ok_or_error {
 	var reg_type = env[reg];
 	return :err(':invalid used') if (reg_type is :invalid || type is :invalid);
 	return :ok(true) if (reg_type is :unknown || type is :unknown || reg_type is :any || type is :any);
@@ -215,7 +224,7 @@ def check_register_type(cmd : @nlasm::order_t, env : @newtc::env, reg : ptd::sim
 	return :ok(true);
 }
 
-def inconsistency_err(cmd : @nlasm::order_t, reg_type : @newtc::type, type : @newtc::type) : @newtc::mbool_t {
+def inconsistency_err(cmd : @nlasm::order_t, reg_type : @newtct::type, type : @newtct::type) : @newtc::ok_or_error {
 	return :err(
 		'Types inconsistent in `'.ov::get_element(cmd).'`:'.string::lf().
 		'  expected: '.ov::get_element(type).string::lf().
@@ -223,11 +232,41 @@ def inconsistency_err(cmd : @nlasm::order_t, reg_type : @newtc::type, type : @ne
 	);
 }
 
-def set_register_type(ref env : @newtc::env, reg : ptd::sim(), type : @newtc::type) {
+def set_register_type(ref env : @newtc::env, reg : ptd::sim(), type : @newtct::type) {
 	env[reg] = type unless reg eq '';
 }
 
-def propagate_exits(ref blocks : ptd::arr(@newtc::typed_block)) : @newtc::mbool_t {
+def print_place(function : @newtc::functionname, debug : @nlasm::debug_t, ) : ptd::sim() {
+	var begin = debug->nast_debug->begin;
+	var end = debug->nast_debug->end;
+	return function->module.':'.begin->line.':'.begin->position.'-'.end->line.':'.end->position;
+}
+
+def get_sim_result_bin_ops() {
+	return singleton::sigleton_do_not_use_without_approval(gen_sim_result_bin_ops());
+}
+
+def get_bool_result_bin_ops() {
+	return singleton::sigleton_do_not_use_without_approval(gen_bool_result_bin_ops());
+}
+
+def gen_sim_result_bin_ops() {
+	var sim_result_ops = {};
+	fora var op (['+', '-', '*', '/', '%', '.']) {
+		sim_result_ops{op} = true;
+	};
+	return sim_result_ops;
+}
+
+def gen_bool_result_bin_ops() {
+	var bool_result_ops = {};
+	fora var op (['eq', 'ne', '<=', '<', '==', '!=', '>', '>=']) {
+		bool_result_ops{op} = true;
+	};
+	return bool_result_ops;
+}
+
+def propagate_exits(ref blocks : ptd::arr(@newtc::typed_block)) : @boolean_t::type {
 	var changed = false;
 	rep var i (array::len(blocks)) {
 		fora var j (blocks[i]->next) {
@@ -238,13 +277,10 @@ def propagate_exits(ref blocks : ptd::arr(@newtc::typed_block)) : @newtc::mbool_
 			}
 		}
 	}
-	return :ok(changed);
+	return changed;
 }
 
-# Lepiej używać alternatywy zamiast `:any`, dzięki temu można stwierdzać rzeczy typu 
-# "to może być sim albo hash, ale to na pewno nie jest bool".
-
-def merge_type(ref t1 : @newtc::type, t2 : @newtc::type) : @boolean_t::type {
+def merge_type(ref t1 : @newtct::type, t2 : @newtct::type) : @boolean_t::type {
 	var t11 = t1;
 	if (t1 is :unknown) {
 		t1 = t2;
@@ -266,27 +302,15 @@ def newtc::functionname() {
 	return ptd::rec({module => ptd::sim(), function => ptd::sim()});
 }
 
-def newtc::mbool_t() {
+def newtc::ok_or_error() {
 	return ptd::var({
 		ok => @boolean_t::type,
 		err => ptd::sim()
 	});
 }
 
-def newtc::type() {
-	return ptd::var({
-		unknown => ptd::none(),
-		invalid => ptd::none(),
-		any => ptd::none(),
-		sim => ptd::none(),
-		variant => ptd::none(),
-		array => ptd::none(),
-		hash => ptd::none(),
-	});
-}
-
 def newtc::env() {
-	return ptd::arr(@newtc::type);
+	return ptd::arr(@newtct::type);
 }
 
 def newtc::typed_block() {
