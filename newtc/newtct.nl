@@ -118,7 +118,7 @@ def newtct::record(own_ref : ptd::sim(), fields : ptd::hash(@newtct::type)) : @n
 	});
 }
 
-def newtct::any(own_ref) {
+def newtct::any(own_ref : ptd::sim()) : @newtct::type {
 	return :def({
 		own_ref => own_ref,
 		desc => :alternative({
