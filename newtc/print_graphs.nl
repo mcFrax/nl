@@ -71,7 +71,9 @@ def print_structure(ref graphstr : ptd::sim(), even, flow_block) {
 	graphstr .= 'style=filled; color='.(even ? 'lightgrey' : 'white').';'.string::lf();
 	forh var sub_block_id, var sub_block (flow_block->blocks) {
 		match (sub_block) case :simple {
-			graphstr .= sub_block_id.';'.string::lf();
+			var attrs = '';
+			attrs = '[color=blue]' if sub_block_id == flow_block->entry;
+			graphstr .= sub_block_id.attrs.';'.string::lf();
 		} case :complex {
 			print_structure(ref graphstr, !even, sub_block);
 		}
