@@ -69,3 +69,8 @@ def forever_loop() {
 		doSomething(0);
 	}
 }
+
+def just_loop() {
+	loop {
+	}
+}

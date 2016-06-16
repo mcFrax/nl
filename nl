@@ -44,7 +44,7 @@ int main(int argc, char **argv) {{
         c_rt_lib0clear(&el);
     }}
     ImmT imexitcode = {1}0main(args);
-    int exitcode = getIntFromImm(imexitcode);
+    int exitcode = imexitcode ? getIntFromImm(imexitcode) : 0;
     c_rt_lib0clear(&imexitcode);
     c_rt_lib0clear(&args);
     c_rt_lib0finish();
