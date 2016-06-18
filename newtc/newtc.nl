@@ -34,17 +34,60 @@ def check_function(modname : ptd::sim(), function : @nlasm::function_t) : @newtc
 	var function_block : @newtc::flow_block = newtc::build_flow_structure(0, all_blocks_set);
 	
 	var empty_env : @newtc::env = gen_empty_env(function->reg_size);
-	var entry_env : @newtc::env = gen_entry_env(function->reg_size, function->args_type);
+	var block_envs : ptd::arr(ptd::rec({entry => @newtc::env, exit => @newtc::env})) = [];
+	rep var ii (array::len(blocks)) {
+		array::push(ref block_envs, {entry => empty_env, exit => empty_env});
+	}
+	rep var ii (array::len(function->args_type)) {
+		block_envs[0].entry[ii] = newtct::any('arg'.ii);
+	}
 	
+	var unresolved_prevs : ptd::arr(ptd::arr(@boolean_t::type)) = [];
+	rep var ii (array::len(blocks)) {
+		array::push(ref unresolved_prevs, {});
+		fora var next (blocks[ii]->next) {
+			unresolved_prevs[ii]{next} = true;
+		}
+	}
+	unresolved_prevs[0] = {};
+	
+	var entry_env_changed = {};
+	check_flow_block(function_block, unresolved_prevs, ref block_envs, ref entry_env_changed);
 	return :ok(true);
+}
+
+def check_flow_block(flow_block, unresolved_prevs, ref block_envs, ref entry_env_changed) : @newtc::ok_or_error {
+	match (flow_block) case :simple(var block_id) {
+		check_simple_block(block_id, ref unresolved_prevs, ref block_envs);
+	} case :complex(var flow_block) {
+		reformat_entry_types
+		var keepgoing = true;
+		while (keepgoing) {
+			forh var sub_block_id, var sub_block (flow_block->blocks) {
+				entry_env_changed{sub_block_id} = false;
+			}
+			forh var sub_block_id, var sub_block (flow_block->blocks) {
+				check_flow_block(sub_block, unresolved_prevs, )
+			}
+			keepgoing = false;
+			forh var sub_block_id, var sub_block (flow_block->blocks) {
+				keepgoing = true if hash::has_key(entry_env_changed, sub_block_id);
+			}
+		}
+	}
+}
+
+def forward_block_exits(flow_block, ref block_envs, ref entry_env_changed) {
+	forh var sub_block_id, var sub_block (flow_block->blocks) {
+		check_flow_block(sub_block, unresolved_prevs, )
+	}
 }
 
 def newtc::build_flow_structure(entry_block_id : ptd::sim(), blocks : ptd::hash(@flow_graph::block_t)) : @newtc::flow_block {
 	die if (hash::size(blocks) < 1);
 	if (hash::size(blocks) == 1) {
-		return :simple(blocks{entry_block_id});
+		return :simple(entry_block_id);
 	} else {
-# 		var next = ???;
 		var tarjan_state = {
 			stack => [],
 			onstack => {},
@@ -58,7 +101,6 @@ def newtc::build_flow_structure(entry_block_id : ptd::sim(), blocks : ptd::hash(
 		return :complex({
 			entry => entry_block_id,
 			blocks => tarjan_state->sub_blocks,
-			next => [],  # TODO??
 		});
 	}
 }
@@ -114,17 +156,9 @@ def update_min(ref a : ptd::sim(), b : ptd::sim()) {
 def gen_empty_env(size : ptd::sim()) : @newtc::env {
 	var empty_env = [];
 	rep var ii (size) {
-		empty_env []= newtct::invalid();
+		empty_env []= :nothing;
 	}
 	return empty_env;
-}
-
-def gen_entry_env(size : ptd::sim(), args_type) : @newtc::env {
-	var env = gen_empty_env(size);
-	rep var ii (array::len(args_type)) {
-		env[ii] = newtct::any('arg'.ii);
-	}
-	return env;
 }
 
 
@@ -145,11 +179,10 @@ def newtc::env() {
 
 def newtc::flow_block() {
 	return ptd::var({
-		simple => @flow_graph::block_t,
+		simple => ptd::sim(),
 		complex => ptd::rec({
 			entry => ptd::sim(),
 			blocks => ptd::hash(@newtc::flow_block),
-			next => ptd::arr(ptd::sim())
 		}),
 	});
 }

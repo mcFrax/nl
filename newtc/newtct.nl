@@ -2,6 +2,7 @@ use ptd;
 
 def newtct::type() {
 	return ptd::var({
+		nothing => ptd::none(),
 		ref => ptd::sim(),
 		def => ptd::rec({
 			own_ref => ptd::sim(),
@@ -39,18 +40,6 @@ def newtct::hash_type() {
 }
 
 # shortcuts:
-
-def newtct::invalid() : @newtct::type {
-	return :def({
-		own_ref => '',
-		desc => :alternative({
-			sim => :no,
-			array => :no,
-			variant => :no,
-			hash => :no,
-		})
-	});
-}
 
 def newtct::sim() : @newtct::type {
 	return :def({

@@ -36,6 +36,34 @@ def build_list2(n) {
 	return result;
 }
 
+# even more tricky one, probably
+def build_list3(n) {
+	var result = :foo(:nil);
+	while (n > 0 || !((result as :foo) is :list)) {
+		var result1 = :nil;
+		if ((result as :foo) is :cons) {
+			result1 = :cons((result as :foo) as :cons);
+		}
+		if (n > 0) {
+			result = :foo(:cons(result1));
+		} else {
+			result = :foo(:list(result1));
+		}
+		--n;
+	}
+	return result;
+}
+
+# unwrapping nested structure of arbitrary depth may be a problem for another approach
+def list_length(l) {
+	var result = 0;
+	while (l is :cons) {
+		l = l as :cons;
+		++result;
+	}
+	return result;
+}
+
 def test09::main() {
 	nl::print(dfile::ssave(build_list(5)).string::lf());
 }
