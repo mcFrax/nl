@@ -32,33 +32,17 @@ def check_function(modname : ptd::sim(), function : @nlasm::function_t) : @newtc
 	}
 	
 	var function_block : @newtc::flow_block = newtc::build_flow_structure(0, all_blocks_set);
-	
-	var empty_env : @newtc::env = gen_empty_env(function->reg_size);
-	var block_envs : ptd::arr(ptd::rec({entry => @newtc::env, exit => @newtc::env})) = [];
-	rep var ii (array::len(blocks)) {
-		array::push(ref block_envs, {entry => empty_env, exit => empty_env});
-	}
-	rep var ii (array::len(function->args_type)) {
-		block_envs[0].entry[ii] = newtct::any('arg'.ii);
-	}
-	
-	var unresolved_prevs : ptd::arr(ptd::arr(@boolean_t::type)) = [];
-	rep var ii (array::len(blocks)) {
-		array::push(ref unresolved_prevs, {});
-		fora var next (blocks[ii]->next) {
-			unresolved_prevs[ii]{next} = true;
-		}
-	}
-	unresolved_prevs[0] = {};
-	
-	var entry_env_changed = {};
-	check_flow_block(function_block, unresolved_prevs, ref block_envs, ref entry_env_changed);
+
+	check_flow_block(function_block, [], ref soft_expectations, blocks);
+	check_arguments(soft_expectations)
 	return :ok(true);
 }
 
-def check_flow_block(flow_block, unresolved_prevs, ref block_envs, ref entry_env_changed) : @newtc::ok_or_error {
+# hard expectations: must be satisfied by this block
+# soft expectations: must be satisfied somewhere, but not necessarily by this block
+def check_flow_block(flow_block, hard_expectations, ref soft_expectations, blocks) : @newtc::ok_or_error {
 	match (flow_block) case :simple(var block_id) {
-		check_simple_block(block_id, ref unresolved_prevs, ref block_envs);
+		return check_simple_block(block_id, ref unresolved_prevs, ref block_envs);
 	} case :complex(var flow_block) {
 		reformat_entry_types
 		var keepgoing = true;
